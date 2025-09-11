@@ -1,0 +1,26 @@
+:root {
+  --md-primary-fg-color: #007a94;
+  --md-accent-fg-color: #026378;
+  --md-default-fg-color--light: #026378;
+}
+
+.md-footer {
+  --md-default-fg-color: #007a94;
+  background-color: var(--md-default-fg-color);
+}
+
+.md-grid {
+  max-width: 70rem;
+}
+
+.md-typeset a {
+  color: #026378;
+}
+
+.tabbed-content {
+  border: 1px solid #ccc;
+  border-top: none;
+  padding: 0.5em;
+  border-bottom-right-radius: 0.3em;
+  border-bottom-left-radius: 0.3em;
+}
