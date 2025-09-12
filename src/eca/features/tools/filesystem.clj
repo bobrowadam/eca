@@ -79,16 +79,23 @@
   (or (tools.util/invalid-arguments arguments (concat (path-validations db)
                                                       [["path" fs/readable? "File $path is not readable"]
                                                        ["path" (complement fs/directory?) "$path is a directory, not a file"]]))
-      (let [line-offset (get arguments "line_offset")
+      (let [line-offset (or (get arguments "line_offset") 0)
             limit (or (get arguments "limit") read-file-max-lines)
-            content (cond-> (slurp (fs/file (fs/canonicalize (get arguments "path"))))
-                      line-offset (->> (string/split-lines)
-                                       (drop line-offset)
-                                       (string/join "\n"))
-                      limit (->> (string/split-lines)
-                                 (take limit)
-                                 (string/join "\n")))]
-        (tools.util/single-text-content content))))
+            full-content-lines (string/split-lines (slurp (fs/file (fs/canonicalize (get arguments "path")))))
+            maybe-truncated-content-lines (cond-> full-content-lines
+                                            line-offset (->> (drop line-offset))
+                                            limit (->> (take limit)))
+            was-truncated? (not= (- (count full-content-lines) line-offset)
+                                 (count maybe-truncated-content-lines))
+            content (string/join "\n" maybe-truncated-content-lines)]
+        (tools.util/single-text-content (if was-truncated?
+                                          (str content "\n\n"
+                                               "[CONTENT TRUNCATED] Showing lines " (if line-offset (inc line-offset) 1) 
+                                               " to " (+ (or line-offset 0) limit)
+                                               " of " (count full-content-lines) " total lines. "
+                                               "Use line_offset=" (+ (or line-offset 0) limit)
+                                               " parameter to read more content.")
+                                          content)))))
 
 (defn ^:private read-file-summary [args]
   (if-let [path (get args "path")]

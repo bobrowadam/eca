@@ -110,7 +110,7 @@
     (is (match?
          {:error false
           :contents [{:type :text
-                      :text "line1\nline2"}]}
+                      :text "line1\nline2\n\n[CONTENT TRUNCATED] Showing lines 1 to 2 of 5 total lines. Use line_offset=2 parameter to read more content."}]}
          (with-redefs [slurp (constantly "line1\nline2\nline3\nline4\nline5")
                        fs/exists? (constantly true)
                        fs/readable? (constantly true)
@@ -122,7 +122,7 @@
     (is (match?
          {:error false
           :contents [{:type :text
-                      :text "line3\nline4"}]}
+                      :text "line3\nline4\n\n[CONTENT TRUNCATED] Showing lines 3 to 4 of 5 total lines. Use line_offset=4 parameter to read more content."}]}
          (with-redefs [slurp (constantly "line1\nline2\nline3\nline4\nline5")
                        fs/exists? (constantly true)
                        fs/readable? (constantly true)
