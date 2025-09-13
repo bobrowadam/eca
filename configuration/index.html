@@ -973,7 +973,7 @@
 <h2 id="tools">Tools<a class="headerlink" href="#tools" title="Permanent link">#</a></h2>
 <h3 id="mcp">MCP<a class="headerlink" href="#mcp" title="Permanent link">#</a></h3>
 <p>For MCP servers configuration, use the <code>mcpServers</code> config, examples:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="example-1" name="__tabbed_2" type="radio" /><input id="example-2" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="example-1">Example 1</label><label for="example-2">Example 2</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="stdio" name="__tabbed_2" type="radio" /><input id="http-streamable" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="stdio">Stdio</label><label for="http-streamable">HTTP-streamable</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p><code>~/.config/eca/config.json</code>
@@ -981,7 +981,9 @@
 <span class="w">  </span><span class="s2">&quot;mcpServers&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="s2">&quot;memory&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">      </span><span class="s2">&quot;command&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;npx&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="s2">&quot;args&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;-y&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;@modelcontextprotocol/server-memory&quot;</span><span class="p">]</span>
+<span class="w">      </span><span class="s2">&quot;args&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;-y&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;@modelcontextprotocol/server-memory&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="c1">// optional</span>
+<span class="w">      </span><span class="s2">&quot;env&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;FOO&quot;</span><span class="w"> </span><span class="s2">&quot;bar&quot;</span><span class="p">}</span><span class="w"> </span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
@@ -992,9 +994,7 @@
 <div class="highlight"><pre><span></span><code><span class="p">{</span>
 <span class="w">  </span><span class="s2">&quot;mcpServers&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="s2">&quot;cool-mcp&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">      </span><span class="s2">&quot;command&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;bash&quot;</span><span class="p">,</span>
-<span class="w">      </span><span class="s2">&quot;args&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;-c&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;my-cool-mcp&quot;</span><span class="p">],</span>
-<span class="w">      </span><span class="s2">&quot;env&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;FOO&quot;</span><span class="w"> </span><span class="s2">&quot;bar&quot;</span><span class="p">}</span>
+<span class="w">      </span><span class="s2">&quot;url&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://my-remote-mcp.com/mcp&quot;</span>
 <span class="w">    </span><span class="p">}</span>
 <span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
@@ -1092,7 +1092,7 @@
 </li>
 </ul>
 <p>Placeholders in the format <code>{{argument_name}}</code> within the <code>command</code> string will be replaced by the values provided by the LLM.</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="example-1_1" name="__tabbed_4" type="radio" /><input id="example-2_1" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="example-1_1">Example 1</label><label for="example-2_1">Example 2</label></div>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="example-1" name="__tabbed_4" type="radio" /><input id="example-2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="example-1">Example 1</label><label for="example-2">Example 2</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
 <p><code>~/.config/eca/config.json</code>
@@ -1279,7 +1279,8 @@ optional metadata:</p>
 <span class="w">    </span><span class="nx">mcpTimeoutSeconds?</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
 <span class="w">    </span><span class="nx">lspTimeoutSeconds?</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
 <span class="w">    </span><span class="nx">mcpServers</span><span class="o">?:</span><span class="w"> </span><span class="p">{[</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="nx">command</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">url?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w"> </span><span class="c1">// for remote http-stremable servers</span>
+<span class="w">        </span><span class="nx">command?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w"> </span><span class="c1">// for stdio servers</span>
 <span class="w">        </span><span class="nx">args?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[];</span>
 <span class="w">        </span><span class="nx">disabled?</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
 <span class="w">    </span><span class="p">}};</span>
