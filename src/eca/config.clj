@@ -76,6 +76,7 @@
    :rules []
    :commands []
    :disabledTools []
+   :tools {:readFile {:maxLines 2000}}
    :toolCall {:approval {:byDefault "ask"
                          :allow {"eca_preview_file_change" {}
                                  "eca_read_file" {}

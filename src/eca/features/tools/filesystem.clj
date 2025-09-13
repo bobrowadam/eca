@@ -73,14 +73,14 @@
           (tools.util/single-text-content
            (str tree-output "\n" summary))))))
 
-(def ^:private read-file-max-lines 2000)
-
-(defn ^:private read-file [arguments {:keys [db]}]
+(defn ^:private read-file [arguments {:keys [db config]}]
   (or (tools.util/invalid-arguments arguments (concat (path-validations db)
                                                       [["path" fs/readable? "File $path is not readable"]
                                                        ["path" (complement fs/directory?) "$path is a directory, not a file"]]))
       (let [line-offset (or (get arguments "line_offset") 0)
-            limit (or (get arguments "limit") read-file-max-lines)
+            limit (->> [(get arguments "limit") (get-in config [:tools :readFile :maxLines] 2000)]
+                       (filter number?)
+                       (apply min))
             full-content-lines (string/split-lines (slurp (fs/file (fs/canonicalize (get arguments "path")))))
             maybe-truncated-content-lines (cond-> full-content-lines
                                             line-offset (->> (drop line-offset))
@@ -303,7 +303,7 @@
                               "line_offset" {:type "integer"
                                              :description "Line to start reading from (default: 0)"}
                               "limit" {:type "integer"
-                                       :description (str "Maximum lines to read (default: " read-file-max-lines ")")}}
+                                       :description "Maximum lines to read (default: configured in tools.readFile.maxLines, defaults to 2000)"}}
                  :required ["path"]}
     :handler #'read-file
     :summary-fn #'read-file-summary}
