@@ -1,6 +1,9 @@
 # Changelog
 
 ## Unreleased
+- Improve cursor context awareness
+  - Behavior prompt updates
+  - Add surrounding code context
 
 ## 0.61.1
 
