@@ -52,6 +52,19 @@
         :content (llm-api/refine-file-context path lines-range)}
        :partial lines-range))))
 
+(defn ^:private get-surrounding-lines [file-path cursor-line]
+  "Get 3 lines before and 3 lines after the cursor line (0-indexed), handling edge cases."
+  (try
+    (when (and file-path (fs/exists? file-path))
+      (let [lines (string/split-lines (slurp file-path))
+            total-lines (count lines)
+            start-idx (max 0 (- cursor-line 3))
+            end-idx (min total-lines (+ cursor-line 4))]
+        (subvec (vec lines) start-idx end-idx)))
+    (catch Exception e
+      (logger/debug logger-tag (format "Error reading surrounding lines from %s: %s" file-path (.getMessage e)))
+      [])))
+
 (defn raw-contexts->refined [contexts db config]
   (concat (agents-file-contexts db config)
           (mapcat (fn [{:keys [type path lines-range position uri]}]
@@ -65,7 +78,8 @@
                       "repoMap" [{:type :repoMap}]
                       "cursor" [{:type :cursor
                                  :path path
-                                 :position position}]
+                                 :position position
+                                 :surrounding-lines (get-surrounding-lines path (:line (:start position)))}]
                       "mcpResource" (try
                                       (mapv
                                        (fn [{:keys [text]}]

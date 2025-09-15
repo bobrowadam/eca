@@ -47,3 +47,33 @@
       (is (string/includes? result "<resource uri=\"custom://my-resource\">some-cool-content</resource>"))
       (is (string/includes? result "</contexts>"))
       (is (string? result)))))
+
+(deftest cursor-context-formatting-test
+  (testing "Should format cursor context prominently with surrounding code"
+    (let [cursor-context {:type :cursor
+                          :path "/path/to/file.clj"
+                          :position {:start {:line 5 :character 10}
+                                     :end {:line 5 :character 15}}
+                          :surrounding-lines ["(defn bar" "  [x]" "  (* x 2))" "" "(defn cursor-fn" "  [a b]" "  (+ a b))"]}
+          other-contexts [{:type :file :path "foo.clj" :content "(ns foo)"}]
+          result (prompt/build-instructions [cursor-context (first other-contexts)] [] (delay "") "agent" {})]
+      (is (string/includes? result "## CURRENT USER CURSOR POSITION"))
+      (is (string/includes? result "**File:** `/path/to/file.clj`"))
+      (is (string/includes? result "**Position:** line 6, columns 10-15"))
+      (is (string/includes? result "**Surrounding code:**"))
+      (is (string/includes? result "  6  >>> "))
+      (is (string/includes? result "  3      (defn bar"))
+      (is (string/includes? result "<contexts description="))
+      (is (string/includes? result "<file path=\"foo.clj\">"))))
+  
+  (testing "Should handle cursor context without surrounding lines"
+    (let [cursor-context {:type :cursor
+                          :path "/path/to/file.clj"
+                          :position {:start {:line 0 :character 0}
+                                     :end {:line 0 :character 0}}
+                          :surrounding-lines []}
+          result (prompt/build-instructions [cursor-context] [] (delay "") "agent" {})]
+      (is (string/includes? result "## CURRENT USER CURSOR POSITION"))
+      (is (string/includes? result "**File:** `/path/to/file.clj`"))
+      (is (string/includes? result "**Position:** line 1, column 0"))
+      (is (not (string/includes? result "**Surrounding code:**"))))))
