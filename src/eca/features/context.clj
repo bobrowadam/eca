@@ -37,7 +37,9 @@
                   (when global-agent-file [global-agent-file])))))
 
 (defn ^:private file->refined-context [path lines-range]
-  (let [ext (string/lower-case (fs/extension path))]
+  (let [ext (some-> path
+                    fs/extension
+                    string/lower-case)]
     (if (contains? #{"png" "jpg" "jpeg" "gif" "webp"} ext)
       {:type :image
        :media-type (case ext
