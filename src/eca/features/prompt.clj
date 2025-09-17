@@ -108,7 +108,7 @@
      ;; Add cursor contexts with enhanced formatting
      (when (seq cursor-contexts)
        (reduce str ""
-               (map format-cursor-context cursor-contexts)))
+               (format-cursor-context cursor-contexts)))
      ""
      (when (seq non-cursor-contexts)
        ["<contexts description=\"Manually provided by user, usually when provided user knows that your task is related to those files, so consider reliying on it, if not enough, use tools to read/gather any extra files/contexts.\">"
