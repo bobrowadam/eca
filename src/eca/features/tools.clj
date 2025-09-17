@@ -55,6 +55,12 @@
 (defn native-tools [db config]
   (mapv #(assoc % :server "eca") (vals (native-definitions db config))))
 
+;; TOKEN OPTIMIZATION OPPORTUNITY: This function returns ALL available tools
+;; which get sent with every LLM request. Major optimization areas:
+;; 1. Tool relevance filtering - only send tools relevant to current context
+;; 2. Tool definition caching - avoid rebuilding schemas every request
+;; 3. Tool schema compression - remove verbose descriptions for frequently used tools
+;; 4. Context-aware tool selection based on user message content
 (defn all-tools
   "Returns all available tools, including both native ECA tools
    (like filesystem and shell tools) and tools provided by MCP servers."
@@ -69,6 +75,11 @@
               :db db
               :chat-id chat-id
               :config config})))
+     ;; TOKEN OPTIMIZATION: This concat creates a large array of tool definitions
+     ;; that get serialized and sent with every request. Consider:
+     ;; - Lazy tool loading based on user intent
+     ;; - Tool relevance scoring and filtering
+     ;; - Compressed tool representations for common operations
      (concat
       (mapv #(assoc % :origin :native) (native-tools db config))
       (mapv #(assoc % :origin :mcp) (f.mcp/all-tools db))))))

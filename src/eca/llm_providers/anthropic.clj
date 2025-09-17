@@ -151,18 +151,27 @@
 (defn completion!
   [{:keys [model user-messages instructions max-output-tokens
            api-url api-key auth-type url-relative-path reason? past-messages
-           tools web-search extra-payload supports-image?]}
+           tools web-search extra-payload supports-image?
+           ;; TOKEN OPTIMIZATION: New parameters for separated contexts
+           system-instructions user-context]}
    {:keys [on-message-received on-error on-reason on-prepare-tool-call on-tools-called on-usage-updated]}]
   (let [messages (concat (normalize-messages past-messages supports-image?)
                          (normalize-messages (fix-non-thinking-assistant-messages user-messages) supports-image?))
+        ;; TOKEN OPTIMIZATION: Use separated contexts if available, with proper caching
+        system-content (if system-instructions
+                         ;; New optimized approach: separate cacheable system vs dynamic user context
+                         [{:type "text" :text "You are Claude Code, Anthropic's official CLI for Claude."}
+                          {:type "text" :text system-instructions :cache_control {:type "ephemeral"}}]
+                         ;; Legacy fallback: combined instructions
+                         [{:type "text" :text "You are Claude Code, Anthropic's official CLI for Claude."}
+                          {:type "text" :text instructions :cache_control {:type "ephemeral"}}])
         body (merge (assoc-some
                      {:model model
                       :messages (add-cache-to-last-message messages)
                       :max_tokens (or max-output-tokens 32000)
                       :stream true
                       :tools (->tools tools web-search)
-                      :system [{:type "text" :text "You are Claude Code, Anthropic's official CLI for Claude."}
-                               {:type "text" :text instructions :cache_control {:type "ephemeral"}}]}
+                      :system system-content}
                      :thinking (when reason?
                                  {:type "enabled" :budget_tokens 2048}))
                     extra-payload)
@@ -205,8 +214,15 @@
                                                                   :id reason-id})
                                     nil)
             "message_delta" (do
+                              ;; DEBUG: Log usage data to understand Claude Code Pro response format
+                              (logger/debug logger-tag "message_delta event data: %s" (pr-str data))
+                              (when (-> data :delta :stop_reason)
+                                (logger/debug logger-tag "stop_reason found: %s, usage data: %s"
+                                             (-> data :delta :stop_reason)
+                                             (pr-str (:usage data))))
                               (when-let [usage (and (-> data :delta :stop_reason)
                                                     (:usage data))]
+                                (logger/debug logger-tag "Calling on-usage-updated with: %s" (pr-str usage))
                                 (on-usage-updated {:input-tokens (:input_tokens usage)
                                                    :input-cache-creation-tokens (:cache_creation_input_tokens usage)
                                                    :input-cache-read-tokens (:cache_read_input_tokens usage)

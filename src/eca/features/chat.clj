@@ -391,16 +391,29 @@
     (send-content! chat-ctx :system {:type :progress
                                      :state :running
                                      :text "Waiting model"})
+    ;; TOKEN OPTIMIZATION CRITICAL: This is where the massive prompt gets sent to LLM
+    ;; Current issues:
+    ;; - :instructions contains the entire system prompt + rules + file contents
+    ;; - :tools sends ALL tool definitions (can be 20+ tools with full schemas)
+    ;; - :past-messages includes full conversation history
+    ;; Optimizations needed:
+    ;; 1. Split :instructions into separate "system" vs "user" contexts
+    ;; 2. Cache and compress tool definitions
+    ;; 3. Implement conversation history summarization/truncation
+    ;; 4. Only send tools that are relevant to current request
     (llm-api/complete!
      {:model model
       :provider provider
       :model-capabilities (get-in db [:models full-model])
       :user-messages user-messages
-      :instructions instructions
-      :past-messages past-messages
+      :instructions instructions  ;; TOKEN OPTIMIZATION: Legacy fallback for non-optimized providers
+      :past-messages past-messages  ;; <-- TOKEN SINK: Full conversation history
       :config config
-      :tools all-tools
+      :tools all-tools  ;; <-- TOKEN SINK: All tools with full schemas every time
       :provider-auth (get-in @db* [:auth provider])
+      ;; TOKEN OPTIMIZATION: Pass separated contexts to provider
+      :system-instructions (:system-instructions chat-ctx)
+      :user-context (:user-context chat-ctx)
       :on-first-response-received (fn [& _]
                                     (assert-chat-not-stopped! chat-ctx)
                                     (doseq [message user-messages]
@@ -654,6 +667,10 @@
                                                                             :text "Parsing given context"}))
         refined-contexts (f.context/raw-contexts->refined contexts db config)
         repo-map* (delay (f.index/repo-map db config {:as-string? true}))
+        ;; TOKEN OPTIMIZATION: Separate system instructions (cached) from user context (dynamic)
+        system-instructions (f.prompt/build-system-instructions rules selected-behavior config)
+        user-context (f.prompt/build-user-context refined-contexts repo-map*)
+        ;; Legacy compatibility - still provide combined instructions for now
         instructions (f.prompt/build-instructions refined-contexts
                                                   rules
                                                   repo-map*
@@ -664,6 +681,8 @@
                   :behavior selected-behavior
                   :behavior-config behavior-config
                   :instructions instructions
+                  :system-instructions system-instructions  ;; TOKEN OPTIMIZATION: Separated system context
+                  :user-context user-context              ;; TOKEN OPTIMIZATION: Separated user context
                   :full-model full-model
                   :db* db*
                   :config config

@@ -10,6 +10,8 @@
 
 (set! *warn-on-reflection* true)
 
+;; Testing token usage debugging
+
 (def windows-os?
   (.contains (System/getProperty "os.name") "Windows"))
 

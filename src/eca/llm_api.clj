@@ -61,6 +61,13 @@
     (logger/info logger-tag (format "Default LLM model '%s' decision '%s'" model decision))
     model))
 
+;; TOKEN OPTIMIZATION: This function converts tools to LLM format
+;; Current issue: Sends full verbose descriptions and schemas for every tool
+;; Optimization opportunities:
+;; 1. Abbreviate tool descriptions for frequently used tools
+;; 2. Cache tool conversions to avoid repeated processing
+;; 3. Implement tool schema compression
+;; 4. Send only essential parameters for common operations
 (defn ^:private tool->llm-tool [tool]
   (assoc (select-keys tool [:name :description :parameters])
          :type "function"))
@@ -68,7 +75,9 @@
 (defn complete!
   [{:keys [provider model model-capabilities instructions user-messages config on-first-response-received
            on-message-received on-error on-prepare-tool-call on-tools-called on-reason on-usage-updated
-           past-messages tools provider-auth]}]
+           past-messages tools provider-auth
+           ;; TOKEN OPTIMIZATION: New parameters for separated contexts
+           system-instructions user-context]}]
   (let [first-response-received* (atom false)
         emit-first-message-fn (fn [& args]
                                 (when-not @first-response-received*
@@ -87,6 +96,8 @@
                            (when-not (:silent? (ex-data exception))
                              (logger/error args)
                              (on-error args)))
+        ;; TOKEN OPTIMIZATION: This processes ALL tools and sends them with request
+        ;; Major token usage - consider filtering or compressing based on context
         tools (when (:tools model-capabilities)
                 (mapv tool->llm-tool tools))
         reason? (:reason? model-capabilities)
@@ -99,6 +110,9 @@
         api-key (llm-util/provider-api-key provider provider-auth config)
         api-url (llm-util/provider-api-url provider config)
         provider-auth-type (:type provider-auth)
+        ;; TOKEN OPTIMIZATION: Use separated contexts if available, fallback to legacy combined instructions
+        final-instructions (or system-instructions instructions)
+        final-user-context (or user-context (when user-messages (first user-messages)))
         callbacks {:on-message-received on-message-received-wrapper
                    :on-error on-error-wrapper
                    :on-prepare-tool-call on-prepare-tool-call-wrapper
@@ -128,7 +142,7 @@
         (= "anthropic" provider)
         (llm-providers.anthropic/completion!
          {:model model
-          :instructions instructions
+          :instructions final-instructions
           :user-messages user-messages
           :max-output-tokens max-output-tokens
           :reason? reason?
@@ -139,7 +153,10 @@
           :extra-payload extra-payload
           :api-url api-url
           :api-key api-key
-          :auth-type provider-auth-type}
+          :auth-type provider-auth-type
+          ;; TOKEN OPTIMIZATION: Pass separated contexts to provider
+          :system-instructions system-instructions
+          :user-context user-context}
          callbacks)
 
         (= "github-copilot" provider)

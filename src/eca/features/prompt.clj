@@ -83,21 +83,29 @@
                                         surrounding-lines))
                 "\n```\n\n")))))
 
-(defn build-instructions [refined-contexts rules repo-map* behavior config]
+;; TOKEN OPTIMIZATION: Split system vs user context to leverage caching
+;; System context (cached via ephemeral): behavior + rules + static elements
+;; User context (dynamic): file contents + cursor position + conversation
+
+(defn build-system-instructions [rules behavior config]
+  "Builds the static system instructions that can be cached."
+  (multi-str
+   (eca-prompt behavior config)
+   (when (seq rules)
+     ["<rules description=\"Rules defined by user\">\n"
+      (reduce
+       (fn [rule-str {:keys [name content]}]
+         (str rule-str (format "<rule name=\"%s\">%s</rule>\n" name content)))
+       ""
+       rules)
+      "</rules>"])))
+
+(defn build-user-context [refined-contexts repo-map*]
+  "Builds the dynamic user context that changes per request."
   (let [cursor-contexts (filter #(= :cursor (:type %)) refined-contexts)
         non-cursor-contexts (remove #(= :cursor (:type %)) refined-contexts)]
     (multi-str
-     (eca-prompt behavior config)
-     (when (seq rules)
-       ["<rules description=\"Rules defined by user\">\n"
-        (reduce
-         (fn [rule-str {:keys [name content]}]
-           (str rule-str (format "<rule name=\"%s\">%s</rule>\n" name content)))
-         ""
-         rules)
-        "</rules>"])
-
-     ;; Add cursor contexts with enhanced formatting right after rules
+     ;; Add cursor contexts with enhanced formatting
      (when (seq cursor-contexts)
        (reduce str ""
                (map format-cursor-context cursor-contexts)))
@@ -116,6 +124,13 @@
          ""
          non-cursor-contexts)
         "</contexts>"]))))
+
+;; Legacy function for backwards compatibility
+(defn build-instructions [refined-contexts rules repo-map* behavior config]
+  "Legacy function - concatenates system + user context (for backwards compatibility)."
+  (multi-str
+   (build-system-instructions rules behavior config)
+   (build-user-context refined-contexts repo-map*)))
 
 (defn init-prompt [db]
   (replace-vars

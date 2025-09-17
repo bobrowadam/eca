@@ -283,9 +283,18 @@
           (fs/move source destination {:replace-existing false})
           (tools.util/single-text-content (format "Successfully moved %s to %s" source destination))))))
 
+;; TOKEN OPTIMIZATION: This definitions map creates the tool schemas sent to LLM
+;; Major token usage comes from:
+;; 1. Full verbose descriptions loaded from files via read-tool-description
+;; 2. Detailed parameter descriptions for every property
+;; 3. All tool definitions sent every request regardless of relevance
+;; Optimization opportunities:
+;; - Cache these definitions instead of rebuilding
+;; - Create compressed versions for frequent operations
+;; - Load descriptions lazily or abbreviate for common tools
 (def definitions
   {"eca_directory_tree"
-   {:description (tools.util/read-tool-description "eca_directory_tree")
+   {:description (tools.util/read-tool-description "eca_directory_tree")  ;; <-- Loads verbose description file
     :parameters {:type "object"
                  :properties {"path" {:type "string"
                                       :description "The absolute path to the directory."}
