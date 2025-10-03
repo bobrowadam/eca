@@ -23,6 +23,13 @@
              :client-info (:client-info params)
              :workspace-folders (:workspace-folders params)
              :client-capabilities (:capabilities params))
+      ;; Merge additional working directories from config into workspace-folders
+      (when-let [additional-dirs (seq (:additionalWorkingDirectories config))]
+        (let [additional-folders (config/additional-dirs->workspace-folders additional-dirs)]
+          (when (seq additional-folders)
+            (logger/debug "Adding additional working directories:" additional-folders)
+            (swap! db* update :workspace-folders (fn [existing-folders]
+                                                    (vec (concat existing-folders additional-folders)))))))
       (metrics/set-extra-metrics! db*)
       (when-not (:pureConfig config)
         (db/load-db-from-cache! db* config metrics))

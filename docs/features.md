@@ -98,6 +98,7 @@ The built-in commands are:
 `/doctor`: Show information about ECA, useful for troubleshooting.
 `/repo-map-show`: Show the current repoMap context of the session.
 `/prompt-show`: Show the final prompt sent to LLM with all contexts and ECA details.
+`/add-dir`: Add an external directory to the working scope for the current session. Ex: `/add-dir ~/external-project`
 
 #### Custom commands
 
