@@ -112,7 +112,11 @@
                       {:name "prompt-show"
                        :type :native
                        :description "Prompt sent to LLM as system instructions."
-                       :arguments []}]
+                       :arguments []}
+                      {:name "add-dir"
+                       :type :native
+                       :description "Add an external directory to the working scope (Ex: /add-dir ~/my-project)"
+                       :arguments [{:name "directory-path"}]}]
         custom-cmds (map (fn [custom]
                            {:name (:name custom)
                             :type :custom-prompt
@@ -229,6 +233,29 @@
                        :chats {chat-id [{:role "system" :content [{:type :text :text (f.index/repo-map db config {:as-string? true})}]}]}}
       "prompt-show" {:type :chat-messages
                      :chats {chat-id [{:role "system" :content [{:type :text :text instructions}]}]}}
+      "add-dir" (let [path (first args)]
+                  (if (and path (not (string/blank? path)))
+                    (if-let [workspace-folder (config/path->workspace-folder path)]
+                      (do
+                        (swap! db* update :workspace-folders (fn [existing-folders]
+                                                                (vec (concat existing-folders [workspace-folder]))))
+                        {:type :chat-messages
+                         :chats {chat-id [{:role "system"
+                                          :content [{:type :text
+                                                    :text (multi-str (format "✓ Added directory to working scope: %s" (:uri workspace-folder))
+                                                                     ""
+                                                                     "You can now read, write, and edit files in this directory.")}]}]}})
+                      {:type :chat-messages
+                       :chats {chat-id [{:role "system"
+                                        :content [{:type :text
+                                                  :text (multi-str (format "✗ Failed to add directory: %s" path)
+                                                                   ""
+                                                                   "Make sure the path exists and is a directory."
+                                                                   "Paths can be absolute (/path/to/dir) or use ~ for home directory.")}]}]}})
+                    {:type :chat-messages
+                     :chats {chat-id [{:role "system"
+                                      :content [{:type :text
+                                                :text "Usage: /add-dir <directory-path>\nExample: /add-dir ~/my-project"}]}]}}))
 
       ;; else check if a custom command
       (if-let [custom-command-prompt (get-custom-command command args custom-cmds)]

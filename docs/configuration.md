@@ -48,6 +48,66 @@ There are multiples ways to configure ECA:
     ECA_CONFIG='{"myConfig": "my_value"}' eca server
     ```
 
+## Working Directories
+
+By default, ECA only allows file operations within the workspace folders provided by your editor during initialization. You can extend this scope to include additional external directories using either static configuration or runtime commands.
+
+### Static Configuration
+
+Add external directories permanently using the `additionalWorkingDirectories` configuration:
+
+=== "Global config file"
+
+    `~/.config/eca/config.json`
+    ```javascript
+    {
+      "additionalWorkingDirectories": [
+        "/path/to/external/project",
+        "~/shared-libraries/common"
+      ]
+    }
+    ```
+
+=== "Local config file"
+
+    `.eca/config.json`
+    ```javascript
+    {
+      "additionalWorkingDirectories": [
+        "/absolute/path/to/dir",
+        "~/relative/to/home"
+      ]
+    }
+    ```
+
+**Notes:**
+- Paths can be absolute (`/path/to/dir`) or use `~` for home directory expansion
+- Invalid or non-existent paths are silently ignored with a warning in logs
+- These directories are added during server initialization and persist across sessions
+
+### Runtime Command
+
+Add directories dynamically during a chat session using the `/add-dir` command:
+
+```
+/add-dir /path/to/external/project
+/add-dir ~/my-shared-library
+```
+
+**Notes:**
+- Changes only affect the current session
+- The directory must exist and be readable
+- You'll receive confirmation when successfully added
+- Use this for ad-hoc access to external directories
+
+### Security Implications
+
+⚠️ **Important:** Adding external directories grants ECA full read/write access to those locations. Only add directories you trust, as the LLM will be able to:
+- Read all files within those directories
+- Write new files
+- Edit existing files
+- Execute commands in those locations (if shell tools are enabled)
+
 ## Providers / Models
 
 For providers and models configuration check the [dedicated models section](./models.md#custom-providers).

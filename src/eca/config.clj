@@ -6,6 +6,7 @@
   3. local config-file: searching from a local `.eca/config.json` file.
   4. `initializatonOptions` sent in `initialize` request."
   (:require
+   [babashka.fs :as fs]
    [camel-snake-kebab.core :as csk]
    [cheshire.core :as json]
    [cheshire.factory :as json.factory]
@@ -98,6 +99,7 @@
    :mcpTimeoutSeconds 60
    :lspTimeoutSeconds 30
    :mcpServers {}
+   :additionalWorkingDirectories []
    :welcomeMessage (multi-str "# Welcome to ECA!"
                               ""
                               "Complete `/` for all commands"
@@ -280,6 +282,33 @@
 
     ;; all good
     :else nil))
+
+(defn path->workspace-folder
+  "Converts a filesystem path to a WorkspaceFolder map.
+   Handles ~ expansion and validates path existence.
+   Returns {:uri \"file:///...\", :name \"...\"} or nil if invalid."
+  [path]
+  (when (and path (not (string/blank? path)))
+    (try
+      (let [expanded-path (if (string/starts-with? path "~")
+                            (str (fs/expand-home (fs/file path)))
+                            path)
+            canonical-path (when (fs/exists? expanded-path)
+                            (str (fs/canonicalize expanded-path)))]
+        (when (and canonical-path (fs/directory? canonical-path))
+          {:uri (str "file://" canonical-path)
+           :name (fs/file-name canonical-path)}))
+      (catch Exception e
+        (logger/warn logger-tag (format "Failed to convert path '%s' to workspace folder: %s" path (.getMessage e)))
+        nil))))
+
+(defn additional-dirs->workspace-folders
+  "Converts a collection of directory paths to WorkspaceFolder format.
+   Filters out invalid paths and returns a vector of workspace folder maps."
+  [paths]
+  (->> paths
+       (keep path->workspace-folder)
+       vec))
 
 (defn listen-for-changes! [db*]
   (while (not (:stopping @db*))
