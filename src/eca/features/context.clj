@@ -101,41 +101,54 @@
       {:type "file"
        :path path})))
 
-(defn all-contexts [query db* config]
-  (let [query (or (some-> query string/trim) "")
-        first-project-path (shared/uri->filename (:uri (first (:workspace-folders @db*))))
-        relative-path (and query
-                           (or
-                            (when (string/starts-with? query "~")
-                              (fs/expand-home (fs/file query)))
-                            (when (string/starts-with? query "/")
-                              (fs/file query))
-                            (when (or (string/starts-with? query "./")
-                                      (string/starts-with? query "../"))
-                              (fs/file first-project-path query))))
-        relative-files (when relative-path
-                         (mapv file->context
-                               (try
-                                 (if (fs/exists? relative-path)
-                                   (fs/list-dir relative-path)
-                                   (fs/list-dir (fs/parent relative-path)))
-                                 (catch Exception _ nil))))
-        workspace-files (when-not relative-path
-                          (into []
-                                (comp
-                                 (map :uri)
-                                 (map shared/uri->filename)
-                                 (mapcat #(contexts-for % query config))
-                                 (take 100) ;; for performance, user can always make query specific for better results.
-                                 (map file->context))
-                                (:workspace-folders @db*)))
-        root-dirs (mapv (fn [{:keys [uri]}] {:type "directory"
-                                             :path (shared/uri->filename uri)})
-                        (:workspace-folders @db*))
-        mcp-resources (mapv #(assoc % :type "mcpResource") (f.mcp/all-resources @db*))]
-    (concat [{:type "repoMap"}
-             {:type "cursor"}]
-            root-dirs
-            relative-files
-            workspace-files
-            mcp-resources)))
+(defn all-contexts
+  "Returns all available contexts for the given query.
+   Options:
+   - :type-filter - When specified, only contexts matching this type will be returned.
+                    Valid values: \"file\", \"directory\", \"repoMap\", \"cursor\", \"mcpResource\""
+  ([query db* config]
+   (all-contexts query db* config nil))
+  ([query db* config {:keys [type-filter]}]
+   (let [query (or (some-> query string/trim) "")
+         first-project-path (shared/uri->filename (:uri (first (:workspace-folders @db*))))
+         relative-path (and query
+                            (or
+                             (when (string/starts-with? query "~")
+                               (fs/expand-home (fs/file query)))
+                             (when (string/starts-with? query "/")
+                               (fs/file query))
+                             (when (or (string/starts-with? query "./")
+                                       (string/starts-with? query "../"))
+                               (fs/file first-project-path query))))
+         relative-files (when relative-path
+                          (mapv file->context
+                                (try
+                                  (if (fs/exists? relative-path)
+                                    (fs/list-dir relative-path)
+                                    (fs/list-dir (fs/parent relative-path)))
+                                  (catch Exception _ nil))))
+         workspace-files (when-not relative-path
+                           (into []
+                                 (comp
+                                  (map :uri)
+                                  (map shared/uri->filename)
+                                  (mapcat #(contexts-for % query config))
+                                  (take 100) ;; for performance, user can always make query specific for better results.
+                                  (map file->context))
+                                 (:workspace-folders @db*)))
+         root-dirs (when-not relative-path
+                     (mapv (fn [{:keys [uri]}] {:type "directory"
+                                                :path (shared/uri->filename uri)})
+                           (:workspace-folders @db*)))
+         mcp-resources (when-not relative-path
+                         (mapv #(assoc % :type "mcpResource") (f.mcp/all-resources @db*)))
+         all-contexts (concat (when-not relative-path
+                                [{:type "repoMap"}
+                                 {:type "cursor"}])
+                              root-dirs
+                              relative-files
+                              workspace-files
+                              mcp-resources)]
+     (if type-filter
+       (filter #(= (:type %) type-filter) all-contexts)
+       all-contexts))))

@@ -922,11 +922,11 @@
                                      :text "Tool call rejected by user choice"}})))
 
 (defn query-context
-  [{:keys [query contexts chat-id]}
+  [{:keys [query contexts chat-id type-filter]}
    db*
    config]
   {:chat-id chat-id
-   :contexts (set/difference (set (f.context/all-contexts query db* config))
+   :contexts (set/difference (set (f.context/all-contexts query db* config {:type-filter type-filter}))
                              (set contexts))})
 
 (defn query-commands

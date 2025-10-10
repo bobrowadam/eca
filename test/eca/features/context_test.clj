@@ -108,6 +108,62 @@
               file-paths (->> results (filter #(= "file" (:type %))) (map :path) set)]
           (is (contains? file-paths readme)))))))
 
+(deftest type-filter-test
+  (testing "type-filter returns only matching context types"
+    (h/reset-components!)
+    (let [root (h/file-path "/fake/repo")
+          fake-paths [(h/file-path (str root "/dir"))
+                      (h/file-path (str root "/foo.txt"))
+                      (h/file-path (str root "/dir/nested.txt"))
+                      (h/file-path (str root "/bar.txt"))]]
+      (swap! (h/db*) assoc :workspace-folders [{:uri (h/file-uri "file:///fake/repo")}])
+      (with-redefs [f.context/all-files-from #'f.context/all-files-from*
+                    fs/glob (fn [_root-filename pattern]
+                              (let [q (string/replace pattern #"\*" "")]
+                                (filter #(string/includes? (str %) q) fake-paths)))
+                    fs/directory? (fn [p] (string/ends-with? (str p) "/dir"))
+                    fs/canonicalize identity
+                    f.index/filter-allowed (fn [file-paths _root _config] file-paths)
+                    f.mcp/all-resources (fn [_db] [{:uri "mcp://r1"}])]
+
+        (testing "filter by directory only"
+          (let [result (f.context/all-contexts nil (h/db*) (h/config) {:type-filter "directory"})]
+            ;; Should only include directories
+            (is (every? #(= "directory" (:type %)) result))
+            ;; Should include workspace root
+            (is (some #(= {:type "directory" :path root} %) result))
+            ;; Should not include files or other types
+            (is (not (some #(= "file" (:type %)) result)))
+            (is (not (some #(= "repoMap" (:type %)) result)))
+            (is (not (some #(= "cursor" (:type %)) result)))
+            (is (not (some #(= "mcpResource" (:type %)) result)))))
+
+        (testing "filter by file only"
+          (let [result (f.context/all-contexts nil (h/db*) (h/config) {:type-filter "file"})]
+            ;; Should only include files
+            (is (every? #(= "file" (:type %)) result))
+            (is (some #(= {:type "file" :path (h/file-path (str root "/foo.txt"))} %) result))
+            ;; Should not include directories or other types
+            (is (not (some #(= "directory" (:type %)) result)))))
+
+        (testing "filter by mcpResource only"
+          (let [result (f.context/all-contexts nil (h/db*) (h/config) {:type-filter "mcpResource"})]
+            ;; Should only include MCP resources
+            (is (every? #(= "mcpResource" (:type %)) result))
+            (is (some #(= {:type "mcpResource" :uri "mcp://r1"} %) result))
+            ;; Should not include files or directories
+            (is (not (some #(= "file" (:type %)) result)))
+            (is (not (some #(= "directory" (:type %)) result)))))
+
+        (testing "no filter returns all types"
+          (let [result (f.context/all-contexts nil (h/db*) (h/config))]
+            ;; Should include all types
+            (is (some #(= "directory" (:type %)) result))
+            (is (some #(= "file" (:type %)) result))
+            (is (some #(= "repoMap" (:type %)) result))
+            (is (some #(= "cursor" (:type %)) result))
+            (is (some #(= "mcpResource" (:type %)) result))))))))
+
 (deftest relative-path-query-test
   (testing "./relative path lists entries in that directory (no glob)"
     (let [root (h/file-path "/fake/repo")

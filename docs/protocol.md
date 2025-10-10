@@ -1015,6 +1015,13 @@ interface ChatQueryContextParams {
      * The already considered contexts.
      */
     contexts: ChatContext[];
+
+    /**
+     * Optional filter by context type.
+     * When specified, only contexts matching this type will be returned.
+     * Valid values: "file", "directory", "repoMap", "cursor", "mcpResource"
+     */
+    typeFilter?: string;
 }
 ```
 
