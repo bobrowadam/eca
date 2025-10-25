@@ -1,0 +1,4609 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ECA - AI pair programming capabilities in any editor">
+      
+      
+      
+        <link rel="canonical" href="https://eca.dev/CHANGELOG/">
+      
+      
+        <link rel="prev" href="../models/">
+      
+      
+      
+      <link rel="icon" href="../images/logo.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>Changelog - ECA - Editor Code Assistant</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/layout.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-VFJYDKR1MR"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-VFJYDKR1MR",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-VFJYDKR1MR",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#changelog" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ECA - Editor Code Assistant" class="md-header__button md-logo" aria-label="ECA - Editor Code Assistant" data-md-component="logo">
+      
+  <img src="../images/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ECA - Editor Code Assistant
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Changelog
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/editor-code-assistant/eca" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    editor-code-assistant/eca
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href=".." class="md-tabs__link">
+          
+  
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../features/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Features
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../installation/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Installation
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../models/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Models
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="https://github.com/sponsors/ericdallo" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Support Us
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Changelog
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ECA - Editor Code Assistant" class="md-nav__button md-logo" aria-label="ECA - Editor Code Assistant" data-md-component="logo">
+      
+  <img src="../images/logo.svg" alt="logo">
+
+    </a>
+    ECA - Editor Code Assistant
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/editor-code-assistant/eca" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    editor-code-assistant/eca
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    
+    
+    
+    
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" >
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Protocol
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../features/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Features
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/sponsors/ericdallo" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Support Us
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Changelog
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Changelog
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#unreleased" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unreleased
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0721" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.72.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0720" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.72.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0713" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.71.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0712" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.71.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0711" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.71.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0710" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.71.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0706" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.70.6
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0705" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.70.5
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0704" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.70.4
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0703" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.70.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0702" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.70.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0701" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.70.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0700" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.70.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0691" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.69.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0690" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.69.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0681" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.68.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0680" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.68.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0670" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.67.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0661" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.66.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0660" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.66.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0650" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.65.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0641" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.64.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0640" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.64.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0633" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.63.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0632" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.63.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0631" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.63.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0630" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.63.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0621" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.62.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0620" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.62.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0611" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.61.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0610" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.61.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0600" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.60.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0590" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.59.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0582" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.58.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0581" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.58.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0580" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.58.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0570" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.57.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0564" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.56.4
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0563" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.56.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0562" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.56.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0561" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.56.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0560" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.56.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0550" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.55.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0544" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.54.4
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0543" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.54.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0542" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.54.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0541" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.54.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0540" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.54.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0530" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.53.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0520" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.52.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0513" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.51.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0512" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.51.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0511" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.51.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0510" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.51.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0502" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.50.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0501" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.50.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0500" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.50.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0490" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.49.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0480" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.48.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0470" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.47.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0460" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.46.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0450" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.45.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0441" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.44.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0440" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.44.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0431" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.43.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0430" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.43.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0420" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.42.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0410" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.41.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0400" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.40.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0390" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.39.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0383" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.38.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0382" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.38.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0381" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.38.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0380" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.38.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0370" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.37.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0365" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.36.5
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0364" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.36.4
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0363" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.36.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0362" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.36.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0361" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.36.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0360" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.36.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0350" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.35.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0342" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.34.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0341" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.34.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0340" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.34.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0330" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.33.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0324" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.32.4
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0323" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.32.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0322" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.32.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0321" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.32.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0320" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.32.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0310" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.31.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0300" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.30.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0292" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.29.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0291" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.29.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0290" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.29.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0280" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.28.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0270" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.27.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0263" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.26.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0262" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.26.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0261" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.26.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0260" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.26.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0250" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.25.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0243" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.24.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0242" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.24.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0241" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.24.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0240" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.24.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0231" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.23.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0230" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.23.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0220" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.22.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0211" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.21.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0210" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.21.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0200" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.20.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0190" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.19.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0180" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.18.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0172" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.17.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0171" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.17.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0170" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.17.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0160" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.16.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0153" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.15.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0152" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.15.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0151" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.15.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0150" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.15.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0144" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.14.4
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0143" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.14.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0142" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.14.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0141" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.14.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0140" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.14.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0131" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.13.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0130" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.13.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0127" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.12.7
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0126" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.12.6
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0125" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.12.5
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0124" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.12.4
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0123" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.12.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0122" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.12.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0121" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.12.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0120" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.12.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0112" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.11.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0111" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.11.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0110" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.11.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0103" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.10.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0102" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.10.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0101" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.10.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0100" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.10.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#090" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#081" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#080" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#070" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.7.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#061" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.6.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#060" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.6.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#051" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.5.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#050" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.5.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#043" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.4.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#042" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.4.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#041" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.4.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#040" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.4.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#031" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.3.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#030" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.3.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#020" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.2.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#010" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.1.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#004" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.0.4
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#003" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.0.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#002" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.0.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#001" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.0.1
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#unreleased" class="md-nav__link">
+    <span class="md-ellipsis">
+      Unreleased
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0721" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.72.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0720" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.72.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0713" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.71.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0712" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.71.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0711" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.71.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0710" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.71.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0706" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.70.6
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0705" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.70.5
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0704" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.70.4
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0703" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.70.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0702" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.70.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0701" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.70.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0700" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.70.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0691" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.69.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0690" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.69.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0681" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.68.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0680" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.68.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0670" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.67.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0661" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.66.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0660" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.66.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0650" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.65.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0641" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.64.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0640" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.64.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0633" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.63.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0632" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.63.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0631" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.63.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0630" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.63.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0621" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.62.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0620" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.62.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0611" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.61.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0610" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.61.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0600" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.60.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0590" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.59.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0582" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.58.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0581" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.58.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0580" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.58.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0570" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.57.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0564" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.56.4
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0563" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.56.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0562" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.56.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0561" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.56.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0560" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.56.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0550" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.55.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0544" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.54.4
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0543" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.54.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0542" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.54.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0541" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.54.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0540" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.54.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0530" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.53.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0520" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.52.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0513" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.51.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0512" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.51.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0511" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.51.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0510" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.51.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0502" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.50.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0501" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.50.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0500" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.50.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0490" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.49.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0480" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.48.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0470" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.47.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0460" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.46.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0450" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.45.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0441" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.44.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0440" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.44.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0431" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.43.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0430" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.43.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0420" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.42.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0410" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.41.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0400" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.40.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0390" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.39.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0383" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.38.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0382" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.38.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0381" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.38.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0380" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.38.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0370" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.37.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0365" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.36.5
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0364" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.36.4
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0363" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.36.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0362" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.36.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0361" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.36.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0360" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.36.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0350" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.35.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0342" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.34.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0341" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.34.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0340" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.34.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0330" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.33.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0324" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.32.4
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0323" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.32.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0322" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.32.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0321" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.32.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0320" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.32.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0310" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.31.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0300" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.30.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0292" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.29.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0291" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.29.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0290" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.29.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0280" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.28.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0270" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.27.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0263" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.26.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0262" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.26.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0261" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.26.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0260" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.26.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0250" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.25.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0243" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.24.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0242" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.24.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0241" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.24.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0240" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.24.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0231" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.23.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0230" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.23.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0220" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.22.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0211" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.21.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0210" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.21.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0200" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.20.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0190" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.19.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0180" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.18.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0172" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.17.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0171" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.17.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0170" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.17.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0160" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.16.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0153" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.15.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0152" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.15.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0151" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.15.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0150" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.15.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0144" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.14.4
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0143" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.14.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0142" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.14.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0141" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.14.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0140" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.14.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0131" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.13.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0130" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.13.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0127" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.12.7
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0126" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.12.6
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0125" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.12.5
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0124" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.12.4
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0123" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.12.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0122" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.12.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0121" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.12.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0120" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.12.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0112" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.11.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0111" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.11.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0110" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.11.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0103" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.10.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0102" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.10.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0101" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.10.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#0100" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.10.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#090" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.9.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#081" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#080" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.8.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#070" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.7.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#061" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.6.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#060" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.6.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#051" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.5.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#050" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.5.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#043" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.4.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#042" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.4.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#041" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.4.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#040" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.4.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#031" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.3.1
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#030" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.3.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#020" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.2.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#010" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.1.0
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#004" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.0.4
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#003" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.0.3
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#002" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.0.2
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#001" class="md-nav__link">
+    <span class="md-ellipsis">
+      0.0.1
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="changelog">Changelog<a class="headerlink" href="#changelog" title="Permanent link">#</a></h1>
+<h2 id="unreleased">Unreleased<a class="headerlink" href="#unreleased" title="Permanent link">#</a></h2>
+<h2 id="0721">0.72.1<a class="headerlink" href="#0721" title="Permanent link">#</a></h2>
+<ul>
+<li>Only include <code>parallel_tool_calls</code> to openai-responses and openai-chat if true. #169</li>
+</ul>
+<h2 id="0720">0.72.0<a class="headerlink" href="#0720" title="Permanent link">#</a></h2>
+<ul>
+<li>Support clojureMCP dry-run flags for edit/write tools, being able to show preview of diffs before running tool.</li>
+</ul>
+<h2 id="0713">0.71.3<a class="headerlink" href="#0713" title="Permanent link">#</a></h2>
+<ul>
+<li>Assoc <code>parallel_tool_calls</code> to openai-chat only if truth.</li>
+</ul>
+<h2 id="0712">0.71.2<a class="headerlink" href="#0712" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix regression in <code>/compact</code> command. #162</li>
+<li>Fix to use local zone for time presentation in <code>/resume</code>.</li>
+</ul>
+<h2 id="0711">0.71.1<a class="headerlink" href="#0711" title="Permanent link">#</a></h2>
+<ul>
+<li>Use web-search false if model capabiltiies are not found.</li>
+</ul>
+<h2 id="0710">0.71.0<a class="headerlink" href="#0710" title="Permanent link">#</a></h2>
+<ul>
+<li>Support <code>/resume</code> a specific chat.</li>
+</ul>
+<h2 id="0706">0.70.6<a class="headerlink" href="#0706" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix <code>openai-chat</code> api not following <code>completionUrlRelativePath</code>.</li>
+</ul>
+<h2 id="0705">0.70.5<a class="headerlink" href="#0705" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix web-search not working for custom models using openai/anthropic apis.</li>
+</ul>
+<h2 id="0704">0.70.4<a class="headerlink" href="#0704" title="Permanent link">#</a></h2>
+<ul>
+<li>Support <code>visible</code> field in hooks configuration to show or not in client.</li>
+</ul>
+<h2 id="0703">0.70.3<a class="headerlink" href="#0703" title="Permanent link">#</a></h2>
+<ul>
+<li>Deprecate prePrompt and postPrompt in favor of preRequest and prePrompt.</li>
+</ul>
+<h2 id="0702">0.70.2<a class="headerlink" href="#0702" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix model capabilities for models with custom names.</li>
+</ul>
+<h2 id="0701">0.70.1<a class="headerlink" href="#0701" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix prePrompt hook.</li>
+</ul>
+<h2 id="0700">0.70.0<a class="headerlink" href="#0700" title="Permanent link">#</a></h2>
+<ul>
+<li>Add hooks support. #43</li>
+</ul>
+<h2 id="0691">0.69.1<a class="headerlink" href="#0691" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix regression on models with no extraPayload.</li>
+</ul>
+<h2 id="0690">0.69.0<a class="headerlink" href="#0690" title="Permanent link">#</a></h2>
+<ul>
+<li>Support multiple model configs with different payloads using same model name via <code>modelName</code> config. (Ex: gpt-5 and gpt-5-high but both use gpt-5)</li>
+</ul>
+<h2 id="0681">0.68.1<a class="headerlink" href="#0681" title="Permanent link">#</a></h2>
+<ul>
+<li>Add <code>anthropic/haiku-4.5</code> model by default.</li>
+</ul>
+<h2 id="0680">0.68.0<a class="headerlink" href="#0680" title="Permanent link">#</a></h2>
+<ul>
+<li>Unwrap mentioned @contexts in prompt appending as user message its content. #154</li>
+</ul>
+<h2 id="0670">0.67.0<a class="headerlink" href="#0670" title="Permanent link">#</a></h2>
+<ul>
+<li>Improved flaky test #150</li>
+<li>Obfuscate env vars in /doctor.</li>
+<li>Bump clj-otel to 0.2.10</li>
+<li>Rename $ARGS to $ARGUMENTS placeholder alias for custom commands.</li>
+<li>Support recursive AGENTS.md file inclusions with @file mention. #140</li>
+</ul>
+<h2 id="0661">0.66.1<a class="headerlink" href="#0661" title="Permanent link">#</a></h2>
+<ul>
+<li>Improve plan behavior prompt. #139</li>
+</ul>
+<h2 id="0660">0.66.0<a class="headerlink" href="#0660" title="Permanent link">#</a></h2>
+<ul>
+<li>Add support for secrets stored in authinfo and netrc files</li>
+<li>Added tests for stopping concurrent tool calls. #147</li>
+<li>Improve logging.</li>
+<li>Improve performance of <code>chat/queryContext</code>.</li>
+</ul>
+<h2 id="0650">0.65.0<a class="headerlink" href="#0650" title="Permanent link">#</a></h2>
+<ul>
+<li>Added ability to cancel tool calls. Only the shell tool currently. #145</li>
+<li>Bump mcp java sdk to 0.14.1.</li>
+<li>Improve json output for tools that output json.</li>
+</ul>
+<h2 id="0641">0.64.1<a class="headerlink" href="#0641" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix duplicated arguments on <code>toolCallPrepare</code> for openai-chat API models. https://github.com/editor-code-assistant/eca-emacs/issues/56</li>
+</ul>
+<h2 id="0640">0.64.0<a class="headerlink" href="#0640" title="Permanent link">#</a></h2>
+<ul>
+<li>Add <code>server</code> to tool call messages.</li>
+</ul>
+<h2 id="0633">0.63.3<a class="headerlink" href="#0633" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix last word going after tool call for openai-chat API.</li>
+</ul>
+<h2 id="0632">0.63.2<a class="headerlink" href="#0632" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix retrocompatibility with some models not working with openai-chat like deepseek.</li>
+</ul>
+<h2 id="0631">0.63.1<a class="headerlink" href="#0631" title="Permanent link">#</a></h2>
+<ul>
+<li>Add <code>gpt-5-codex</code> model as default for <code>openai</code> provider.</li>
+</ul>
+<h2 id="0630">0.63.0<a class="headerlink" href="#0630" title="Permanent link">#</a></h2>
+<ul>
+<li>Support "accept and remember" tool call per session and name.</li>
+<li>Avoid generating huge chat titles.</li>
+</ul>
+<h2 id="0621">0.62.1<a class="headerlink" href="#0621" title="Permanent link">#</a></h2>
+<ul>
+<li>Add <code>claude-sonnet-4.5</code> for github-copilot provider.</li>
+<li>Add <code>prompt-received</code> metric.</li>
+</ul>
+<h2 id="0620">0.62.0<a class="headerlink" href="#0620" title="Permanent link">#</a></h2>
+<ul>
+<li>Use a default of 32k tokens for max_tokens in openai-chat API.</li>
+<li>Improve rejection prompt for tool calls.</li>
+<li>Use <code>max_completion_tokens</code> instead of <code>max_tokens</code> in openai-chat API.</li>
+<li>Support context/tokens usage/cost for openai-chat API.</li>
+<li>Support <code>anthropic/claude-sonnet-4.5</code> by default.</li>
+</ul>
+<h2 id="0611">0.61.1<a class="headerlink" href="#0611" title="Permanent link">#</a></h2>
+<ul>
+<li>More tolerant whitespace handling after <code>data:</code>.</li>
+<li>Fix login for google provider. #134</li>
+</ul>
+<h2 id="0610">0.61.0<a class="headerlink" href="#0610" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix chat titles not working for some providers.</li>
+<li>Enable reasoning for google models.</li>
+<li>Support reasoning blocks in models who use openai-chat api.</li>
+</ul>
+<h2 id="0600">0.60.0<a class="headerlink" href="#0600" title="Permanent link">#</a></h2>
+<ul>
+<li>Support google gemini as built-in models. #50</li>
+</ul>
+<h2 id="0590">0.59.0<a class="headerlink" href="#0590" title="Permanent link">#</a></h2>
+<ul>
+<li>Deprecate repoMap context, will be removed in the future.</li>
+<li>After lots of tunnings and improvements, the repoMap is no longer relevant as <code>eca_directory_tree</code> provides similar and more specific view for LLM to use.</li>
+<li>Support <code>toolCall shellCommand summaryMaxLength</code> to configure UX of command length. #130</li>
+</ul>
+<h2 id="0582">0.58.2<a class="headerlink" href="#0582" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix MCP prompt for native image.</li>
+</ul>
+<h2 id="0581">0.58.1<a class="headerlink" href="#0581" title="Permanent link">#</a></h2>
+<ul>
+<li>Improve progress notification when tool is running.</li>
+</ul>
+<h2 id="0580">0.58.0<a class="headerlink" href="#0580" title="Permanent link">#</a></h2>
+<ul>
+<li>Bump MCP java sdk to 0.13.1</li>
+<li>Improve MCP logs on stderr.</li>
+<li>Support tool call rejection with reasons inputed by user. #127</li>
+</ul>
+<h2 id="0570">0.57.0<a class="headerlink" href="#0570" title="Permanent link">#</a></h2>
+<ul>
+<li>Greatly reduce token consuming of <code>eca_directory_tree</code></li>
+<li>Ignoring files in gitignore</li>
+<li>Improving tool output for LLM removing token consuming chars.</li>
+</ul>
+<h2 id="0564">0.56.4<a class="headerlink" href="#0564" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix renew oauth tokens when it expires in the same session.</li>
+</ul>
+<h2 id="0563">0.56.3<a class="headerlink" href="#0563" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix metrics exception when saving to db.</li>
+</ul>
+<h2 id="0562">0.56.2<a class="headerlink" href="#0562" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix db exception.</li>
+</ul>
+<h2 id="0561">0.56.1<a class="headerlink" href="#0561" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix usage reporting.</li>
+</ul>
+<h2 id="0560">0.56.0<a class="headerlink" href="#0560" title="Permanent link">#</a></h2>
+<ul>
+<li>Return new chat metadata content.</li>
+<li>Add chat title via prompt to LLM.</li>
+</ul>
+<h2 id="0550">0.55.0<a class="headerlink" href="#0550" title="Permanent link">#</a></h2>
+<ul>
+<li>Add support for Opentelemetry via <code>otlp</code> config.</li>
+<li>Export metrics of server tasks, tool calls, prompts, resources.</li>
+</ul>
+<h2 id="0544">0.54.4<a class="headerlink" href="#0544" title="Permanent link">#</a></h2>
+<ul>
+<li>Use jsonrpc4clj instead of lsp4clj.</li>
+<li>Bump graalvm to 24 and java to 24 improving native binary perf.</li>
+</ul>
+<h2 id="0543">0.54.3<a class="headerlink" href="#0543" title="Permanent link">#</a></h2>
+<ul>
+<li>Avoid errors on multiple same MCP server calls in parallel.</li>
+</ul>
+<h2 id="0542">0.54.2<a class="headerlink" href="#0542" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix openai cache tokens cost calculation.</li>
+</ul>
+<h2 id="0541">0.54.1<a class="headerlink" href="#0541" title="Permanent link">#</a></h2>
+<ul>
+<li>Improve welcome message.</li>
+</ul>
+<h2 id="0540">0.54.0<a class="headerlink" href="#0540" title="Permanent link">#</a></h2>
+<ul>
+<li>Improve large file handling in <code>read-file</code> tool:</li>
+<li>Replace basic truncation notice with detailed line range information and next-step instructions.</li>
+<li>Allow users to customize default line limit through <code>tools.readFile.maxLines</code> configuration (keep the current 2000 as default).</li>
+<li>Moved the future in :on-tools-called and stored it in the db. #119</li>
+<li>Support <code>compactPromptFile</code> config.</li>
+<li>Fix tools not being listed for servers using mcp-remote.</li>
+</ul>
+<h2 id="0530">0.53.0<a class="headerlink" href="#0530" title="Permanent link">#</a></h2>
+<ul>
+<li>Add <code>/compact</code> command to summarize the current conversation helping reduce context size.</li>
+<li>Add support for images as contexts.</li>
+</ul>
+<h2 id="0520">0.52.0<a class="headerlink" href="#0520" title="Permanent link">#</a></h2>
+<ul>
+<li>Support http-streamable http servers (non auth support for now)</li>
+<li>Fix promtps that send assistant messages not working for anthropic.</li>
+</ul>
+<h2 id="0513">0.51.3<a class="headerlink" href="#0513" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix manual anthropic login to save credentials in global config instead of cache.</li>
+</ul>
+<h2 id="0512">0.51.2<a class="headerlink" href="#0512" title="Permanent link">#</a></h2>
+<ul>
+<li>Minor log improvement of failed to start MCPs.</li>
+</ul>
+<h2 id="0511">0.51.1<a class="headerlink" href="#0511" title="Permanent link">#</a></h2>
+<ul>
+<li>Bump mcp java sdk to 1.12.1.</li>
+<li>Fix mcp servers default timeout from 20s -&gt; 60s.</li>
+</ul>
+<h2 id="0510">0.51.0<a class="headerlink" href="#0510" title="Permanent link">#</a></h2>
+<ul>
+<li>Support timeout on <code>eca_shell_command</code> with default to 1min.</li>
+<li>Support <code>@cursor</code> context representing the current editor cursor position. #103</li>
+</ul>
+<h2 id="0502">0.50.2<a class="headerlink" href="#0502" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix setting the <code>web-search</code> capability in the relevant models</li>
+<li>Fix summary text for tool calls using <code>openai-chat</code> api.</li>
+</ul>
+<h2 id="0501">0.50.1<a class="headerlink" href="#0501" title="Permanent link">#</a></h2>
+<ul>
+<li>Bump mcp-java-sdk to 0.12.0.</li>
+</ul>
+<h2 id="0500">0.50.0<a class="headerlink" href="#0500" title="Permanent link">#</a></h2>
+<ul>
+<li>Added missing parameters to <code>toolCallRejected</code> where possible.  PR #109</li>
+<li>Improve plan prompt present plan step.</li>
+<li>Add custom behavior configuration support. #79</li>
+<li>Behaviors can now define <code>defaultModel</code>, <code>disabledTools</code>, <code>systemPromptFile</code>, and <code>toolCall</code> approval rules.</li>
+<li>Built-in <code>agent</code> and <code>plan</code> behaviors are pre-configured.</li>
+<li>Replace <code>systemPromptTemplateFile</code> with <code>systemPromptFile</code> for complete prompt files instead of templates.</li>
+<li>Remove <code>nativeTools</code> configuration in favor of <code>toolCall</code> approval and <code>disabledTools</code>.</li>
+<li>Native tools are now always enabled by default, controlled via <code>disabledTools</code> and <code>toolCall</code> approval.</li>
+</ul>
+<h2 id="0490">0.49.0<a class="headerlink" href="#0490" title="Permanent link">#</a></h2>
+<ul>
+<li>Add <code>totalTimeMs</code> to reason and toolCall content blocks.</li>
+</ul>
+<h2 id="0480">0.48.0<a class="headerlink" href="#0480" title="Permanent link">#</a></h2>
+<ul>
+<li>Add nix flake build.</li>
+<li>Stop prompt does not change the status of the last running toolCall. #65</li>
+<li>Add <code>toolCallRunning</code> content to <code>chat/contentReceived</code>.</li>
+</ul>
+<h2 id="0470">0.47.0<a class="headerlink" href="#0470" title="Permanent link">#</a></h2>
+<ul>
+<li>Support more providers login via <code>/login</code>.</li>
+<li>openai</li>
+<li>openrouter</li>
+<li>deepseek</li>
+<li>azure</li>
+<li>z-ai</li>
+</ul>
+<h2 id="0460">0.46.0<a class="headerlink" href="#0460" title="Permanent link">#</a></h2>
+<ul>
+<li>Remove the need to pass <code>requestId</code> on prompt messages.</li>
+<li>Support empty <code>/login</code> command to ask what provider to login.</li>
+</ul>
+<h2 id="0450">0.45.0<a class="headerlink" href="#0450" title="Permanent link">#</a></h2>
+<ul>
+<li>Support user configured custom tools via <code>customTools</code> config. #92</li>
+<li>Fix default approval for read only tools to be <code>allow</code> instead of <code>ask</code>.</li>
+</ul>
+<h2 id="0441">0.44.1<a class="headerlink" href="#0441" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix renew token regression.</li>
+<li>Improve error feedback when failed to renew token.</li>
+</ul>
+<h2 id="0440">0.44.0<a class="headerlink" href="#0440" title="Permanent link">#</a></h2>
+<ul>
+<li>Support <code>deny</code> tool calls via <code>toolCall approval deny</code> setting.</li>
+</ul>
+<h2 id="0431">0.43.1<a class="headerlink" href="#0431" title="Permanent link">#</a></h2>
+<ul>
+<li>Safely rename <code>default*</code> -&gt; <code>select*</code> in <code>config/updated</code>.</li>
+</ul>
+<h2 id="0430">0.43.0<a class="headerlink" href="#0430" title="Permanent link">#</a></h2>
+<ul>
+<li>Support <code>chat/selectedBehaviorChanged</code> client notification.</li>
+<li>Update models according with supported models given its auth or key/url configuration.</li>
+<li>Return models only authenticated or logged in avoid too much models on UI that won't work.</li>
+</ul>
+<h2 id="0420">0.42.0<a class="headerlink" href="#0420" title="Permanent link">#</a></h2>
+<ul>
+<li>New server notification <code>config/updated</code> used to notify clients when a relevant config changed (behaviors, models etc).</li>
+<li>Deprecate info inside <code>initialize</code> response, clients should use <code>config/updated</code> now.</li>
+</ul>
+<h2 id="0410">0.41.0<a class="headerlink" href="#0410" title="Permanent link">#</a></h2>
+<ul>
+<li>Improve anthropic extraPayload requirement when adding models.</li>
+<li>Add message to when config failed to be parsed.</li>
+<li>Fix context completion for workspaces that are not git. #98</li>
+<li>Fix session tokens calculation.</li>
+</ul>
+<h2 id="0400">0.40.0<a class="headerlink" href="#0400" title="Permanent link">#</a></h2>
+<ul>
+<li>Drop <code>agentFileRelativePath</code> in favor of behaviors customizations in the future.</li>
+<li>Unwrap <code>chat</code> config to be at root level.</li>
+<li>Fix token expiration for copilot and anthropic.</li>
+<li>Considerably improve toolCall approval / permissions config.</li>
+<li>Now with thave multiple optiosn to ask or allow tool calls, check config section.</li>
+</ul>
+<h2 id="0390">0.39.0<a class="headerlink" href="#0390" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix session-tokens in usage notifications.</li>
+<li>Support context limit on usage notifications.</li>
+<li>Fix session/message tokens calculation.</li>
+</ul>
+<h2 id="0383">0.38.3<a class="headerlink" href="#0383" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix anthropic token renew.</li>
+</ul>
+<h2 id="0382">0.38.2<a class="headerlink" href="#0382" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix command prompts to allow args with spaces between quotes.</li>
+<li>Fix anthropic token renew when expires.</li>
+</ul>
+<h2 id="0381">0.38.1<a class="headerlink" href="#0381" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix graalvm properties.</li>
+</ul>
+<h2 id="0380">0.38.0<a class="headerlink" href="#0380" title="Permanent link">#</a></h2>
+<ul>
+<li>Improve plan-mode (prompt + eca_preview_file_change tool) #94</li>
+<li>Add fallback for matching / editing text in files #94</li>
+</ul>
+<h2 id="0370">0.37.0<a class="headerlink" href="#0370" title="Permanent link">#</a></h2>
+<ul>
+<li>Require approval for <code>eca_shell_command</code> if running outside workspace folders.</li>
+<li>Fix anthropic subscription.</li>
+</ul>
+<h2 id="0365">0.36.5<a class="headerlink" href="#0365" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix pricing for models being case insensitive on its name when checking capabilities.</li>
+</ul>
+<h2 id="0364">0.36.4<a class="headerlink" href="#0364" title="Permanent link">#</a></h2>
+<ul>
+<li>Improve api url error message when not configured.</li>
+</ul>
+<h2 id="0363">0.36.3<a class="headerlink" href="#0363" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix <code>anthropic/claude-3-5-haiku-20241022</code> model.</li>
+<li>Log json error parsing in configs.</li>
+</ul>
+<h2 id="0362">0.36.2<a class="headerlink" href="#0362" title="Permanent link">#</a></h2>
+<ul>
+<li>Add login providers and server command to <code>/doctor</code>.</li>
+</ul>
+<h2 id="0361">0.36.1<a class="headerlink" href="#0361" title="Permanent link">#</a></h2>
+<ul>
+<li>Improved the <code>eca_directory_tree</code> tool. #82</li>
+</ul>
+<h2 id="0360">0.36.0<a class="headerlink" href="#0360" title="Permanent link">#</a></h2>
+<ul>
+<li>Support relative contexts additions via <code>~</code>, <code>./</code> <code>../</code> and <code>/</code>. #61</li>
+</ul>
+<h2 id="0350">0.35.0<a class="headerlink" href="#0350" title="Permanent link">#</a></h2>
+<ul>
+<li>Anthropic subscription support, via <code>/login anthropic</code> command. #57</li>
+</ul>
+<h2 id="0342">0.34.2<a class="headerlink" href="#0342" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix copilot requiring login in different workspaces.</li>
+</ul>
+<h2 id="0341">0.34.1<a class="headerlink" href="#0341" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix proxy exception. #73</li>
+</ul>
+<h2 id="0340">0.34.0<a class="headerlink" href="#0340" title="Permanent link">#</a></h2>
+<ul>
+<li>Support custom UX details/summary for MCP tools. #67</li>
+<li>Support clojureMCP tools diff for file changes.</li>
+</ul>
+<h2 id="0330">0.33.0<a class="headerlink" href="#0330" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix reasoning titles in thoughts blocks for openai-responses.</li>
+<li>Fix hanging LSP diagnostics requests</li>
+<li>Add <code>lspTimeoutSeconds</code> to config</li>
+<li>Support <code>HTTP_PROXY</code> and <code>HTTPS_PROXY</code> env vars for LLM request via proxies. #73</li>
+</ul>
+<h2 id="0324">0.32.4<a class="headerlink" href="#0324" title="Permanent link">#</a></h2>
+<ul>
+<li>Disable <code>eca_plan_edit_file</code> in plan behavior until better idea on what plan behavior should do.</li>
+</ul>
+<h2 id="0323">0.32.3<a class="headerlink" href="#0323" title="Permanent link">#</a></h2>
+<ul>
+<li>Consider <code>AGENTS.md</code> instead of <code>AGENT.md</code>, following the https://agents.md standard.</li>
+</ul>
+<h2 id="0322">0.32.2<a class="headerlink" href="#0322" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix option to set default chat behavior from config via <code>chat defaultBehavior</code>. #71</li>
+</ul>
+<h2 id="0321">0.32.1<a class="headerlink" href="#0321" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix support for models with <code>/</code> in the name like Openrouter ones.</li>
+</ul>
+<h2 id="0320">0.32.0<a class="headerlink" href="#0320" title="Permanent link">#</a></h2>
+<ul>
+<li>Refactor config for better UX and understanding:</li>
+<li>Move <code>models</code> to inside <code>providers</code>.</li>
+<li>Make <code>customProviders</code> compatible with <code>providers</code>. models need to be a map now, not a list.</li>
+</ul>
+<h2 id="0310">0.31.0<a class="headerlink" href="#0310" title="Permanent link">#</a></h2>
+<ul>
+<li>Update copilot models</li>
+<li>Drop uneeded <code>ollama useTools</code> and <code>ollama think</code> configs.</li>
+<li>Refactor configs for config providers unification.</li>
+<li><code>&lt;provider&gt;ApiKey</code> and <code>&lt;providerApiUrl&gt;</code> now live in <code>:providers "&lt;provider&gt;" :key</code>.</li>
+<li>Move <code>defaultModel</code> config from customProvider to root.</li>
+</ul>
+<h2 id="0300">0.30.0<a class="headerlink" href="#0300" title="Permanent link">#</a></h2>
+<ul>
+<li>Add <code>/login</code> command to login to providers</li>
+<li>Add Github Copilot models support with login.</li>
+</ul>
+<h2 id="0292">0.29.2<a class="headerlink" href="#0292" title="Permanent link">#</a></h2>
+<ul>
+<li>Add <code>/doctor</code> command to help with troubleshooting</li>
+</ul>
+<h2 id="0291">0.29.1<a class="headerlink" href="#0291" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix args streaming in toolCallPrepare to not repeat the args. https://github.com/editor-code-assistant/eca-nvim/issues/28</li>
+</ul>
+<h2 id="0290">0.29.0<a class="headerlink" href="#0290" title="Permanent link">#</a></h2>
+<ul>
+<li>Add editor tools to retrieve information like diagnostics. #56</li>
+</ul>
+<h2 id="0280">0.28.0<a class="headerlink" href="#0280" title="Permanent link">#</a></h2>
+<ul>
+<li>Change api for custom providers to support <code>openai-responses</code> instead of just <code>openai</code>, still supporting <code>openai</code> only.</li>
+<li>Add limit to repoMap with default of 800 total entries and 50 per dir. #35</li>
+<li>Add support for OpenAI Chat Completions API for broad third-party model support.</li>
+<li>A new <code>openai-chat</code> custom provider <code>api</code> type was added to support any provider using the standard OpenAI <code>/v1/chat/completions</code> endpoint.</li>
+<li>This enables easy integration with services like OpenRouter, Groq, DeepSeek, Together AI, and local LiteLLM instances.</li>
+</ul>
+<h2 id="0270">0.27.0<a class="headerlink" href="#0270" title="Permanent link">#</a></h2>
+<ul>
+<li>Add support for auto read <code>AGENT.md</code> from workspace root and global eca dir, considering as context for chat prompts.</li>
+<li>Add <code>/prompt-show</code> command to show ECA prompt sent to LLM.</li>
+<li>Add <code>/init</code> command to ask LLM to create/update <code>AGENT.md</code> file.</li>
+</ul>
+<h2 id="0263">0.26.3<a class="headerlink" href="#0263" title="Permanent link">#</a></h2>
+<ul>
+<li>breaking: Replace configs <code>ollama host</code> and <code>ollama port</code> with <code>ollamaApiUrl</code>.</li>
+</ul>
+<h2 id="0262">0.26.2<a class="headerlink" href="#0262" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix <code>chat/queryContext</code> to not return already added contexts</li>
+<li>Fix some MCP prompts that didn't work.</li>
+</ul>
+<h2 id="0261">0.26.1<a class="headerlink" href="#0261" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix anthropic api for custom providers.</li>
+<li>Support customize completion api url via custom providers.</li>
+</ul>
+<h2 id="0260">0.26.0<a class="headerlink" href="#0260" title="Permanent link">#</a></h2>
+<ul>
+<li>Support manual approval for specific tools. #44</li>
+</ul>
+<h2 id="0250">0.25.0<a class="headerlink" href="#0250" title="Permanent link">#</a></h2>
+<ul>
+<li>Improve plan-mode to do file changes with diffs.</li>
+</ul>
+<h2 id="0243">0.24.3<a class="headerlink" href="#0243" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix initializationOptions config merge.</li>
+<li>Fix default claude model.</li>
+</ul>
+<h2 id="0242">0.24.2<a class="headerlink" href="#0242" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix some commands not working.</li>
+</ul>
+<h2 id="0241">0.24.1<a class="headerlink" href="#0241" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix build</li>
+</ul>
+<h2 id="0240">0.24.0<a class="headerlink" href="#0240" title="Permanent link">#</a></h2>
+<ul>
+<li>Get models and configs from models.dev instead of hardcoding in eca.</li>
+<li>Allow custom models addition via <code>models &lt;modelName&gt;</code> config.</li>
+<li>Add <code>/resume</code> command to resume previous chats.</li>
+<li>Support loading system prompts from a file.</li>
+<li>Fix model name parsing.</li>
+</ul>
+<h2 id="0231">0.23.1<a class="headerlink" href="#0231" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix openai reasoning not being included in messages.</li>
+</ul>
+<h2 id="0230">0.23.0<a class="headerlink" href="#0230" title="Permanent link">#</a></h2>
+<ul>
+<li>Support parallel tool call.</li>
+</ul>
+<h2 id="0220">0.22.0<a class="headerlink" href="#0220" title="Permanent link">#</a></h2>
+<ul>
+<li>Improve <code>eca_shell_command</code> to handle better error outputs.</li>
+<li>Add summary for eca commands via <code>summary</code> field on tool calls.</li>
+</ul>
+<h2 id="0211">0.21.1<a class="headerlink" href="#0211" title="Permanent link">#</a></h2>
+<ul>
+<li>Default to gpt-5 instead of o4-mini when openai-api-key found.</li>
+<li>Considerably improve <code>eca_shell_command</code> to fix args parsing + git/PRs interactions.</li>
+</ul>
+<h2 id="0210">0.21.0<a class="headerlink" href="#0210" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix openai skip streaming response corner cases.</li>
+<li>Allow override payload of any LLM provider.</li>
+</ul>
+<h2 id="0200">0.20.0<a class="headerlink" href="#0200" title="Permanent link">#</a></h2>
+<ul>
+<li>Support custom commands via md files in <code>~/.config/eca/commands/</code> or <code>.eca/commands/</code>.</li>
+</ul>
+<h2 id="0190">0.19.0<a class="headerlink" href="#0190" title="Permanent link">#</a></h2>
+<ul>
+<li>Support <code>claude-opus-4-1</code> model.</li>
+<li>Support <code>gpt-5</code>, <code>gpt-5-mini</code>, <code>gpt-5-nano</code> models.</li>
+</ul>
+<h2 id="0180">0.18.0<a class="headerlink" href="#0180" title="Permanent link">#</a></h2>
+<ul>
+<li>Replace <code>chat</code> behavior with <code>plan</code>.</li>
+</ul>
+<h2 id="0172">0.17.2<a class="headerlink" href="#0172" title="Permanent link">#</a></h2>
+<ul>
+<li>fix query context refactor</li>
+</ul>
+<h2 id="0171">0.17.1<a class="headerlink" href="#0171" title="Permanent link">#</a></h2>
+<ul>
+<li>Avoid crash MCP start if doesn't support some capabilities.</li>
+<li>Improve tool calling to avoid stop LLM loop if any exception happens.</li>
+</ul>
+<h2 id="0170">0.17.0<a class="headerlink" href="#0170" title="Permanent link">#</a></h2>
+<ul>
+<li>Add <code>/repo-map-show</code> command. #37</li>
+</ul>
+<h2 id="0160">0.16.0<a class="headerlink" href="#0160" title="Permanent link">#</a></h2>
+<ul>
+<li>Support custom system prompts via config <code>systemPromptTemplate</code>.</li>
+<li>Add support for file change diffs on <code>eca_edit_file</code> tool call.</li>
+<li>Fix response output to LLM when tool call is rejected.</li>
+</ul>
+<h2 id="0153">0.15.3<a class="headerlink" href="#0153" title="Permanent link">#</a></h2>
+<ul>
+<li>Rename <code>eca_list_directory</code> to <code>eca_directory_tree</code> tool for better overview of project files/dirs.</li>
+</ul>
+<h2 id="0152">0.15.2<a class="headerlink" href="#0152" title="Permanent link">#</a></h2>
+<ul>
+<li>Improve <code>eca_edit_file</code> tool for better usage from LLM.</li>
+</ul>
+<h2 id="0151">0.15.1<a class="headerlink" href="#0151" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix mcp tool calls.</li>
+<li>Improve eca filesystem calls for better tool usage from LLM.</li>
+<li>Fix default model selection to check anthropic api key before.</li>
+</ul>
+<h2 id="0150">0.15.0<a class="headerlink" href="#0150" title="Permanent link">#</a></h2>
+<ul>
+<li>Support MCP resources as a new context.</li>
+</ul>
+<h2 id="0144">0.14.4<a class="headerlink" href="#0144" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix usage miscalculation.</li>
+</ul>
+<h2 id="0143">0.14.3<a class="headerlink" href="#0143" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix reason-id on openai models afecting chat thoughts messages.</li>
+<li>Support openai o models reason text when available.</li>
+</ul>
+<h2 id="0142">0.14.2<a class="headerlink" href="#0142" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix MCPs not starting because of graal reflection issue.</li>
+</ul>
+<h2 id="0141">0.14.1<a class="headerlink" href="#0141" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix native image build.</li>
+</ul>
+<h2 id="0140">0.14.0<a class="headerlink" href="#0140" title="Permanent link">#</a></h2>
+<ul>
+<li>Support enable/disable tool servers.</li>
+<li>Bump mcp java sdk to 0.11.0.</li>
+</ul>
+<h2 id="0131">0.13.1<a class="headerlink" href="#0131" title="Permanent link">#</a></h2>
+<ul>
+<li>Improve ollama model listing getting capabilities, avoiding change ollama config for different models.</li>
+</ul>
+<h2 id="0130">0.13.0<a class="headerlink" href="#0130" title="Permanent link">#</a></h2>
+<ul>
+<li>Support reasoning for ollama models that support think.</li>
+</ul>
+<h2 id="0127">0.12.7<a class="headerlink" href="#0127" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix ollama tool calls.</li>
+</ul>
+<h2 id="0126">0.12.6<a class="headerlink" href="#0126" title="Permanent link">#</a></h2>
+<ul>
+<li>fix web-search support for custom providers.</li>
+<li>fix output of eca_shell_command.</li>
+</ul>
+<h2 id="0125">0.12.5<a class="headerlink" href="#0125" title="Permanent link">#</a></h2>
+<ul>
+<li>Improve tool call result marking as error when not expected output.</li>
+<li>Fix cases when tool calls output nothing.</li>
+</ul>
+<h2 id="0124">0.12.4<a class="headerlink" href="#0124" title="Permanent link">#</a></h2>
+<ul>
+<li>Add chat command type.</li>
+</ul>
+<h2 id="0123">0.12.3<a class="headerlink" href="#0123" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix MCP prompts for anthropic models.</li>
+</ul>
+<h2 id="0122">0.12.2<a class="headerlink" href="#0122" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix tool calls</li>
+</ul>
+<h2 id="0121">0.12.1<a class="headerlink" href="#0121" title="Permanent link">#</a></h2>
+<ul>
+<li>Improve welcome message.</li>
+</ul>
+<h2 id="0120">0.12.0<a class="headerlink" href="#0120" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix openai api key read from config.</li>
+<li>Support commands via <code>/</code>.</li>
+<li>Support MCP prompts via commands.</li>
+</ul>
+<h2 id="0112">0.11.2<a class="headerlink" href="#0112" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix error field on tool call outputs.</li>
+</ul>
+<h2 id="0111">0.11.1<a class="headerlink" href="#0111" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix reasoning for openai o models.</li>
+</ul>
+<h2 id="0110">0.11.0<a class="headerlink" href="#0110" title="Permanent link">#</a></h2>
+<ul>
+<li>Add support for file contexts with line ranges.</li>
+</ul>
+<h2 id="0103">0.10.3<a class="headerlink" href="#0103" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix openai <code>max_output_tokens</code> message.</li>
+</ul>
+<h2 id="0102">0.10.2<a class="headerlink" href="#0102" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix usage metrics for anthropic models.</li>
+</ul>
+<h2 id="0101">0.10.1<a class="headerlink" href="#0101" title="Permanent link">#</a></h2>
+<ul>
+<li>Improve <code>eca_read_file</code> tool to have better and more assertive descriptions/parameters.</li>
+</ul>
+<h2 id="0100">0.10.0<a class="headerlink" href="#0100" title="Permanent link">#</a></h2>
+<ul>
+<li>Increase anthropic models maxTokens to 8196</li>
+<li>Support thinking/reasoning on models that support it.</li>
+</ul>
+<h2 id="090">0.9.0<a class="headerlink" href="#090" title="Permanent link">#</a></h2>
+<ul>
+<li>Include eca as a  server with tools.</li>
+<li>Support disable tools via config.</li>
+<li>Improve ECA prompt to be more precise and output with better quality</li>
+</ul>
+<h2 id="081">0.8.1<a class="headerlink" href="#081" title="Permanent link">#</a></h2>
+<ul>
+<li>Make generic tool server updates for eca native tools.</li>
+</ul>
+<h2 id="080">0.8.0<a class="headerlink" href="#080" title="Permanent link">#</a></h2>
+<ul>
+<li>Support tool call approval and configuration to manual approval.</li>
+<li>Initial support for repo-map context.</li>
+</ul>
+<h2 id="070">0.7.0<a class="headerlink" href="#070" title="Permanent link">#</a></h2>
+<ul>
+<li>Add client request to delete a chat.</li>
+</ul>
+<h2 id="061">0.6.1<a class="headerlink" href="#061" title="Permanent link">#</a></h2>
+<ul>
+<li>Support defaultModel in custom providers.</li>
+</ul>
+<h2 id="060">0.6.0<a class="headerlink" href="#060" title="Permanent link">#</a></h2>
+<ul>
+<li>Add usage tokens + cost to chat messages.</li>
+</ul>
+<h2 id="051">0.5.1<a class="headerlink" href="#051" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix openai key</li>
+</ul>
+<h2 id="050">0.5.0<a class="headerlink" href="#050" title="Permanent link">#</a></h2>
+<ul>
+<li>Support custom LLM providers via config.</li>
+</ul>
+<h2 id="043">0.4.3<a class="headerlink" href="#043" title="Permanent link">#</a></h2>
+<ul>
+<li>Improve context query performance.</li>
+</ul>
+<h2 id="042">0.4.2<a class="headerlink" href="#042" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix output of errored tool calls.</li>
+</ul>
+<h2 id="041">0.4.1<a class="headerlink" href="#041" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix arguments test when preparing tool call.</li>
+</ul>
+<h2 id="040">0.4.0<a class="headerlink" href="#040" title="Permanent link">#</a></h2>
+<ul>
+<li>Add support for global rules.</li>
+<li>Fix origin field of tool calls.</li>
+<li>Allow chat communication with no workspace opened.</li>
+</ul>
+<h2 id="031">0.3.1<a class="headerlink" href="#031" title="Permanent link">#</a></h2>
+<ul>
+<li>Improve default model logic to check for configs and env vars of known models.</li>
+<li>Fix past messages sent to LLMs.</li>
+</ul>
+<h2 id="030">0.3.0<a class="headerlink" href="#030" title="Permanent link">#</a></h2>
+<ul>
+<li>Support stop chat prompts via <code>chat/promptStop</code> notification.</li>
+<li>Fix anthropic messages history.</li>
+</ul>
+<h2 id="020">0.2.0<a class="headerlink" href="#020" title="Permanent link">#</a></h2>
+<ul>
+<li>Add native tools: filesystem</li>
+<li>Add MCP/tool support for ollama models.</li>
+<li>Improve ollama integration only requiring <code>ollama serve</code> to be running.</li>
+<li>Improve chat history and context passed to all LLM providers.</li>
+<li>Add support for prompt caching for Anthropic models.</li>
+</ul>
+<h2 id="010">0.1.0<a class="headerlink" href="#010" title="Permanent link">#</a></h2>
+<ul>
+<li>Allow comments on <code>json</code> configs.</li>
+<li>Improve MCP tool call feedback.</li>
+<li>Add support for env vars in mcp configs.</li>
+<li>Add <code>mcp/serverUpdated</code> server notification.</li>
+</ul>
+<h2 id="004">0.0.4<a class="headerlink" href="#004" title="Permanent link">#</a></h2>
+<ul>
+<li>Add env support for MCPs</li>
+<li>Add web_search capability</li>
+<li>Add <code>o3</code> model support.</li>
+<li>Support custom API urls for OpenAI and Anthropic</li>
+<li>Add <code>--log-level &lt;level&gt;</code> option for better debugging.</li>
+<li>Add support for global config file.</li>
+<li>Improve MCP response handling.</li>
+<li>Improve LLM streaming response handler.</li>
+</ul>
+<h2 id="003">0.0.3<a class="headerlink" href="#003" title="Permanent link">#</a></h2>
+<ul>
+<li>Fix ollama servers discovery</li>
+<li>Fix <code>.eca/config.json</code> read from workspace root</li>
+<li>Add support for MCP servers</li>
+</ul>
+<h2 id="002">0.0.2<a class="headerlink" href="#002" title="Permanent link">#</a></h2>
+<ul>
+<li>First alpha release</li>
+</ul>
+<h2 id="001">0.0.1<a class="headerlink" href="#001" title="Permanent link">#</a></h2>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 25, 2025 04:11:12 UTC">October 25, 2025</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/editor-code-assistant/eca" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1M480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2m-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3m-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "content.code.copy", "content.code.select"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+    
+  </body>
+</html>

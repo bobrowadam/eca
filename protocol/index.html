@@ -1,0 +1,2854 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ECA - AI pair programming capabilities in any editor">
+      
+      
+      
+        <link rel="canonical" href="https://eca.dev/protocol/">
+      
+      
+        <link rel="prev" href="../development/">
+      
+      
+        <link rel="next" href="../troubleshooting/">
+      
+      
+      <link rel="icon" href="../images/logo.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>Protocol - ECA - Editor Code Assistant</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/layout.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-VFJYDKR1MR"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-VFJYDKR1MR",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-VFJYDKR1MR",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#eca-protocol" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ECA - Editor Code Assistant" class="md-header__button md-logo" aria-label="ECA - Editor Code Assistant" data-md-component="logo">
+      
+  <img src="../images/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ECA - Editor Code Assistant
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Protocol
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/editor-code-assistant/eca" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    editor-code-assistant/eca
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href=".." class="md-tabs__link">
+          
+  
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../features/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Features
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../installation/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Installation
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../models/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Models
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="https://github.com/sponsors/ericdallo" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Support Us
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../CHANGELOG/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Changelog
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ECA - Editor Code Assistant" class="md-nav__button md-logo" aria-label="ECA - Editor Code Assistant" data-md-component="logo">
+      
+  <img src="../images/logo.svg" alt="logo">
+
+    </a>
+    ECA - Editor Code Assistant
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/editor-code-assistant/eca" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    editor-code-assistant/eca
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Protocol
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Protocol
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#base-protocol" class="md-nav__link">
+    <span class="md-ellipsis">
+      Base Protocol
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Base Protocol">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#header-part" class="md-nav__link">
+    <span class="md-ellipsis">
+      Header Part
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#content-part" class="md-nav__link">
+    <span class="md-ellipsis">
+      Content Part
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lifecycle-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lifecycle Messages
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lifecycle Messages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#initialize" class="md-nav__link">
+    <span class="md-ellipsis">
+      Initialize (↩️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initialized" class="md-nav__link">
+    <span class="md-ellipsis">
+      Initialized (➡️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shutdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shutdown (↩️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exit (➡️)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-assistant-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Assistant Features
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Code Assistant Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chat-prompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chat Prompt (↩️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chat-content-received" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chat Content Received (⬅️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chat-approve-tool-call" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chat approve tool call (➡️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chat-reject-tool-call" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chat reject tool call (➡️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chat-query-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chat Query Context (↩️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chat-query-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chat Query Commands (↩️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chat-stop-prompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chat stop prompt (➡️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chat-delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chat delete (↩️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chat-selected-behavior-changed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chat selected behavior changed (➡️)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#editor-diagnostics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Editor diagnostics (↪️)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Editor diagnostics (↪️)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#completion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Completion (↩️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Edit (↩️)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#config-updated" class="md-nav__link">
+    <span class="md-ellipsis">
+      Config updated (⬅️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tool-updated" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tool updated (⬅️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stop-mcp-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stop MCP server (➡️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start-mcp-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Start MCP server (➡️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-mcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add MCP (↩️)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#general-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      General features
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="General features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#showmessage" class="md-nav__link">
+    <span class="md-ellipsis">
+      showMessage (⬅️)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../features/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Features
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/sponsors/ericdallo" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Support Us
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Changelog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#base-protocol" class="md-nav__link">
+    <span class="md-ellipsis">
+      Base Protocol
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Base Protocol">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#header-part" class="md-nav__link">
+    <span class="md-ellipsis">
+      Header Part
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#content-part" class="md-nav__link">
+    <span class="md-ellipsis">
+      Content Part
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Example:
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lifecycle-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Lifecycle Messages
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Lifecycle Messages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#initialize" class="md-nav__link">
+    <span class="md-ellipsis">
+      Initialize (↩️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#initialized" class="md-nav__link">
+    <span class="md-ellipsis">
+      Initialized (➡️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#shutdown" class="md-nav__link">
+    <span class="md-ellipsis">
+      Shutdown (↩️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#exit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exit (➡️)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-assistant-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code Assistant Features
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Code Assistant Features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#chat-prompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chat Prompt (↩️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chat-content-received" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chat Content Received (⬅️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chat-approve-tool-call" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chat approve tool call (➡️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chat-reject-tool-call" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chat reject tool call (➡️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chat-query-context" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chat Query Context (↩️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chat-query-commands" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chat Query Commands (↩️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chat-stop-prompt" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chat stop prompt (➡️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chat-delete" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chat delete (↩️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#chat-selected-behavior-changed" class="md-nav__link">
+    <span class="md-ellipsis">
+      Chat selected behavior changed (➡️)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#editor-diagnostics" class="md-nav__link">
+    <span class="md-ellipsis">
+      Editor diagnostics (↪️)
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Editor diagnostics (↪️)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#completion" class="md-nav__link">
+    <span class="md-ellipsis">
+      Completion (↩️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Edit (↩️)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Configuration
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Configuration">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#config-updated" class="md-nav__link">
+    <span class="md-ellipsis">
+      Config updated (⬅️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#tool-updated" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tool updated (⬅️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#stop-mcp-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Stop MCP server (➡️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#start-mcp-server" class="md-nav__link">
+    <span class="md-ellipsis">
+      Start MCP server (➡️)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#add-mcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      Add MCP (↩️)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#general-features" class="md-nav__link">
+    <span class="md-ellipsis">
+      General features
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="General features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#showmessage" class="md-nav__link">
+    <span class="md-ellipsis">
+      showMessage (⬅️)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="eca-protocol">ECA Protocol<a class="headerlink" href="#eca-protocol" title="Permanent link">#</a></h1>
+<p>The ECA (Editor Code Assistant) protocol is JSON-RPC 2.0-based protocol heavily insipired by the <a href="https://microsoft.github.io/language-server-protocol/">LSP (Language Server Protocol)</a>, that enables communication between multiple code editors/IDEs and ECA process (server), which will interact with multiple LLMs. It follows similar patterns to the LSP but is specifically designed for AI code assistance features.</p>
+<p>Key characteristics:
+- Provides a protocol standard so different editors can use the same language to offer AI features.
+- Supports bidirectional communication (client to server and server to client)
+- Handles both synchronous requests and asynchronous notifications
+- Includes built-in support for streaming responses
+- Provides structured error handling</p>
+<h2 id="base-protocol">Base Protocol<a class="headerlink" href="#base-protocol" title="Permanent link">#</a></h2>
+<p>The base protocol consists of a header and a content part (comparable to HTTP). The header and content part are
+separated by a <code>\r\n</code>.</p>
+<h3 id="header-part">Header Part<a class="headerlink" href="#header-part" title="Permanent link">#</a></h3>
+<p>The header part consists of header fields. Each header field is comprised of a name and a value, separated by <code>:</code> (a colon and a space). The structure of header fields conforms to the <a href="https://tools.ietf.org/html/rfc7230#section-3.2">HTTP semantic</a>. Each header field is terminated by <code>\r\n</code>. Considering the last header field and the overall header itself are each terminated with <code>\r\n</code>, and that at least one header is mandatory, this means that two <code>\r\n</code> sequences always immediately precede the content part of a message.</p>
+<p>Currently the following header fields are supported:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align: left;">Header Field Name</th>
+<th style="text-align: left;">Value Type</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Content-Length</td>
+<td style="text-align: left;">number</td>
+<td style="text-align: left;">The length of the content part in bytes. This header is required.</td>
+</tr>
+<tr>
+<td style="text-align: left;">Content-Type</td>
+<td style="text-align: left;">string</td>
+<td style="text-align: left;">The mime type of the content part. Defaults to application/vscode-jsonrpc; charset=utf-8</td>
+</tr>
+<tr>
+<td style="text-align: left;">{: .table .table-bordered .table-responsive}</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+</tr>
+</tbody>
+</table>
+<p>The header part is encoded using the 'ascii' encoding. This includes the <code>\r\n</code> separating the header and content part.</p>
+<h3 id="content-part">Content Part<a class="headerlink" href="#content-part" title="Permanent link">#</a></h3>
+<p>Contains the actual content of the message. The content part of a message uses <a href="https://www.jsonrpc.org/specification">JSON-RPC 2.0</a> to describe requests, responses and notifications. The content part is encoded using the charset provided in the Content-Type field. It defaults to <code>utf-8</code>, which is the only encoding supported right now. If a server or client receives a header with a different encoding than <code>utf-8</code> it should respond with an error.</p>
+<h3 id="example">Example:<a class="headerlink" href="#example" title="Permanent link">#</a></h3>
+<div class="highlight"><pre><span></span><code>Content-Length: ...\r\n
+\r\n
+{
+    &quot;jsonrpc&quot;: &quot;2.0&quot;,
+    &quot;id&quot;: 1,
+    &quot;method&quot;: &quot;initialize&quot;,
+    &quot;params&quot;: {
+        ...
+    }
+}
+</code></pre></div>
+<h2 id="lifecycle-messages">Lifecycle Messages<a class="headerlink" href="#lifecycle-messages" title="Permanent link">#</a></h2>
+<p>The protocol defines a set of lifecycle messages that manage the connection and state between the client (editor) and server (code assistant).</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="initialization-flow" name="__tabbed_1" type="radio" /><input id="shutdown-flow" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="initialization-flow">Initialization flow</label><label for="shutdown-flow">Shutdown flow</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Handshake between client and server, including the actions done by server after initialization.</p>
+<pre class="mermaid"><code>sequenceDiagram
+    autonumber
+    participant C as Client / Editor
+    participant S as ECA Server
+    C-&gt;&gt;+S: initialize (request)
+    Note right of S: Save workspace-folders/capabilties
+    S-&gt;&gt;-C: initialize (response)
+    C--)+S: initialized (notification)
+    Note right of S: Sync models: Request models.dev &lt;br/&gt;for models capabilities
+    Note right of S: Notify which models/behaviors are &lt;br/&gt;avaialble and their defaults.
+    S--)C: config/updated (notification)
+    Note right of S: Init MCP servers
+    S--)-C: tool/serverUpdated (notification)</code></pre>
+</div>
+<div class="tabbed-block">
+<p>Shutdown process between client and server</p>
+<pre class="mermaid"><code>sequenceDiagram
+    autonumber
+    participant C as Client / Editor
+    participant S as ECA Server
+    C-&gt;&gt;+S: shutdown
+    Note right of S: Finish MCP servers process
+    S-&gt;&gt;-C: shutdown
+    C--)S: exit
+    Note right of S: Server stops its process</code></pre>
+</div>
+</div>
+</div>
+<h3 id="initialize">Initialize (↩️)<a class="headerlink" href="#initialize" title="Permanent link">#</a></h3>
+<p>The first request sent from client to server. This message:
+- Establishes the connection
+- Allows the server to index the project
+- Enables capability negotiation
+- Sets up the workspace context</p>
+<p><em>Request:</em></p>
+<ul>
+<li>method: <code>initialize</code></li>
+<li>params: <code>InitializeParams</code> defined as follows:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">InitializeParams</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The process Id of the parent process that started the server. Is null if</span>
+<span class="cm">     * the process has not been started by another process. If the parent</span>
+<span class="cm">     * process is not alive then the server should exit (see exit notification)</span>
+<span class="cm">     * its process.</span>
+<span class="cm">     */</span>
+<span class="w">     </span><span class="nx">processId</span><span class="o">:</span><span class="w"> </span><span class="kt">integer</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="kc">null</span><span class="p">;</span>
+
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">     * Information about the client</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">clientInfo</span><span class="o">?:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * The name of the client as defined by the client.</span>
+<span class="cm">         */</span>
+<span class="w">        </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * The client&#39;s version as defined by the client.</span>
+<span class="cm">         */</span>
+<span class="w">        </span><span class="nx">version?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * User provided initialization options.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">initializationOptions</span><span class="o">?:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="cm">/*</span>
+<span class="cm">         * The chat behavior.</span>
+<span class="cm">         */</span>
+<span class="w">         </span><span class="nx">chatBehavior?</span><span class="o">:</span><span class="w"> </span><span class="kt">ChatBehavior</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The capabilities provided by the client (editor or tool)</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">capabilities</span><span class="o">:</span><span class="w"> </span><span class="kt">ClientCapabilities</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The workspace folders configured in the client when the server starts.</span>
+<span class="cm">     * If client doesn´t support multiple projects, it should send a single </span>
+<span class="cm">     * workspaceFolder with the project root.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">workspaceFolders</span><span class="o">:</span><span class="w"> </span><span class="kt">WorkspaceFolder</span><span class="p">[];</span>
+<span class="p">}</span>
+
+<span class="kd">interface</span><span class="w"> </span><span class="nx">WorkspaceFolder</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The associated URI for this workspace folder.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">uri</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The name of the workspace folder. Used to refer to this folder in the user interface.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">interface</span><span class="w"> </span><span class="nx">ClientCapabilities</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">codeAssistant</span><span class="o">?:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">chat?</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * Whether client supports provide editor informations to server like</span>
+<span class="cm">         * diagnostics, cursor information and others.</span>
+<span class="cm">         */</span>
+<span class="w">        </span><span class="nx">editor</span><span class="o">?:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="cm">/**</span>
+<span class="cm">             * Whether client supports provide editor diagnostics </span>
+<span class="cm">             * information to server (Ex: LSP diagnostics) via `editor/getDiagnostics` </span>
+<span class="cm">             * server request.</span>
+<span class="cm">             */</span><span class="w"> </span>
+<span class="w">            </span><span class="nx">diagnostics?</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kr">type</span><span class="w"> </span><span class="nx">ChatBehavior</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;agent&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;plan&#39;</span><span class="p">;</span>
+</code></pre></div>
+<p><em>Response:</em></p>
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">InitializeResponse</span><span class="w"> </span><span class="p">{}</span>
+</code></pre></div>
+<h3 id="initialized">Initialized (➡️)<a class="headerlink" href="#initialized" title="Permanent link">#</a></h3>
+<p>A notification sent from the client to the server after receiving the initialize response. This message:
+- Confirms that the client is ready to receive requests
+- Signals that the server can start sending notifications
+- Indicates that the workspace is fully loaded</p>
+<p><em>Notification:</em></p>
+<ul>
+<li>method: <code>initialized</code></li>
+<li>params: <code>InitializedParams</code> defined as follows:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">InitializedParams</span><span class="w"> </span><span class="p">{}</span>
+</code></pre></div>
+<h3 id="shutdown">Shutdown (↩️)<a class="headerlink" href="#shutdown" title="Permanent link">#</a></h3>
+<p>A request sent from the client to the server to gracefully shut down the connection. This message:
+- Allows the server to clean up resources
+- Ensures all pending operations are completed
+- Prepares for a clean disconnection</p>
+<p><em>Request:</em></p>
+<ul>
+<li>method: <code>shutdown</code></li>
+<li>params: none</li>
+</ul>
+<p><em>Response:</em></p>
+<ul>
+<li>result: null</li>
+<li>error: code and message set in case an exception happens during shutdown request.</li>
+</ul>
+<h3 id="exit">Exit (➡️)<a class="headerlink" href="#exit" title="Permanent link">#</a></h3>
+<p>A notification sent from the client to the server to terminate the connection. This message:
+- Should be sent after a shutdown request
+- Signals the server to exit its process
+- Ensures all resources are released</p>
+<p><em>Notification:</em></p>
+<ul>
+<li>method: <code>exit</code></li>
+<li>params: none </li>
+</ul>
+<h2 id="code-assistant-features">Code Assistant Features<a class="headerlink" href="#code-assistant-features" title="Permanent link">#</a></h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="chat-text" name="__tabbed_2" type="radio" /><input id="chat-tool-call" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="chat-text">Chat: text</label><label for="chat-tool-call">Chat: tool call</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Example of a basic chat conversation with only texts:</p>
+<pre class="mermaid"><code>sequenceDiagram
+    autonumber
+    participant C as Client / Editor
+    participant S as ECA Server
+    participant L as LLM
+    C-&gt;&gt;+S: chat/prompt
+    Note over C,S: User sends: Hello there!
+    S--)C: chat/contentReceived (system: start)
+    S--)C: chat/contentReceived (user: "hello there!")
+    Note right of S: Prepare prompt with all&lt;br/&gt;available contexts and tools.
+    S-&gt;&gt;+L: Send prompt
+    S-&gt;&gt;-C: chat/prompt
+    Note over C,S: Success: sent to LLM
+    loop LLM streaming
+        Note right of L: Returns first `H`,&lt;br/&gt;then `i!`, etc
+        L--)S: Stream data
+        S--)C: chat/contentReceived (assistant: text)
+
+    end
+    L-&gt;&gt;-S: Finish response
+    S-&gt;&gt;C: chat/contentReceived (system: finished)</code></pre>
+</div>
+<div class="tabbed-block">
+<p>Example of a tool call loop LLM interaction:</p>
+<pre class="mermaid"><code>sequenceDiagram
+    autonumber
+    participant C as Client / Editor
+    participant S as ECA Server
+    participant L as LLM
+    C-&gt;&gt;S: chat/prompt
+    Note over C,S: ...&lt;br/&gt;Same as text flow
+    S-&gt;&gt;+L: Send prompt with&lt;br/&gt;available tools
+    loop LLM streaming / calling tools
+        Note right of L: Returns first `will`,&lt;br/&gt;then `check`, etc
+        L--)S: Stream data
+        S--)C: chat/contentReceived (assistant: text)
+        S--)C: chat/contentReceived (toolCallPrepare: name + args)
+        L-&gt;&gt;-S: Finish response:&lt;br/&gt;needs tool call&lt;br/&gt;'eca_directory_tree'
+        S-&gt;&gt;C: chat/contentReceived (toolCallRun)&lt;br/&gt;Ask user if should call tool
+        C--)S: chat/toolCallApprove
+        S-&gt;&gt;C: chat/contentReceived (toolCallRunning)
+        Note right of S: Call tool and get result
+        S-&gt;&gt;C: chat/contentReceived (toolCalled)
+        S-&gt;&gt;+L: Send previous prompt +&lt;br/&gt;LLM response +&lt;br/&gt;tool call result
+        Note right of L: Stream response
+    end
+    L-&gt;&gt;-S: Finish response
+    S-&gt;&gt;C: chat/contentReceived (system: finished)</code></pre>
+</div>
+</div>
+</div>
+<h3 id="chat-prompt">Chat Prompt (↩️)<a class="headerlink" href="#chat-prompt" title="Permanent link">#</a></h3>
+<p>A request sent from client to server, starting or continuing a chat in natural language as an agent.
+Used for broader questions or continuous discussion of project/files.</p>
+<p><em>Request:</em> </p>
+<ul>
+<li>method: <code>chat/prompt</code></li>
+<li>params: <code>ChatPromptParams</code> defined as follows:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">ChatPromptParams</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The chat session identifier. If not provided, a new chat session will be created.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">chatId?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The message from the user in native language</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Specifies the AI model to be used for chat responses.</span>
+<span class="cm">     * Different models may have different capabilities, response styles,</span>
+<span class="cm">     * and performance characteristics.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">model?</span><span class="o">:</span><span class="w"> </span><span class="kt">ChatModel</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The chat behavior used by server to handle chat communication and actions.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">behavior?</span><span class="o">:</span><span class="w"> </span><span class="kt">ChatBehavior</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Optional contexts about the current workspace.</span>
+<span class="cm">     * Can include multiple different types of context.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">contexts?</span><span class="o">:</span><span class="w"> </span><span class="kt">ChatContext</span><span class="p">[];</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * The LLM model name.</span>
+<span class="cm"> */</span>
+<span class="kr">type</span><span class="w"> </span><span class="nx">ChatModel</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="kr">type</span><span class="w"> </span><span class="nx">ChatContext</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">FileContext</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">DirectoryContext</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">WebContext</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">RepoMapContext</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">CursorContext</span><span class="w"> </span><span class="o">|</span><span class="nx">McpResourceContext</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Context related to a file in the workspace</span>
+<span class="cm"> */</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nx">FileContext</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;file&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Path to the file</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Range of lines to retrive from file, if nil consider whole file.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">linesRange?</span><span class="o">:</span><span class="w"> </span><span class="kt">LinesRange</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kd">interface</span><span class="w"> </span><span class="nx">LinesRange</span><span class="w"> </span><span class="p">{</span>
+<span class="w">   </span><span class="nx">start</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">   </span><span class="nx">end</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Context related to a directory in the workspace</span>
+<span class="cm"> */</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nx">DirectoryContext</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;directory&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Path to the directory</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Context related to web content</span>
+<span class="cm"> */</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nx">WebContext</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;web&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * URL of the web content</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">url</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Context about the workspaces repo-map, automatically calculated by server.</span>
+<span class="cm"> * Clients should include this to chat by default but users may want exclude </span>
+<span class="cm"> * this context to reduce context size if needed.</span>
+<span class="cm"> *</span>
+<span class="cm"> * @deprecated No longer needed, replaced by eca_directory_tree tool.</span>
+<span class="cm"> */</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nx">RepoMapContext</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;repoMap&#39;</span><span class="p">;</span><span class="w"> </span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Context about the cursor position in editor, sent by client.</span>
+<span class="cm"> * Clients should track path and cursor position.</span>
+<span class="cm"> */</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nx">CursorContext</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;cursor&#39;</span><span class="p">;</span><span class="w"> </span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * File path of where the cursor is.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Cursor position, if not using a selection start should be equal to end.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">position</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">       </span><span class="nx">start</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">           </span><span class="nx">line</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">           </span><span class="nx">character</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">       </span><span class="p">},</span>
+<span class="w">       </span><span class="nx">end</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">           </span><span class="nx">line</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">           </span><span class="nx">character</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">       </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/***</span>
+<span class="cm"> * A MCP resource available from a MCP server.</span>
+<span class="cm"> */</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nx">McpResourceContext</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;mcpResource&#39;</span><span class="p">;</span>
+
+<span class="w">   </span><span class="cm">/** </span>
+<span class="cm">    * The URI of the resource like file://foo/bar.clj</span>
+<span class="cm">    */</span>
+<span class="w">    </span><span class="nx">uri</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/** </span>
+<span class="cm">     * The name of the resource.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/** </span>
+<span class="cm">     * The description of the resource.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">description</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/** </span>
+<span class="cm">     * The mimeType of the resource like `text/markdown`.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">mimeType</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/** </span>
+<span class="cm">     * The server name of this MCP resource.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">server</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><em>Response:</em></p>
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">ChatPromptResponse</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Unique identifier for this chat session</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">chatId</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/*</span>
+<span class="cm">     * The model used for this chat request.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">model</span><span class="o">:</span><span class="w"> </span><span class="kt">ChatModel</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * What the server is doing after receing this prompt</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">status</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;prompting&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;login&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="chat-content-received">Chat Content Received (⬅️)<a class="headerlink" href="#chat-content-received" title="Permanent link">#</a></h3>
+<p>A server notification with a new content from the LLM.</p>
+<p><em>Notification:</em> </p>
+<ul>
+<li>method: <code>chat/contentReceived</code></li>
+<li>params: <code>ChatContentReceivedParams</code> defined as follows:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">ChatContentReceivedParams</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The chat session identifier this content belongs to</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">chatId</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The content received from the LLM</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="kt">ChatContent</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The owner of this content.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">role</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;user&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;system&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;assistant&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Different types of content that can be received from the LLM</span>
+<span class="cm"> */</span>
+<span class="kr">type</span><span class="w"> </span><span class="nx">ChatContent</span><span class="w"> </span><span class="o">=</span><span class="w"> </span>
+<span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nx">ChatTextContent</span><span class="w"> </span>
+<span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nx">ChatURLContent</span><span class="w"> </span>
+<span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nx">ChatProgressContent</span><span class="w"> </span>
+<span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nx">ChatUsageContent</span>
+<span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nx">ChatReasonStartedContent</span><span class="w"> </span>
+<span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nx">ChatReasonTextContent</span><span class="w"> </span>
+<span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nx">ChatReasonFinishedContent</span><span class="w"> </span>
+<span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nx">ChatHookActionStartedContent</span><span class="w"> </span>
+<span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nx">ChatHookActionFinishedContent</span><span class="w"> </span>
+<span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nx">ChatToolCallPrepareContent</span>
+<span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nx">ChatToolCallRunContent</span>
+<span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nx">ChatToolCallRunningContent</span>
+<span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nx">ChatToolCalledContent</span>
+<span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nx">ChatToolCallRejectedContent</span>
+<span class="w">    </span><span class="o">|</span><span class="w"> </span><span class="nx">ChatMetadataContent</span><span class="p">;</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Simple text message from the LLM</span>
+<span class="cm"> */</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nx">ChatTextContent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;text&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The text content</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Progress messages about the chat. </span>
+<span class="cm"> * Usually to mark what eca is doing/waiting or tell it finished processing messages.</span>
+<span class="cm"> */</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nx">ChatProgressContent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;progress&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The state of this progress.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">state</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;running&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;finished&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/*</span>
+<span class="cm">     * Extra text to show in chat about current state of this chat.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * A reason started from the LLM</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nx">ChatReasonStartedContent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;reasonStarted&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The id of this reason</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w"> </span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * A reason text from the LLM</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nx">ChatReasonTextContent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;reasonText&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The id of a started reason</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The text content of the reasoning</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * A reason finished from the LLM</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nx">ChatReasonFinishedContent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;reasonFinished&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The id of this reason</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w"> </span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The total time the reason took in milliseconds.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">totalTimeMs</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * A hook action started to run</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nx">ChatHookActionStartedContent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;hookActionStarted&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The id of this hook</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w"> </span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The name of this hook</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The type of this hook action</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">actionType</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;shell&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * A hook action finished</span>
+<span class="cm"> *</span>
+<span class="cm"> */</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nx">ChatHookActionFinishedContent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;hookActionFinished&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The id of this hook</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w"> </span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The name of this hook</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The type of this hook action</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">actionType</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;shell&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The status code of this hook</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">status</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The output of this hook if any</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">output?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The error of this hook if any</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">error?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * URL content message from the LLM</span>
+<span class="cm"> */</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nx">ChatURLContent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;url&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The URL title</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The URL link</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">url</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Details about the chat&#39;s usage, like used tokens and costs.</span>
+<span class="cm"> */</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nx">ChatUsageContent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;usage&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The total input + output tokens of the whole chat session so far.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">sessionTokens</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The cost of the last sent message summing input + output tokens.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">lastMessageCost?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w"> </span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The cost of the whole chat session so far.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">sessionCost?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Informations about limits.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">limit</span><span class="o">?:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * The context limit for this chat.</span>
+<span class="cm">         */</span>
+<span class="w">        </span><span class="nx">context</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * The output limit for this chat.</span>
+<span class="cm">         */</span>
+<span class="w">        </span><span class="nx">output</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Tool call that LLM is preparing to execute.</span>
+<span class="cm"> * This will be sent multiple times for same tool id for each time LLM outputs </span>
+<span class="cm"> * a part of the arg, so clients should append the arguments to UI.</span>
+<span class="cm"> */</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nx">ChatToolCallPrepareContent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;toolCallPrepare&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">origin</span><span class="o">:</span><span class="w"> </span><span class="kt">ToolCallOrigin</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * id of the tool call</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Name of the tool</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Server name of this tool</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">server</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/*</span>
+<span class="cm">     * Argument text of this tool call</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">argumentsText</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w"> </span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Summary text to present about this tool call, </span>
+<span class="cm">     * ex: &#39;Reading file &quot;foo&quot;...&#39;.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">summary?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Extra details about this call. </span>
+<span class="cm">     * Clients may use this to present different UX for this tool call.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">details?</span><span class="o">:</span><span class="w"> </span><span class="kt">ToolCallDetails</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Tool call that LLM will run, sent once per id.</span>
+<span class="cm"> */</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nx">ChatToolCallRunContent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;toolCallRun&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">origin</span><span class="o">:</span><span class="w"> </span><span class="kt">ToolCallOrigin</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * id of the tool call</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Name of the tool</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Server name of this tool</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">server</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/*</span>
+<span class="cm">     * Arguments of this tool call</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">arguments</span><span class="o">:</span><span class="w"> </span><span class="p">{[</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">};</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Whether this call requires manual approval from the user.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">manualApproval</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Summary text to present about this tool call, </span>
+<span class="cm">     * ex: &#39;Reading file &quot;foo&quot;...&#39;.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">summary?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Extra details about this call. </span>
+<span class="cm">     * Clients may use this to present different UX for this tool call.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">details?</span><span class="o">:</span><span class="w"> </span><span class="kt">ToolCallDetails</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Tool call that server is running to report to LLM later, sent once per id.</span>
+<span class="cm"> */</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nx">ChatToolCallRunningContent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;toolCallRunning&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">origin</span><span class="o">:</span><span class="w"> </span><span class="kt">ToolCallOrigin</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * id of the tool call</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Name of the tool</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Server name of this tool</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">server</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/*</span>
+<span class="cm">     * Arguments of this tool call</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">arguments</span><span class="o">:</span><span class="w"> </span><span class="p">{[</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">};</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Summary text to present about this tool call, </span>
+<span class="cm">     * ex: &#39;Reading file &quot;foo&quot;...&#39;.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">summary?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Extra details about this call. </span>
+<span class="cm">     * Clients may use this to present different UX for this tool call.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">details?</span><span class="o">:</span><span class="w"> </span><span class="kt">ToolCallDetails</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Tool call result that LLM trigerred and was executed already, sent once per id.</span>
+<span class="cm"> */</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nx">ChatToolCalledContent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;toolCalled&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">origin</span><span class="o">:</span><span class="w"> </span><span class="kt">ToolCallOrigin</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * id of the tool call</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Name of the tool</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Server name of this tool</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">server</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/*</span>
+<span class="cm">     * Arguments of this tool call</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">arguments</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[];</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Whether it was a error</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">error</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * the result of the tool call.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">outputs</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span>
+<span class="w">        </span><span class="cm">/*</span>
+<span class="cm">         * The type of this output</span>
+<span class="cm">         */</span>
+<span class="w">        </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;text&#39;</span><span class="p">;</span>
+
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * The content of this output</span>
+<span class="cm">         */</span>
+<span class="w">        </span><span class="nx">text</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="p">}];</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The total time the call took in milliseconds.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">totalTimeMs</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Summary text to present about this tool call, </span>
+<span class="cm">     * ex: &#39;Reading file &quot;foo&quot;...&#39;.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">summary?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Extra details about this call. </span>
+<span class="cm">     * Clients may use this to present different UX for this tool call.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">details?</span><span class="o">:</span><span class="w"> </span><span class="kt">ToolCallDetails</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Tool call rejected, sent once per id.</span>
+<span class="cm"> */</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nx">ChatToolCallRejectedContent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;toolCallRejected&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">origin</span><span class="o">:</span><span class="w"> </span><span class="kt">ToolCallOrigin</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * id of the tool call</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">id</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Name of the tool</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Server name of this tool</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">server</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/*</span>
+<span class="cm">     * Arguments of this tool call</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">arguments</span><span class="o">:</span><span class="w"> </span><span class="p">{[</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">};</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The reason why this tool call was rejected</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">reason</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;user-choice&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;user-config&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Summary text to present about this tool call, </span>
+<span class="cm">     * ex: &#39;Reading file &quot;foo&quot;...&#39;.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">summary?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Extra details about this call. </span>
+<span class="cm">     * Clients may use this to present different UX for this tool call.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">details?</span><span class="o">:</span><span class="w"> </span><span class="kt">ToolCallDetails</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kr">type</span><span class="w"> </span><span class="nx">ToolCallOrigin</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;mcp&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;native&#39;</span><span class="p">;</span>
+
+<span class="kr">type</span><span class="w"> </span><span class="nx">ToolCallDetails</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">FileChangeDetails</span><span class="p">;</span>
+
+<span class="kd">interface</span><span class="w"> </span><span class="nx">FileChangeDetails</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;fileChange&#39;</span><span class="p">;</span>
+
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * The file path of this file change</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * The content diff of this file change</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="nx">diff</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * The count of lines added in this change.</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="nx">linesAdded</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+
+<span class="w">     </span><span class="cm">/**</span>
+<span class="cm">      * The count of lines removed in this change.</span>
+<span class="cm">      */</span>
+<span class="w">     </span><span class="nx">linesRemoved</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/**</span>
+<span class="cm"> * Extra information about a chat</span>
+<span class="cm"> */</span>
+<span class="kd">interface</span><span class="w"> </span><span class="nx">ChatMetadataContent</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;metadata&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The chat title.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">title</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="chat-approve-tool-call">Chat approve tool call (➡️)<a class="headerlink" href="#chat-approve-tool-call" title="Permanent link">#</a></h3>
+<p>A client notification for server to approve a waiting tool call.
+This will execute the tool call and continue the LLM chat loop.</p>
+<p><em>Notification:</em></p>
+<ul>
+<li>method: <code>chat/toolCallApprove</code></li>
+<li>params: <code>ChatToolCallApproveParams</code> defined as follows:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">ChatToolCallApproveParams</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The chat session identifier.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">chatId</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The approach to save this tool call.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">save</span><span class="o">?:</span><span class="w"> </span><span class="s1">&#39;session&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The tool call identifier to approve.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">toolCallId</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w"> </span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="chat-reject-tool-call">Chat reject tool call (➡️)<a class="headerlink" href="#chat-reject-tool-call" title="Permanent link">#</a></h3>
+<p>A client notification for server to reject a waiting tool call.
+This will not execute the tool call and return to the LLM chat loop.</p>
+<p><em>Notification:</em></p>
+<ul>
+<li>method: <code>chat/toolCallReject</code></li>
+<li>params: <code>ChatToolCallRejectParams</code> defined as follows:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">ChatToolCallRejectParams</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The chat session identifier.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">chatId</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The tool call identifier to reject.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">toolCallId</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w"> </span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="chat-query-context">Chat Query Context (↩️)<a class="headerlink" href="#chat-query-context" title="Permanent link">#</a></h3>
+<p>A request sent from client to server, querying for all the available contexts for user add to prompt calls.</p>
+<p><em>Request:</em> </p>
+<ul>
+<li>method: <code>chat/queryContext</code></li>
+<li>params: <code>ChatQueryContextParams</code> defined as follows:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">ChatQueryContextParams</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The chat session identifier.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">chatId?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The query to filter results, blank string returns all available contexts.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">query</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The already considered contexts.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">contexts</span><span class="o">:</span><span class="w"> </span><span class="kt">ChatContext</span><span class="p">[];</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><em>Response:</em></p>
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">ChatQueryContextResponse</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The chat session identifier.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">chatId?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The returned available contexts.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">contexts</span><span class="o">:</span><span class="w"> </span><span class="kt">ChatContext</span><span class="p">[];</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="chat-query-commands">Chat Query Commands (↩️)<a class="headerlink" href="#chat-query-commands" title="Permanent link">#</a></h3>
+<p>A request sent from client to server, querying for all the available commands for user to call.
+Commands are multiple possible actions like MCP prompts, doctor, costs. Usually the 
+UX follows <code>/&lt;command&gt;</code> to spawn a command.</p>
+<p><em>Request:</em> </p>
+<ul>
+<li>method: <code>chat/queryCommands</code></li>
+<li>params: <code>ChatQueryCommandsParams</code> defined as follows:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">ChatQueryCommandsParams</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The chat session identifier.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">chatId?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The query to filter results, blank string returns all available commands.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">query</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><em>Response:</em></p>
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">ChatQueryCommandsResponse</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The chat session identifier.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">chatId?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The returned available Commands.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">commands</span><span class="o">:</span><span class="w"> </span><span class="kt">ChatCommand</span><span class="p">[];</span>
+<span class="p">}</span>
+
+<span class="kd">interface</span><span class="w"> </span><span class="nx">ChatCommand</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The name of the command.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The description of the command.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">description</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The type of this command</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;mcp-prompt&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;native&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The arguments of the command.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">arguments</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span>
+<span class="w">       </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">       </span><span class="nx">description?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">       </span><span class="nx">required</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span><span class="w"> </span>
+<span class="w">    </span><span class="p">}];</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="chat-stop-prompt">Chat stop prompt (➡️)<a class="headerlink" href="#chat-stop-prompt" title="Permanent link">#</a></h3>
+<p>A client notification for server to stop the current chat prompt with LLM if running.
+This will stop LLM loops or ignore subsequent LLM responses so other prompts can be trigerred.</p>
+<p><em>Notification:</em></p>
+<ul>
+<li>method: <code>chat/promptStop</code></li>
+<li>params: <code>ChatPromptStopParams</code> defined as follows:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">ChatPromptStopParams</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The chat session identifier.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">chatId</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="chat-delete">Chat delete (↩️)<a class="headerlink" href="#chat-delete" title="Permanent link">#</a></h3>
+<p>A client request to delete a existing chat, removing all previous messages and used tokens/costs from memory, good for reduce context or start a new clean chat.
+After response, clients should reset chat UI to a clean state.</p>
+<p><em>Request:</em> </p>
+<ul>
+<li>method: <code>chat/delete</code></li>
+<li>params: <code>ChatDeleteParams</code> defined as follows:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">ChatDeleteParams</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The chat session identifier.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">chatId?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="chat-selected-behavior-changed">Chat selected behavior changed (➡️)<a class="headerlink" href="#chat-selected-behavior-changed" title="Permanent link">#</a></h3>
+<p>A client notification for server telling the user selected a different behavior in chat.</p>
+<p><em>Notification:</em></p>
+<ul>
+<li>method: <code>chat/selectedBehaviorChanged</code></li>
+<li>params: <code>ChatSelectedBehaviorChanged</code> defined as follows:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">ChatSelectedBehaviorChanged</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The selected behavior.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">behavior</span><span class="o">:</span><span class="w"> </span><span class="kt">ChatBehavior</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><em>Response:</em></p>
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">ChatDeleteResponse</span><span class="w"> </span><span class="p">{}</span>
+</code></pre></div>
+<h2 id="editor-diagnostics">Editor diagnostics (↪️)<a class="headerlink" href="#editor-diagnostics" title="Permanent link">#</a></h2>
+<p>A server request to retrieve LSP or any other kind of diagnostics if available from current workspaces.
+Useful for server to provide to LLM information about errors/warnings about current code.</p>
+<p><em>Request:</em> </p>
+<ul>
+<li>method: <code>editor/getDiagnostics</code></li>
+<li>params: <code>EditorGetDiagnosticsParams</code> defined as follows:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">EditorGetDiagnosticsParams</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Optional uri to get diagnostics, if nil return whole workspaces diagnostics.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">uri?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<p><em>Response:</em></p>
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">EditorGetDiagnosticsResponse</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The list of diagnostics.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">diagnostics</span><span class="o">:</span><span class="w"> </span><span class="kt">EditorDiagnostic</span><span class="p">[];</span>
+<span class="p">}</span>
+
+<span class="kd">interface</span><span class="w"> </span><span class="nx">EditorDiagnostic</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The diagnostic file uri.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">uri</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The diagnostic severity.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">severity</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;error&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;warning&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;info&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;hint&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The diagnostic source. Ex: &#39;clojure-lsp&#39;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">source</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The diagnostic range (1-based).</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">range</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">start</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">line</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">character</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">        </span><span class="p">};</span>
+
+<span class="w">        </span><span class="nx">end</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">line</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">character</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">    </span><span class="p">};</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The diagnostic code. Ex: &#39;wrong-args&#39;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">code?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The diagnostic message. Ex: &#39;Wrong number of args for function X&#39;</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w"> </span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="completion">Completion (↩️)<a class="headerlink" href="#completion" title="Permanent link">#</a></h3>
+<p>Soon</p>
+<h3 id="edit">Edit (↩️)<a class="headerlink" href="#edit" title="Permanent link">#</a></h3>
+<p>Soon</p>
+<h2 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">#</a></h2>
+<h3 id="config-updated">Config updated (⬅️)<a class="headerlink" href="#config-updated" title="Permanent link">#</a></h3>
+<p>A server notification with the new config server is considering (models, behaviors etc), usually related to config or auth changes.
+Clients should update UI accordingly, if a field is missing/null, means it had no change since last config updated, so clients should ignore.</p>
+<p><em>Notification:</em> </p>
+<ul>
+<li>method: <code>config/updated</code></li>
+<li>params: <code>configUpdatedParams</code> defined as follows:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">ConfigUpdatedParams</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Configs related to chat.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">chat</span><span class="o">?:</span><span class="w"> </span><span class="p">{</span>
+
+<span class="w">       </span><span class="cm">/**</span>
+<span class="cm">        * The models the user can use in chat.</span>
+<span class="cm">        */</span>
+<span class="w">        </span><span class="nx">models?</span><span class="o">:</span><span class="w"> </span><span class="kt">ChatModel</span><span class="p">[];</span>
+
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">        * The chat behaviors the user can select.</span>
+<span class="cm">        */</span>
+<span class="w">        </span><span class="nx">behaviors?</span><span class="o">:</span><span class="w"> </span><span class="kt">ChatBehavior</span><span class="p">[];</span>
+
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * The model for client select in chat, if that is present</span>
+<span class="cm">         * clients should forcefully update chat selected model.</span>
+<span class="cm">         * </span>
+<span class="cm">         * Server returns this when starting and only when makes sense to </span>
+<span class="cm">         * force update a model, like a config change.</span>
+<span class="cm">         */</span>
+<span class="w">        </span><span class="nx">selectModel?</span><span class="o">:</span><span class="w"> </span><span class="kt">ChatModel</span><span class="p">;</span>
+
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">         * The behavior for client select in chat, if that is present</span>
+<span class="cm">         * clients should forcefully update chat selected behavior.</span>
+<span class="cm">         * </span>
+<span class="cm">         * Server returns this when starting and only when makes sense to </span>
+<span class="cm">         * force update a behavior, like a config change.</span>
+<span class="cm">         */</span>
+<span class="w">        </span><span class="nx">selectBehavior?</span><span class="o">:</span><span class="w"> </span><span class="kt">ChatBehavior</span><span class="p">;</span>
+
+<span class="w">        </span><span class="cm">/**</span>
+<span class="cm">        * Message to show when starting a new chat.</span>
+<span class="cm">        */</span>
+<span class="w">        </span><span class="nx">welcomeMessage?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="tool-updated">Tool updated (⬅️)<a class="headerlink" href="#tool-updated" title="Permanent link">#</a></h3>
+<p>A server notification about a tool status update like a MCP or native tool.
+This is useful for clients present to user the list of configured tools/MCPs,
+their status and available tools and actions.</p>
+<p><em>Notification:</em> </p>
+<ul>
+<li>method: <code>tool/serverUpdated</code></li>
+<li>params: <code>ToolServerUpdatedParams</code> defined as follows:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kr">type</span><span class="w"> </span><span class="nx">ToolServerUpdatedParams</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">EcaServerUpdatedParams</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="nx">MCPServerUpdatedParams</span><span class="p">;</span>
+
+<span class="kd">interface</span><span class="w"> </span><span class="nx">EcaServerUpdatedParams</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;native&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;ECA&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="nx">status</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;running&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The built-in tools supported by eca.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">tools</span><span class="o">:</span><span class="w"> </span><span class="kt">ServerTool</span><span class="p">[];</span>
+<span class="p">}</span>
+
+<span class="kd">interface</span><span class="w"> </span><span class="nx">MCPServerUpdatedParams</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;mcp&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The server name.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The command to start this server.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">command</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The arguments to start this server.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">args</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[];</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The status of the server.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">status</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;running&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;starting&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;stopped&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;failed&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;disabled&#39;</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The tools supported by this mcp server if not disabled.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">tools?</span><span class="o">:</span><span class="w"> </span><span class="kt">ServerTool</span><span class="p">[];</span>
+<span class="p">}</span>
+
+<span class="kd">interface</span><span class="w"> </span><span class="nx">ServerTool</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The server tool name.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The server tool description.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">description</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The server tool parameters.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">parameters</span><span class="o">:</span><span class="w"> </span><span class="kt">any</span><span class="p">;</span><span class="w"> </span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * Whther this tool is disabled.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">disabled?</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="stop-mcp-server">Stop MCP server (➡️)<a class="headerlink" href="#stop-mcp-server" title="Permanent link">#</a></h3>
+<p>A client notification for server to stop a MCP server, stopping the process.
+Updates its status via <code>tool/serverUpdated</code> notification.</p>
+<p><em>Notification:</em></p>
+<ul>
+<li>method: <code>mcp/stopServer</code></li>
+<li>params: <code>MCPStopServerParams</code> defined as follows:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">MCPStopServerParams</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The MCP server name.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="start-mcp-server">Start MCP server (➡️)<a class="headerlink" href="#start-mcp-server" title="Permanent link">#</a></h3>
+<p>A client notification for server to start a stopped MCP server, starting the process again.
+Updates its status via <code>tool/serverUpdated</code> notification.</p>
+<p><em>Notification:</em></p>
+<ul>
+<li>method: <code>mcp/startServer</code></li>
+<li>params: <code>MCPStartServerParams</code> defined as follows:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">MCPStartServerParams</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The server name.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></div>
+<h3 id="add-mcp">Add MCP (↩️)<a class="headerlink" href="#add-mcp" title="Permanent link">#</a></h3>
+<p>Soon</p>
+<h2 id="general-features">General features<a class="headerlink" href="#general-features" title="Permanent link">#</a></h2>
+<h3 id="showmessage">showMessage (⬅️)<a class="headerlink" href="#showmessage" title="Permanent link">#</a></h3>
+<p>A notification from server telling client to present a message to user.</p>
+<p><em>Request:</em> </p>
+<ul>
+<li>method: <code>$/showMessage</code></li>
+<li>params: <code>ShowMessageParams</code> defined as follows:</li>
+</ul>
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">ShowMessageParams</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The message type. See {@link MessageType}.</span>
+<span class="cm">    */</span>
+<span class="w">    </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="nx">MessageType</span><span class="p">;</span>
+
+<span class="w">    </span><span class="cm">/**</span>
+<span class="cm">     * The actual message.</span>
+<span class="cm">     */</span>
+<span class="w">    </span><span class="nx">message</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">export</span><span class="w"> </span><span class="kr">type</span><span class="w"> </span><span class="nx">MessageType</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;error&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;warning&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;info&#39;</span><span class="p">;</span>
+</code></pre></div>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 24, 2025 17:29:37 UTC">October 24, 2025</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/editor-code-assistant/eca" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1M480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2m-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3m-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "content.code.copy", "content.code.select"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+    
+  </body>
+</html>

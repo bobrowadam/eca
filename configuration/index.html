@@ -1,0 +1,1585 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="ECA - AI pair programming capabilities in any editor">
+      
+      
+      
+        <link rel="canonical" href="https://eca.dev/configuration/">
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../models/">
+      
+      
+      <link rel="icon" href="../images/logo.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.6.15">
+    
+    
+      
+        <title>Configuration - ECA - Editor Code Assistant</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.342714a4.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/layout.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+  
+
+
+  
+  
+
+<script id="__analytics">function __md_analytics(){function e(){dataLayer.push(arguments)}window.dataLayer=window.dataLayer||[],e("js",new Date),e("config","G-VFJYDKR1MR"),document.addEventListener("DOMContentLoaded",(function(){document.forms.search&&document.forms.search.query.addEventListener("blur",(function(){this.value&&e("event","search",{search_term:this.value})}));document$.subscribe((function(){var t=document.forms.feedback;if(void 0!==t)for(var a of t.querySelectorAll("[type=submit]"))a.addEventListener("click",(function(a){a.preventDefault();var n=document.location.pathname,d=this.getAttribute("data-md-value");e("event","feedback",{page:n,data:d}),t.firstElementChild.disabled=!0;var r=t.querySelector(".md-feedback__note [data-md-value='"+d+"']");r&&(r.hidden=!1)})),t.hidden=!1})),location$.subscribe((function(t){e("config","G-VFJYDKR1MR",{page_path:t.pathname})}))}));var t=document.createElement("script");t.async=!0,t.src="https://www.googletagmanager.com/gtag/js?id=G-VFJYDKR1MR",document.getElementById("__analytics").insertAdjacentElement("afterEnd",t)}</script>
+  
+    <script>"undefined"!=typeof __md_analytics&&__md_analytics()</script>
+  
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#configuration" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="ECA - Editor Code Assistant" class="md-header__button md-logo" aria-label="ECA - Editor Code Assistant" data-md-component="logo">
+      
+  <img src="../images/logo.svg" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            ECA - Editor Code Assistant
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Configuration
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/editor-code-assistant/eca" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    editor-code-assistant/eca
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+    
+  
+  
+    
+    
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href=".." class="md-tabs__link">
+          
+  
+  
+  Home
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../features/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Features
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../installation/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Installation
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../models/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Models
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="https://github.com/sponsors/ericdallo" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Support Us
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../CHANGELOG/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Changelog
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="ECA - Editor Code Assistant" class="md-nav__button md-logo" aria-label="ECA - Editor Code Assistant" data-md-component="logo">
+      
+  <img src="../images/logo.svg" alt="logo">
+
+    </a>
+    ECA - Editor Code Assistant
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/editor-code-assistant/eca" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6m-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3m44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9M244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8M97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1m-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7m32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1m-11.4-14.7c-1.6 1-1.6 3.6 0 5.9s4.3 3.3 5.6 2.3c1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2"/></svg>
+  </div>
+  <div class="md-source__repository">
+    editor-code-assistant/eca
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_1" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_1" id="__nav_1_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    Home
+    
+  </span>
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_1_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_1">
+            <span class="md-nav__icon md-icon"></span>
+            Home
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Overview
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    Configuration
+    
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ways-to-configure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ways to configure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#providers-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      Providers / Models
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tools
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      MCP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#approval-permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Approval / permissions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Reading
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Tools
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-command-prompts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom command prompts
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rules
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#behaviors-prompts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Behaviors / prompts
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hooks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#opentelemetry-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opentelemetry integration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#all-configs" class="md-nav__link">
+    <span class="md-ellipsis">
+      All configs
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../development/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Development
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Protocol
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../troubleshooting/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Troubleshooting
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../features/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Features
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../installation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Installation
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Models
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="https://github.com/sponsors/ericdallo" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Support Us
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../CHANGELOG/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Changelog
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ways-to-configure" class="md-nav__link">
+    <span class="md-ellipsis">
+      Ways to configure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#providers-models" class="md-nav__link">
+    <span class="md-ellipsis">
+      Providers / Models
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Tools
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Tools">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#mcp" class="md-nav__link">
+    <span class="md-ellipsis">
+      MCP
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#approval-permissions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Approval / permissions
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#file-reading" class="md-nav__link">
+    <span class="md-ellipsis">
+      File Reading
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#custom-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Tools
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-command-prompts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom command prompts
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#rules" class="md-nav__link">
+    <span class="md-ellipsis">
+      Rules
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#behaviors-prompts" class="md-nav__link">
+    <span class="md-ellipsis">
+      Behaviors / prompts
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hooks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Hooks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#opentelemetry-integration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Opentelemetry integration
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#all-configs" class="md-nav__link">
+    <span class="md-ellipsis">
+      All configs
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+  
+
+
+<h1 id="configuration">Configuration<a class="headerlink" href="#configuration" title="Permanent link">#</a></h1>
+<p>Check all available configs and its default values <a href="#all-configs">here</a>.</p>
+<h2 id="ways-to-configure">Ways to configure<a class="headerlink" href="#ways-to-configure" title="Permanent link">#</a></h2>
+<p>There are multiples ways to configure ECA:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:4"><input checked="checked" id="global-config-file" name="__tabbed_1" type="radio" /><input id="local-config-file" name="__tabbed_1" type="radio" /><input id="initializationoptions" name="__tabbed_1" type="radio" /><input id="env-var" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="global-config-file">Global config file</label><label for="local-config-file">Local Config file</label><label for="initializationoptions">InitializationOptions</label><label for="env-var">Env var</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>Convenient for users and multiple projects</p>
+<div class="highlight"><span class="filename">~/.config/eca/config.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;defaultBehavior&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;plan&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>Convenient for users</p>
+<div class="highlight"><span class="filename">.eca/config.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;defaultBehavior&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;plan&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>Convenient for editors</p>
+<p>Client editors can pass custom settings when sending the <code>initialize</code> request via the <code>initializationOptions</code> object:</p>
+<div class="highlight"><pre><span></span><code><span class="s2">&quot;initializationOptions&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;defaultBehavior&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;plan&quot;</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>Via env var during server process spawn:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">ECA_CONFIG</span><span class="o">=</span><span class="s1">&#39;{&quot;myConfig&quot;: &quot;my_value&quot;}&#39;</span><span class="w"> </span>eca<span class="w"> </span>server
+</code></pre></div>
+</div>
+</div>
+</div>
+<h2 id="providers-models">Providers / Models<a class="headerlink" href="#providers-models" title="Permanent link">#</a></h2>
+<p>For providers and models configuration check the <a href="../models/#custom-providers">dedicated models section</a>.</p>
+<h2 id="tools">Tools<a class="headerlink" href="#tools" title="Permanent link">#</a></h2>
+<h3 id="mcp">MCP<a class="headerlink" href="#mcp" title="Permanent link">#</a></h3>
+<p>For MCP servers configuration, use the <code>mcpServers</code> config, examples:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="stdio" name="__tabbed_2" type="radio" /><input id="http-streamable" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="stdio">Stdio</label><label for="http-streamable">HTTP-streamable</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><span class="filename">~/.config/eca/config.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;mcpServers&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;memory&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;command&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;npx&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;args&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;-y&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;@modelcontextprotocol/server-memory&quot;</span><span class="p">],</span>
+<span class="w">      </span><span class="c1">// optional</span>
+<span class="w">      </span><span class="s2">&quot;env&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;FOO&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;bar&quot;</span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><span class="filename">~/.config/eca/config.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;mcpServers&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;cool-mcp&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;url&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://my-remote-mcp.com/mcp&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h3 id="approval-permissions">Approval / permissions<a class="headerlink" href="#approval-permissions" title="Permanent link">#</a></h3>
+<p>By default, ECA asks to call any non read-only tool (default <a href="https://github.com/editor-code-assistant/eca/blob/5e598439e606727701a69393e55bbd205c9e16d8/src/eca/config.clj#L88-L96">here</a>), but that can easily be configured in several ways via the <code>toolCall.approval</code> config.</p>
+<p>You can configure the default behavior with <code>byDefault</code> and/or configure a tool in <code>ask</code>, <code>allow</code> or <code>deny</code> configs.</p>
+<p>Check some examples:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="3:5"><input checked="checked" id="allow-any-tools-by-default" name="__tabbed_3" type="radio" /><input id="allow-all-but-some-tools" name="__tabbed_3" type="radio" /><input id="ask-all-but-all-tools-from-some-mcps" name="__tabbed_3" type="radio" /><input id="matching-by-a-tool-argument" name="__tabbed_3" type="radio" /><input id="denying-a-tool" name="__tabbed_3" type="radio" /><div class="tabbed-labels"><label for="allow-any-tools-by-default">Allow any tools by default</label><label for="allow-all-but-some-tools">Allow all but some tools</label><label for="ask-all-but-all-tools-from-some-mcps">Ask all but all tools from some mcps</label><label for="matching-by-a-tool-argument">Matching by a tool argument</label><label for="denying-a-tool">Denying a tool</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><span class="filename">~/.config/eca/config.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;toolCall&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;approval&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;byDefault&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;allow&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><span class="filename">~/.config/eca/config.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;toolCall&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;approval&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;byDefault&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;allow&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;ask&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;eca_editfile&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">        </span><span class="s2">&quot;my-mcp__my_tool&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><span class="filename">~/.config/eca/config.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;toolCall&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;approval&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="c1">// &quot;byDefault&quot;: &quot;ask&quot;, not needed as it&#39;s eca default</span>
+<span class="w">      </span><span class="s2">&quot;allow&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;eca&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">        </span><span class="s2">&quot;my-mcp&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p><strong><code>argsMatchers</code></strong> is a map of argument name by list of <a href="https://www.regexplanet.com/advanced/java/index.html">java regex</a>.</p>
+<div class="highlight"><span class="filename">~/.config/eca/config.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;toolCall&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;approval&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;byDefault&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;allow&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;ask&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;eca_shell_command&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;argsMatchers&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;command&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;.*rm.*&quot;</span><span class="p">,</span>
+<span class="w">                                                           </span><span class="s2">&quot;.*mv.*&quot;</span><span class="p">]}}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><span class="filename">~/.config/eca/config.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;toolCall&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;approval&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;byDefault&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;allow&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;deny&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;eca_shell_command&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;argsMatchers&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;command&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;.*rm.*&quot;</span><span class="p">,</span>
+<span class="w">                                                           </span><span class="s2">&quot;.*mv.*&quot;</span><span class="p">]}}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Also check the <code>plan</code> behavior which is safer.</p>
+<p><strong>The <code>manualApproval</code> setting was deprecated and replaced by the <code>approval</code> one without breaking changes</strong></p>
+<h3 id="file-reading">File Reading<a class="headerlink" href="#file-reading" title="Permanent link">#</a></h3>
+<p>You can configure the maximum number of lines returned by the <code>eca_read_file</code> tool:</p>
+<div class="highlight"><span class="filename">~/.config/eca/config.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;toolCall&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;readFile&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;maxLines&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">1000</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>Default: <code>2000</code> lines</p>
+<h3 id="custom-tools">Custom Tools<a class="headerlink" href="#custom-tools" title="Permanent link">#</a></h3>
+<p>You can define your own command-line tools that the LLM can use. These are configured via the <code>customTools</code> key in your <code>config.json</code>.</p>
+<p>The <code>customTools</code> value is an object where each key is the name of your tool. Each tool definition has the following properties:</p>
+<ul>
+<li><code>description</code>: A clear description of what the tool does. This is crucial for the LLM to decide when to use it.</li>
+<li><code>command</code>: An string representing the command and its static arguments.</li>
+<li><code>schema</code>: An object that defines the parameters the LLM can provide.<ul>
+<li><code>properties</code>: An object where each key is an argument name.</li>
+<li><code>required</code>: An array of required argument names.</li>
+</ul>
+</li>
+</ul>
+<p>Placeholders in the format <code>{{argument_name}}</code> within the <code>command</code> string will be replaced by the values provided by the LLM.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="4:2"><input checked="checked" id="example-1" name="__tabbed_4" type="radio" /><input id="example-2" name="__tabbed_4" type="radio" /><div class="tabbed-labels"><label for="example-1">Example 1</label><label for="example-2">Example 2</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><span class="filename">~/.config/eca/config.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;customTools&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;web-search&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Fetches the content of a URL and returns it in Markdown format.&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;command&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;trafilatura --output-format=markdown -u {{url}}&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;schema&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;properties&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="s2">&quot;url&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;The URL to fetch content from.&quot;</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="s2">&quot;required&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;url&quot;</span><span class="p">]</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><span class="filename">~/.config/eca/config.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;customTools&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;file-search&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Finds files within a directory that match a specific name pattern.&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;command&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;find {{directory}} -name {{pattern}}&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;schema&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;properties&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="s2">&quot;directory&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;The directory to start the search from.&quot;</span>
+<span class="w">          </span><span class="p">},</span>
+<span class="w">          </span><span class="s2">&quot;pattern&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;string&quot;</span><span class="p">,</span>
+<span class="w">            </span><span class="s2">&quot;description&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;The search pattern for the filename (e.g., &#39;*.clj&#39;).&quot;</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">},</span>
+<span class="w">        </span><span class="s2">&quot;required&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;directory&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;pattern&quot;</span><span class="p">]</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h2 id="custom-command-prompts">Custom command prompts<a class="headerlink" href="#custom-command-prompts" title="Permanent link">#</a></h2>
+<p>You can configure custom command prompts for project, global or via <code>commands</code> config pointing to the path of the commands.
+Prompts can use variables like <code>$ARGUMENTS</code>, <code>$ARG1</code>, <code>ARG2</code>, to replace in the prompt during command call.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="5:3"><input checked="checked" id="local-custom-commands" name="__tabbed_5" type="radio" /><input id="global-custom-commands" name="__tabbed_5" type="radio" /><input id="config" name="__tabbed_5" type="radio" /><div class="tabbed-labels"><label for="local-custom-commands">Local custom commands</label><label for="global-custom-commands">Global custom commands</label><label for="config">Config</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>A <code>.eca/commands</code> folder from the workspace root containing <code>.md</code> files with the custom prompt.</p>
+<div class="highlight"><span class="filename">.eca/commands/check-performance.md</span><pre><span></span><code>Check for performance issues in $ARG1 and optimize if needed.
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>A <code>$XDG_CONFIG_HOME/eca/commands</code> or <code>~/.config/eca/commands</code> folder containing <code>.md</code> files with the custom command prompt.</p>
+<div class="highlight"><span class="filename">~/.config/eca/commands/check-performance.md</span><pre><span></span><code>Check for performance issues in $ARG1 and optimize if needed.
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>Just add to your config the <code>commands</code> pointing to <code>.md</code> files that will be searched from the workspace root if not an absolute path:</p>
+<div class="highlight"><span class="filename">~/.config/eca/config.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;commands&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span><span class="s2">&quot;path&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;my-custom-prompt.md&quot;</span><span class="p">}]</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h2 id="rules">Rules<a class="headerlink" href="#rules" title="Permanent link">#</a></h2>
+<p>Rules are contexts that are passed to the LLM during a prompt and are useful to tune prompts or LLM behavior.
+Rules are text files (typically <code>.md</code>, but any format works):</p>
+<p>There are 3 possible ways to configure rules following this order of priority:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="6:3"><input checked="checked" id="project-file" name="__tabbed_6" type="radio" /><input id="global-file" name="__tabbed_6" type="radio" /><input id="config_1" name="__tabbed_6" type="radio" /><div class="tabbed-labels"><label for="project-file">Project file</label><label for="global-file">Global file</label><label for="config_1">Config</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<p>A <code>.eca/rules</code> folder from the workspace root containing <code>.md</code> files with the rules.</p>
+<div class="highlight"><span class="filename">.eca/rules/talk_funny.md</span><pre><span></span><code><span class="k">-</span><span class="w"> </span>Talk funny like Mickey!
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>A <code>$XDG_CONFIG_HOME/eca/rules</code> or <code>~/.config/eca/rules</code> folder containing <code>.md</code> files with the rules.</p>
+<div class="highlight"><span class="filename">~/.config/eca/rules/talk_funny.md</span><pre><span></span><code><span class="k">-</span><span class="w"> </span>Talk funny like Mickey!
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<p>Just add toyour config the <code>:rules</code> pointing to <code>.md</code> files that will be searched from the workspace root if not an absolute path:</p>
+<div class="highlight"><span class="filename">~/.config/eca/config.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;rules&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span><span class="s2">&quot;path&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;my-rule.md&quot;</span><span class="p">}]</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h2 id="behaviors-prompts">Behaviors / prompts<a class="headerlink" href="#behaviors-prompts" title="Permanent link">#</a></h2>
+<p>ECA allows to totally customize the prompt sent to LLM via the <code>behavior</code> config, allowing to have multiple behaviors for different tasks or workflows.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="7:1"><input checked="checked" id="example-my-behavior" name="__tabbed_7" type="radio" /><div class="tabbed-labels"><label for="example-my-behavior">Example: my-behavior</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><span class="filename">~/.config/eca/config.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;behavior&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;my-behavior&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;systemPromptFile&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;/path/to/my-behavior-prompt.md&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h2 id="hooks">Hooks<a class="headerlink" href="#hooks" title="Permanent link">#</a></h2>
+<p>Hooks are actions that can run before or after an specific event, useful to notify after prompt finished or to block a tool call doing some check in a script.</p>
+<p>Allowed hook types:</p>
+<ul>
+<li><code>preRequest</code>: Run before prompt is sent to LLM, if a hook output is provided, append to user prompt.</li>
+<li><code>postRequest</code>: Run after prompt is finished, when chat come back to idle state.</li>
+<li><code>preToolCall</code>: Run before a tool is called, if a hook exit with status <code>2</code>, reject the tool call.</li>
+<li><code>postToolCall</code>: Run after a tool was called.</li>
+</ul>
+<p><strong>Input</strong>: Hooks will receive input as json with information from that event, like tool name, args or user prompt.</p>
+<p><strong>Output</strong>: All hook actions allow printing output (stdout) and errors (stderr) which will be shown in chat.</p>
+<p><strong>Matcher</strong>: Specify whether to apply this hook checking a regex applying to <code>mcp__tool-name</code>, applicable only for <code>*ToolCall</code> hooks.</p>
+<p><strong>Visible</strong>: whether to show or not this hook in chat when executing, defaults to true.</p>
+<p>Examples:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="8:2"><input checked="checked" id="notify-after-prompt-finish" name="__tabbed_8" type="radio" /><input id="block-specific-tool-call-checking-hook-arg" name="__tabbed_8" type="radio" /><div class="tabbed-labels"><label for="notify-after-prompt-finish">Notify after prompt finish</label><label for="block-specific-tool-call-checking-hook-arg">Block specific tool call checking hook arg</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><span class="filename">~/.config/eca/config.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;hooks&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;notify-me&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;postRequest&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;actions&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="s2">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;shell&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="s2">&quot;shell&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;notify-send \&quot;Hey, prompt finished!\&quot;&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span><span class="w"> </span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><span class="filename">~/.config/eca/config.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;hooks&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;check-my-tool&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;preToolCall&quot;</span><span class="p">,</span><span class="w"> </span>
+<span class="w">      </span><span class="s2">&quot;matcher&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;my-mcp__some-tool&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;visible&quot;</span><span class="o">:</span><span class="w"> </span><span class="kc">false</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;actions&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span>
+<span class="w">        </span><span class="p">{</span>
+<span class="w">          </span><span class="s2">&quot;type&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;shell&quot;</span><span class="p">,</span>
+<span class="w">          </span><span class="s2">&quot;shell&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;tool=$(jq &#39;.\&quot;tool-name\&quot;&#39; &lt;&lt;&lt; \&quot;$1\&quot;); echo \&quot;We should not run the $tool tool bro!\&quot; &gt;&amp;2 &amp;&amp; exit 2&quot;</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">]</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<h2 id="opentelemetry-integration">Opentelemetry integration<a class="headerlink" href="#opentelemetry-integration" title="Permanent link">#</a></h2>
+<p>To configure, add your OTLP collector config via <code>:otlp</code> map following <a href="https://opentelemetry.io/docs/languages/java/configuration/#properties-general">otlp auto-configure settings</a>. Example:</p>
+<div class="highlight"><span class="filename">~/.config/eca/config.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;otlp&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;otel.exporter.otlp.metrics.protocol&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;http/protobuf&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;otel.exporter.otlp.metrics.endpoint&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://my-otlp-endpoint.com/foo&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;otel.exporter.otlp.headers&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Authorization=Bearer 123456&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="all-configs">All configs<a class="headerlink" href="#all-configs" title="Permanent link">#</a></h2>
+<div class="tabbed-set tabbed-alternate" data-tabs="9:2"><input checked="checked" id="schema" name="__tabbed_9" type="radio" /><input id="default-values" name="__tabbed_9" type="radio" /><div class="tabbed-labels"><label for="schema">Schema</label><label for="default-values">Default values</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">Config</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">providers</span><span class="o">?:</span><span class="w"> </span><span class="p">{[</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">api</span><span class="o">?:</span><span class="w"> </span><span class="s1">&#39;openai-responses&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;openai-chat&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;anthropic&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">url?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">urlEnv?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">key?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w"> </span><span class="c1">// when provider supports api key.</span>
+<span class="w">        </span><span class="nx">keyEnv?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">keyRc?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w"> </span><span class="c1">// credential file lookup in format [login@]machine[:port]</span>
+<span class="w">        </span><span class="nx">completionUrlRelativePath?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">models</span><span class="o">:</span><span class="w"> </span><span class="p">{[</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="nx">modelName?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">          </span><span class="nx">extraPayload</span><span class="o">?:</span><span class="w"> </span><span class="p">{[</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="nx">any</span><span class="p">}</span>
+<span class="w">        </span><span class="p">}};</span>
+<span class="w">    </span><span class="p">}};</span>
+<span class="w">    </span><span class="nx">defaultModel?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">hooks</span><span class="o">?:</span><span class="w"> </span><span class="p">{[</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;preToolCall&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;postToolCall&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;preRequest&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;postRequest&#39;</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">matcher</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">visible?</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">actions</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;shell&#39;</span><span class="p">;</span>
+<span class="w">                </span><span class="nx">shell</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}[];</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="nx">rules</span><span class="o">?:</span><span class="w"> </span><span class="p">[{</span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;}];</span>
+<span class="w">    </span><span class="nx">commands</span><span class="o">?:</span><span class="w"> </span><span class="p">[{</span><span class="nx">path</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;}];</span>
+<span class="w">    </span><span class="nx">behavior</span><span class="o">?:</span><span class="w"> </span><span class="p">{[</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">systemPromptFile?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">defaultModel?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">disabledTools?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[];</span>
+<span class="w">        </span><span class="nx">toolCall</span><span class="o">?:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">approval</span><span class="o">?:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="nx">byDefault</span><span class="o">?:</span><span class="w"> </span><span class="s1">&#39;ask&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;allow&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;deny&#39;</span><span class="p">;</span>
+<span class="w">                </span><span class="nx">allow</span><span class="o">?:</span><span class="w"> </span><span class="p">{[</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">argsMatchers</span><span class="o">?:</span><span class="w"> </span><span class="p">{[</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[]}}};</span>
+<span class="w">                </span><span class="nx">ask</span><span class="o">?:</span><span class="w"> </span><span class="p">{[</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">argsMatchers</span><span class="o">?:</span><span class="w"> </span><span class="p">{[</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[]}}};</span>
+<span class="w">                </span><span class="nx">deny</span><span class="o">?:</span><span class="w"> </span><span class="p">{[</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">argsMatchers</span><span class="o">?:</span><span class="w"> </span><span class="p">{[</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[]}}};</span>
+<span class="w">            </span><span class="p">};</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">    </span><span class="p">}};</span>
+<span class="w">    </span><span class="nx">customTools</span><span class="o">?:</span><span class="w"> </span><span class="p">{[</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">description</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">command</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">schema</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">properties</span><span class="o">:</span><span class="w"> </span><span class="p">{[</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">                </span><span class="nx">description</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">            </span><span class="p">}};</span>
+<span class="w">            </span><span class="nx">required</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[];</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">    </span><span class="p">}};</span>
+<span class="w">    </span><span class="nx">disabledTools?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[],</span>
+<span class="w">    </span><span class="nx">toolCall</span><span class="o">?:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="nx">approval</span><span class="o">?:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">byDefault</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;ask&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;allow&#39;</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">allow</span><span class="o">?:</span><span class="w"> </span><span class="p">{{</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">}</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">argsMatchers</span><span class="o">?:</span><span class="w"> </span><span class="p">{{[</span><span class="nx">key</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">}</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[]}}},</span>
+<span class="w">        </span><span class="nx">ask</span><span class="o">?:</span><span class="w"> </span><span class="p">{{</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">}</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">argsMatchers</span><span class="o">?:</span><span class="w"> </span><span class="p">{{[</span><span class="nx">key</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">}</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[]}}},</span>
+<span class="w">        </span><span class="nx">deny</span><span class="o">?:</span><span class="w"> </span><span class="p">{{</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">}</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="nx">argsMatchers</span><span class="o">?:</span><span class="w"> </span><span class="p">{{[</span><span class="nx">key</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">}</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[]}}},</span>
+<span class="w">      </span><span class="p">};</span>
+<span class="w">      </span><span class="nx">readFile</span><span class="o">?:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">maxLines?</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">      </span><span class="p">};</span>
+<span class="w">      </span><span class="nx">shellCommand</span><span class="o">?:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">summaryMaxLength?</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">,</span>
+<span class="w">      </span><span class="p">};</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="nx">mcpTimeoutSeconds?</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">lspTimeoutSeconds?</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">mcpServers</span><span class="o">?:</span><span class="w"> </span><span class="p">{[</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">url?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w"> </span><span class="c1">// for remote http-stremable servers</span>
+<span class="w">        </span><span class="nx">command?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span><span class="w"> </span><span class="c1">// for stdio servers</span>
+<span class="w">        </span><span class="nx">args?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[];</span>
+<span class="w">        </span><span class="nx">disabled?</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+<span class="w">    </span><span class="p">}};</span>
+<span class="w">    </span><span class="nx">defaultBehavior?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">welcomeMessage?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">compactPromptFile?</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">index</span><span class="o">?:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">ignoreFiles</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span>
+<span class="w">            </span><span class="kr">type</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">        </span><span class="p">}];</span>
+<span class="w">        </span><span class="nx">repoMap</span><span class="o">?:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="nx">maxTotalEntries?</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">            </span><span class="nx">maxEntriesPerDir?</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">        </span><span class="p">};</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="nx">otlp</span><span class="o">?:</span><span class="w"> </span><span class="p">{[</span><span class="nx">key</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">]</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">};</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;providers&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;openai&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.openai.com&quot;</span><span class="p">},</span>
+<span class="w">      </span><span class="s2">&quot;anthropic&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.anthropic.com&quot;</span><span class="p">},</span>
+<span class="w">      </span><span class="s2">&quot;github-copilot&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://api.githubcopilot.com&quot;</span><span class="p">},</span>
+<span class="w">      </span><span class="s2">&quot;google&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;https://generativelanguage.googleapis.com/v1beta/openai&quot;</span><span class="p">},</span>
+<span class="w">      </span><span class="s2">&quot;ollama&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;url&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;http://localhost:11434&quot;</span><span class="p">}</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="s2">&quot;defaultModel&quot;</span><span class="o">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span><span class="w"> </span><span class="c1">// let ECA decides the default model.</span>
+<span class="w">  </span><span class="s2">&quot;hooks&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">  </span><span class="s2">&quot;rules&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">  </span><span class="s2">&quot;commands&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">  </span><span class="s2">&quot;disabledTools&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[],</span>
+<span class="w">  </span><span class="s2">&quot;toolCall&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;approval&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;byDefault&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;ask&quot;</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;allow&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;eca_directory_tree&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">                </span><span class="s2">&quot;eca_read_file&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">                </span><span class="s2">&quot;eca_grep&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">                </span><span class="s2">&quot;eca_preview_file_change&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">                </span><span class="s2">&quot;eca_editor_diagnostics&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{}},</span>
+<span class="w">      </span><span class="s2">&quot;ask&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">      </span><span class="s2">&quot;deny&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="s2">&quot;readFile&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;maxLines&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">2000</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="s2">&quot;shellCommand&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;summaryMaxLength&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">30</span><span class="p">,</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">  </span><span class="p">},</span>
+<span class="w">  </span><span class="s2">&quot;mcpTimeoutSeconds&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">60</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;lspTimeoutSeconds&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="mf">30</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;mcpServers&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">  </span><span class="s2">&quot;behavior&quot;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;agent&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;systemPromptFile&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;prompts/agent_behavior.md&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="s2">&quot;disabledTools&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;eca_preview_file_change&quot;</span><span class="p">]},</span>
+<span class="w">    </span><span class="s2">&quot;plan&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;systemPromptFile&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;prompts/plan_behavior.md&quot;</span><span class="p">,</span>
+<span class="w">              </span><span class="s2">&quot;disabledTools&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;eca_edit_file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;eca_write_file&quot;</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;eca_move_file&quot;</span><span class="p">],</span>
+<span class="w">              </span><span class="s2">&quot;toolCall&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;approval&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;deny&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;eca_shell_command&quot;</span><span class="o">:</span>
+<span class="w">                                                 </span><span class="p">{</span><span class="s2">&quot;argsMatchers&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;command&quot;</span><span class="w"> </span><span class="p">[</span><span class="s2">&quot;.*&gt;.*&quot;</span><span class="p">,</span>
+<span class="w">                                                                              </span><span class="s2">&quot;.*\\|\\s*(tee|dd|xargs).*&quot;</span><span class="p">,</span>
+<span class="w">                                                                              </span><span class="s2">&quot;.*\\b(sed|awk|perl)\\s+.*-i.*&quot;</span><span class="p">,</span>
+<span class="w">                                                                              </span><span class="s2">&quot;.*\\b(rm|mv|cp|touch|mkdir)\\b.*&quot;</span><span class="p">,</span>
+<span class="w">                                                                              </span><span class="s2">&quot;.*git\\s+(add|commit|push).*&quot;</span><span class="p">,</span>
+<span class="w">                                                                              </span><span class="s2">&quot;.*npm\\s+install.*&quot;</span><span class="p">,</span>
+<span class="w">                                                                              </span><span class="s2">&quot;.*-c\\s+[\&quot;&#39;].*open.*[\&quot;&#39;]w[\&quot;&#39;].*&quot;</span><span class="p">,</span>
+<span class="w">                                                                              </span><span class="s2">&quot;.*bash.*-c.*&gt;.*&quot;</span><span class="p">]}}}}}}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="w">  </span><span class="s2">&quot;defaultBehavior&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;agent&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;welcomeMessage&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;Welcome to ECA!\n\nType &#39;/&#39; for commands\n\n&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;compactPromptFile&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;prompts/compact.md&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="s2">&quot;index&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;ignoreFiles&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;type&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;gitignore&quot;</span>
+<span class="w">    </span><span class="p">}</span><span class="w"> </span><span class="p">],</span>
+<span class="w">    </span><span class="s2">&quot;repoMap&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;maxTotalEntries&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">800</span><span class="p">,</span>
+<span class="w">      </span><span class="s2">&quot;maxEntriesPerDir&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">50</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+
+
+
+
+
+
+
+  
+    
+  
+  
+
+
+  <aside class="md-source-file">
+    
+      
+  <span class="md-source-file__fact">
+    <span class="md-icon" title="Last update">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
+    </span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-date" title="October 24, 2025 17:29:37 UTC">October 24, 2025</span>
+  </span>
+
+    
+    
+    
+    
+  </aside>
+
+
+  
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+        <div class="md-social">
+  
+    
+    
+    
+    
+      
+      
+    
+    <a href="https://github.com/editor-code-assistant/eca" target="_blank" rel="noopener" title="github.com" class="md-social__link">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><!--! Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1M480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2m-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3m-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1"/></svg>
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "content.code.copy", "content.code.select"], "search": "../assets/javascripts/workers/search.d50fe291.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.56ea9cef.min.js"></script>
+      
+    
+  </body>
+</html>
