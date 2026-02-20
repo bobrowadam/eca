@@ -57,6 +57,7 @@
   (->> (get config :commands)
        (map
         (fn [{:keys [path]}]
+<<<<<<< HEAD
           (let [path (str (fs/expand-home path))]
             (if (fs/absolute? path)
               (when (fs/exists? path)

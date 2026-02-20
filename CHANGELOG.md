@@ -21,7 +21,7 @@
 - Add Context overflow recovery feature.
 
 ## 0.106.0
-
+- Fix home (~) expand for command paths in config
 - Change Openai summary from detailed -> auto.
 - Add variants feature #302
   - By default no variant is set, using model default.
