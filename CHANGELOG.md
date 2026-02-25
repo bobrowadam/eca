@@ -8,7 +8,7 @@
 - Add support to workspace folders change via git worktree via `workspace/didChangeWorkspaceFolders`.
 
 ## 0.108.1
-
+- Support Claude console subscription auth: dispatch `x-api-key` or `Authorization: Bearer` header based on configurable auth type.
 - Support other than text type of tool responses in MCPs. #331
 
 ## 0.108.0
@@ -19,6 +19,7 @@
 
 - Fix home (~) expand for command paths in config
 - Add Context overflow recovery feature.
+
 
 ## 0.106.0
 - Fix home (~) expand for command paths in config
