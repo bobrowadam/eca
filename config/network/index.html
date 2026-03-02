@@ -6,17 +6,17 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Configure ECA rules: define coding standards, conventions, and constraints the LLM must follow globally or per project.">
+        <meta name="description" content="Configure ECA network settings: custom CA certificates, mTLS client certificates, and enterprise proxy support.">
       
       
       
-        <link rel="canonical" href="https://eca.dev/config/rules/">
+        <link rel="canonical" href="https://eca.dev/config/network/">
       
       
-        <link rel="prev" href="../skills/">
+        <link rel="prev" href="../metrics/">
       
       
-        <link rel="next" href="../commands/">
+        <link rel="next" href="../examples/">
       
       
       <link rel="icon" href="../../images/logo.svg">
@@ -24,7 +24,7 @@
     
     
       
-        <title>Rules - ECA - Editor Code Assistant</title>
+        <title>Network / Enterprise - ECA - Editor Code Assistant</title>
       
     
     
@@ -78,9 +78,9 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Rules - ECA - Editor Code Assistant" />
-  <meta property="og:description" content="Configure ECA rules: define coding standards, conventions, and constraints the LLM must follow globally or per project." />
-  <meta property="og:url" content="https://eca.dev/config/rules/" />
+  <meta property="og:title" content="Network / Enterprise - ECA - Editor Code Assistant" />
+  <meta property="og:description" content="Configure ECA network settings: custom CA certificates, mTLS client certificates, and enterprise proxy support." />
+  <meta property="og:url" content="https://eca.dev/config/network/" />
   <meta property="og:image" content="https://eca.dev/images/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -88,8 +88,8 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Rules - ECA - Editor Code Assistant" />
-  <meta name="twitter:description" content="Configure ECA rules: define coding standards, conventions, and constraints the LLM must follow globally or per project." />
+  <meta name="twitter:title" content="Network / Enterprise - ECA - Editor Code Assistant" />
+  <meta name="twitter:description" content="Configure ECA network settings: custom CA certificates, mTLS client certificates, and enterprise proxy support." />
   <meta name="twitter:image" content="https://eca.dev/images/og-image.png" />
 
   </head>
@@ -104,7 +104,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#rules" class="md-skip">
+        <a href="#network" class="md-skip">
           Skip to content
         </a>
       
@@ -137,7 +137,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Rules
+              Network / Enterprise
             
           </span>
         </div>
@@ -738,19 +738,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../rules/" class="md-nav__link">
         
   
   
@@ -761,7 +752,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -932,10 +922,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../network/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Network / Enterprise
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -946,6 +958,71 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#proxy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Proxy
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-ca-certificates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom CA certificates
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mutual-tls-mtls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mutual TLS (mTLS)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#full-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Full example
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1089,6 +1166,59 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#proxy" class="md-nav__link">
+    <span class="md-ellipsis">
+      Proxy
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-ca-certificates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom CA certificates
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mutual-tls-mtls" class="md-nav__link">
+    <span class="md-ellipsis">
+      Mutual TLS (mTLS)
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#full-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Full example
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      Reference
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1106,31 +1236,112 @@
   
 
 
-<h1 id="rules">Rules<a class="headerlink" href="#rules" title="Permanent link">#</a></h1>
-<p>Rules are contexts that are passed to the LLM during a prompt and are useful to tune prompts or LLM responses.
-Rules are text files (typically <code>.md</code>, but any format works):</p>
-<p>There are 3 possible ways to configure rules following this order of priority:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="project-file" name="__tabbed_1" type="radio" /><input id="global-file" name="__tabbed_1" type="radio" /><input id="config" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="project-file">Project file</label><label for="global-file">Global file</label><label for="config">Config</label></div>
+<h1 id="network">Network<a class="headerlink" href="#network" title="Permanent link">#</a></h1>
+<p>ECA supports proxy, custom CA certificates, and mutual TLS (mTLS) for environments behind corporate firewalls or requiring client certificate authentication.</p>
+<p>All network settings apply globally to LLM API requests <strong>and</strong> MCP HTTP transports.</p>
+<h2 id="proxy">Proxy<a class="headerlink" href="#proxy" title="Permanent link">#</a></h2>
+<p>ECA reads proxy configuration from the standard environment variables:</p>
+<div class="highlight"><pre><span></span><code><span class="nv">HTTP_PROXY</span><span class="o">=</span><span class="s2">&quot;http://user:pass@host:port&quot;</span>
+<span class="nv">HTTPS_PROXY</span><span class="o">=</span><span class="s2">&quot;http://user:pass@host:port&quot;</span>
+<span class="nv">http_proxy</span><span class="o">=</span><span class="s2">&quot;http://user:pass@host:port&quot;</span>
+<span class="nv">https_proxy</span><span class="o">=</span><span class="s2">&quot;http://user:pass@host:port&quot;</span>
+</code></pre></div>
+<p>Lowercase wins if both are set. Credentials (if used) must match for HTTP and HTTPS.</p>
+<h2 id="custom-ca-certificates">Custom CA certificates<a class="headerlink" href="#custom-ca-certificates" title="Permanent link">#</a></h2>
+<p>When behind a corporate firewall that uses its own root CA, you will see errors like <code>PKIX path building failed</code>. To fix this, point ECA to a PEM file containing the additional CA certificates:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="config-file" name="__tabbed_1" type="radio" /><input id="environment-variable" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="config-file">Config file</label><label for="environment-variable">Environment variable</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p>A <code>.eca/rules</code> folder from the workspace root containing <code>.md</code> files with the rules.</p>
-<div class="highlight"><span class="filename">.eca/rules/talk_funny.md</span><pre><span></span><code><span class="k">-</span><span class="w"> </span>Talk funny like Mickey!
-</code></pre></div>
-</div>
-<div class="tabbed-block">
-<p>A <code>$XDG_CONFIG_HOME/eca/rules</code> or <code>~/.config/eca/rules</code> folder containing <code>.md</code> files with the rules.</p>
-<div class="highlight"><span class="filename">~/.config/eca/rules/talk_funny.md</span><pre><span></span><code><span class="k">-</span><span class="w"> </span>Talk funny like Mickey!
-</code></pre></div>
-</div>
-<div class="tabbed-block">
-<p>Just add toyour config the <code>:rules</code> pointing to <code>.md</code> files that will be searched from the workspace root if not an absolute path:</p>
 <div class="highlight"><span class="filename">~/.config/eca/config.json</span><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="s2">&quot;rules&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span><span class="s2">&quot;path&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;my-rule.md&quot;</span><span class="p">}]</span>
+<span class="w">  </span><span class="s2">&quot;network&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;caCertFile&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;/etc/ssl/certs/corporate-ca.pem&quot;</span>
+<span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 </div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">SSL_CERT_FILE</span><span class="o">=</span><span class="s2">&quot;/etc/ssl/certs/corporate-ca.pem&quot;</span>
+</code></pre></div>
+<p><code>NODE_EXTRA_CA_CERTS</code> is also supported as a fallback, for compatibility with Node.js tooling.</p>
 </div>
 </div>
+</div>
+<p>Custom CA certificates are <strong>additive</strong> — the JVM default trust store (public CAs) remains trusted.</p>
+<p>The config value supports <a href="../introduction/#dynamic-string-contents">dynamic string interpolation</a>, so you can reference an env var inside the config file:</p>
+<div class="highlight"><span class="filename">~/.config/eca/config.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;network&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;caCertFile&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;${env:SSL_CERT_FILE}&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="mutual-tls-mtls">Mutual TLS (mTLS)<a class="headerlink" href="#mutual-tls-mtls" title="Permanent link">#</a></h2>
+<p>For environments that require client certificate authentication, configure the client certificate and private key:</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="config-file_1" name="__tabbed_2" type="radio" /><input id="environment-variables" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="config-file_1">Config file</label><label for="environment-variables">Environment variables</label></div>
+<div class="tabbed-content">
+<div class="tabbed-block">
+<div class="highlight"><span class="filename">~/.config/eca/config.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;network&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;clientCert&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;/etc/ssl/certs/client.pem&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;clientKey&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;/etc/ssl/private/client-key.pem&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="c1">// only needed when the key is encrypted</span>
+<span class="w">    </span><span class="s2">&quot;clientKeyPassphrase&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;${env:ECA_CLIENT_KEY_PASSPHRASE}&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><pre><span></span><code><span class="nb">export</span><span class="w"> </span><span class="nv">ECA_CLIENT_CERT</span><span class="o">=</span><span class="s2">&quot;/etc/ssl/certs/client.pem&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">ECA_CLIENT_KEY</span><span class="o">=</span><span class="s2">&quot;/etc/ssl/private/client-key.pem&quot;</span>
+<span class="nb">export</span><span class="w"> </span><span class="nv">ECA_CLIENT_KEY_PASSPHRASE</span><span class="o">=</span><span class="s2">&quot;optional-passphrase&quot;</span>
+</code></pre></div>
+</div>
+</div>
+</div>
+<p>Both <code>clientCert</code> and <code>clientKey</code> must be provided together. The key must be in PKCS8 PEM format (either unencrypted or encrypted with a passphrase). RSA and EC key types are supported.</p>
+<h2 id="full-example">Full example<a class="headerlink" href="#full-example" title="Permanent link">#</a></h2>
+<p>A complete network configuration combining a custom CA with mTLS:</p>
+<div class="highlight"><span class="filename">~/.config/eca/config.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;network&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;caCertFile&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;/etc/ssl/certs/corporate-ca.pem&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;clientCert&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;/etc/ssl/certs/client.pem&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;clientKey&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;/etc/ssl/private/client-key.pem&quot;</span><span class="p">,</span>
+<span class="w">    </span><span class="s2">&quot;clientKeyPassphrase&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;${env:ECA_CLIENT_KEY_PASSPHRASE}&quot;</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="reference">Reference<a class="headerlink" href="#reference" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Config key</th>
+<th>Env var fallback</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>caCertFile</code></td>
+<td><code>SSL_CERT_FILE</code>, <code>NODE_EXTRA_CA_CERTS</code></td>
+<td>PEM file with custom CA certificates</td>
+</tr>
+<tr>
+<td><code>clientCert</code></td>
+<td><code>ECA_CLIENT_CERT</code></td>
+<td>PEM file with client certificate for mTLS</td>
+</tr>
+<tr>
+<td><code>clientKey</code></td>
+<td><code>ECA_CLIENT_KEY</code></td>
+<td>PEM file with client private key for mTLS</td>
+</tr>
+<tr>
+<td><code>clientKeyPassphrase</code></td>
+<td><code>ECA_CLIENT_KEY_PASSPHRASE</code></td>
+<td>Passphrase for encrypted client key</td>
+</tr>
+</tbody>
+</table>
+<p>Config values take precedence over environment variables.</p>
 
 
 
@@ -1182,22 +1393,22 @@ Rules are text files (typically <code>.md</code>, but any format works):</p>
   
   <nav class="md-footer__inner md-grid" aria-label="Footer" >
     
-    <a href="../skills/" class="md-footer__link md-footer__link--prev">
+    <a href="../metrics/" class="md-footer__link md-footer__link--prev">
       <div class="md-footer__button md-icon">
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </div>
       <div class="md-footer__title">
         <span class="md-footer__direction">Previous</span>
-        <span class="md-ellipsis">Skills</span>
+        <span class="md-ellipsis">Metrics</span>
       </div>
     </a>
     
     
-    <a href="../commands/" class="md-footer__link md-footer__link--next">
+    <a href="../examples/" class="md-footer__link md-footer__link--next">
       <div class="md-footer__title">
         <span class="md-footer__direction">Next</span>
-        <span class="md-ellipsis">Commands</span>
+        <span class="md-ellipsis">User Examples</span>
       </div>
       <div class="md-footer__button md-icon">
         

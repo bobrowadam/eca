@@ -6,17 +6,17 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="Configure ECA rules: define coding standards, conventions, and constraints the LLM must follow globally or per project.">
+        <meta name="description" content="Configure ECA variants: switch between model presets, reasoning effort levels, and custom payload overrides on the fly.">
       
       
       
-        <link rel="canonical" href="https://eca.dev/config/rules/">
+        <link rel="canonical" href="https://eca.dev/config/variants/">
       
       
-        <link rel="prev" href="../skills/">
+        <link rel="prev" href="../tools/">
       
       
-        <link rel="next" href="../commands/">
+        <link rel="next" href="../skills/">
       
       
       <link rel="icon" href="../../images/logo.svg">
@@ -24,7 +24,7 @@
     
     
       
-        <title>Rules - ECA - Editor Code Assistant</title>
+        <title>Variants - ECA - Editor Code Assistant</title>
       
     
     
@@ -78,9 +78,9 @@
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
-  <meta property="og:title" content="Rules - ECA - Editor Code Assistant" />
-  <meta property="og:description" content="Configure ECA rules: define coding standards, conventions, and constraints the LLM must follow globally or per project." />
-  <meta property="og:url" content="https://eca.dev/config/rules/" />
+  <meta property="og:title" content="Variants - ECA - Editor Code Assistant" />
+  <meta property="og:description" content="Configure ECA variants: switch between model presets, reasoning effort levels, and custom payload overrides on the fly." />
+  <meta property="og:url" content="https://eca.dev/config/variants/" />
   <meta property="og:image" content="https://eca.dev/images/og-image.png" />
   <meta property="og:image:width" content="1200" />
   <meta property="og:image:height" content="630" />
@@ -88,8 +88,8 @@
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Rules - ECA - Editor Code Assistant" />
-  <meta name="twitter:description" content="Configure ECA rules: define coding standards, conventions, and constraints the LLM must follow globally or per project." />
+  <meta name="twitter:title" content="Variants - ECA - Editor Code Assistant" />
+  <meta name="twitter:description" content="Configure ECA variants: switch between model presets, reasoning effort levels, and custom payload overrides on the fly." />
   <meta name="twitter:image" content="https://eca.dev/images/og-image.png" />
 
   </head>
@@ -104,7 +104,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#rules" class="md-skip">
+        <a href="#variants" class="md-skip">
           Skip to content
         </a>
       
@@ -137,7 +137,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Rules
+              Variants
             
           </span>
         </div>
@@ -692,10 +692,32 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../variants/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    Variants
+    
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -706,6 +728,53 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#built-in-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      Built-in Variants
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Variants
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agent-default-variant" class="md-nav__link">
+    <span class="md-ellipsis">
+      Agent Default Variant
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -738,19 +807,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../rules/" class="md-nav__link">
         
   
   
@@ -761,7 +821,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -1089,6 +1148,41 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#built-in-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      Built-in Variants
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-variants" class="md-nav__link">
+    <span class="md-ellipsis">
+      Custom Variants
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#agent-default-variant" class="md-nav__link">
+    <span class="md-ellipsis">
+      Agent Default Variant
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1106,31 +1200,143 @@
   
 
 
-<h1 id="rules">Rules<a class="headerlink" href="#rules" title="Permanent link">#</a></h1>
-<p>Rules are contexts that are passed to the LLM during a prompt and are useful to tune prompts or LLM responses.
-Rules are text files (typically <code>.md</code>, but any format works):</p>
-<p>There are 3 possible ways to configure rules following this order of priority:</p>
-<div class="tabbed-set tabbed-alternate" data-tabs="1:3"><input checked="checked" id="project-file" name="__tabbed_1" type="radio" /><input id="global-file" name="__tabbed_1" type="radio" /><input id="config" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="project-file">Project file</label><label for="global-file">Global file</label><label for="config">Config</label></div>
+<h1 id="variants">Variants<a class="headerlink" href="#variants" title="Permanent link">#</a></h1>
+<p><img alt="" src="../../images/features/variants.png" /></p>
+<p>Variants are named payload presets for a model, allowing you to quickly switch between different LLM parameters — like reasoning effort — without changing the model itself.</p>
+<h2 id="built-in-variants">Built-in Variants<a class="headerlink" href="#built-in-variants" title="Permanent link">#</a></h2>
+<p>ECA ships with built-in variants for some known models via the <code>variantsByModel</code> config which has a good default.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="1:2"><input checked="checked" id="anthropic" name="__tabbed_1" type="radio" /><input id="openai" name="__tabbed_1" type="radio" /><div class="tabbed-labels"><label for="anthropic">Anthropic</label><label for="openai">OpenAI</label></div>
 <div class="tabbed-content">
 <div class="tabbed-block">
-<p>A <code>.eca/rules</code> folder from the workspace root containing <code>.md</code> files with the rules.</p>
-<div class="highlight"><span class="filename">.eca/rules/talk_funny.md</span><pre><span></span><code><span class="k">-</span><span class="w"> </span>Talk funny like Mickey!
-</code></pre></div>
+<p>Applies to models matching <code>sonnet-4-6</code>, <code>opus-4-5</code>, <code>opus-4-6</code> (any separator: <code>-</code>, <code>.</code>, <code>_</code>).</p>
+<table>
+<thead>
+<tr>
+<th>Variant</th>
+<th>Payload</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>low</code></td>
+<td><code>{"output_config": {"effort": "low"}, "thinking": {"type": "adaptive"}}</code></td>
+</tr>
+<tr>
+<td><code>medium</code></td>
+<td><code>{"output_config": {"effort": "medium"}, "thinking": {"type": "adaptive"}}</code></td>
+</tr>
+<tr>
+<td><code>high</code></td>
+<td><code>{"output_config": {"effort": "high"}, "thinking": {"type": "adaptive"}}</code></td>
+</tr>
+<tr>
+<td><code>max</code></td>
+<td><code>{"output_config": {"effort": "max"}, "thinking": {"type": "adaptive"}}</code></td>
+</tr>
+</tbody>
+</table>
 </div>
 <div class="tabbed-block">
-<p>A <code>$XDG_CONFIG_HOME/eca/rules</code> or <code>~/.config/eca/rules</code> folder containing <code>.md</code> files with the rules.</p>
-<div class="highlight"><span class="filename">~/.config/eca/rules/talk_funny.md</span><pre><span></span><code><span class="k">-</span><span class="w"> </span>Talk funny like Mickey!
-</code></pre></div>
+<p>Applies to models matching <code>gpt-5-3-codex</code>, <code>gpt-5-2</code>. Excluded for <code>github-copilot</code> provider.</p>
+<table>
+<thead>
+<tr>
+<th>Variant</th>
+<th>Payload</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>none</code></td>
+<td><code>{"reasoning": {"effort": "none"}}</code></td>
+</tr>
+<tr>
+<td><code>low</code></td>
+<td><code>{"reasoning": {"effort": "low", "summary": "auto"}}</code></td>
+</tr>
+<tr>
+<td><code>medium</code></td>
+<td><code>{"reasoning": {"effort": "medium", "summary": "auto"}}</code></td>
+</tr>
+<tr>
+<td><code>high</code></td>
+<td><code>{"reasoning": {"effort": "high", "summary": "auto"}}</code></td>
+</tr>
+<tr>
+<td><code>xhigh</code></td>
+<td><code>{"reasoning": {"effort": "xhigh", "summary": "auto"}}</code></td>
+</tr>
+</tbody>
+</table>
 </div>
+</div>
+</div>
+<h2 id="custom-variants">Custom Variants<a class="headerlink" href="#custom-variants" title="Permanent link">#</a></h2>
+<p>You can define your own variants per model under <code>providers.&lt;provider&gt;.models.&lt;model&gt;.variants</code>. Custom variants are merged with built-in ones — if names clash, your definition wins.</p>
+<div class="tabbed-set tabbed-alternate" data-tabs="2:2"><input checked="checked" id="global-config-file" name="__tabbed_2" type="radio" /><input id="local-config-file" name="__tabbed_2" type="radio" /><div class="tabbed-labels"><label for="global-config-file">Global config file</label><label for="local-config-file">Local config file</label></div>
+<div class="tabbed-content">
 <div class="tabbed-block">
-<p>Just add toyour config the <code>:rules</code> pointing to <code>.md</code> files that will be searched from the workspace root if not an absolute path:</p>
 <div class="highlight"><span class="filename">~/.config/eca/config.json</span><pre><span></span><code><span class="p">{</span>
-<span class="w">  </span><span class="s2">&quot;rules&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">[{</span><span class="s2">&quot;path&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;my-rule.md&quot;</span><span class="p">}]</span>
+<span class="w">  </span><span class="s2">&quot;providers&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;anthropic&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;models&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;claude-sonnet-4-6&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="s2">&quot;variants&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;creative&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;temperature&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;top_p&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">0.95</span><span class="p">}</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+</div>
+<div class="tabbed-block">
+<div class="highlight"><span class="filename">.eca/config.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;providers&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;anthropic&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;models&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;claude-sonnet-4-6&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="s2">&quot;variants&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="s2">&quot;creative&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="s2">&quot;temperature&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">1</span><span class="p">,</span><span class="w"> </span><span class="s2">&quot;top_p&quot;</span><span class="o">:</span><span class="w"> </span><span class="mf">0.95</span><span class="p">}</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
 <span class="p">}</span>
 </code></pre></div>
 </div>
 </div>
 </div>
+<p>To disable a specific built-in variant, set it to <code>{}</code>:</p>
+<div class="highlight"><span class="filename">~/.config/eca/config.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;providers&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;openai&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;models&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="s2">&quot;gpt-5.2&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">          </span><span class="s2">&quot;variants&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// removes the &quot;none&quot; and &quot;xhigh&quot; built-in variants</span>
+<span class="w">            </span><span class="s2">&quot;none&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{},</span>
+<span class="w">            </span><span class="s2">&quot;xhigh&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{}</span>
+<span class="w">          </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">      </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<h2 id="agent-default-variant">Agent Default Variant<a class="headerlink" href="#agent-default-variant" title="Permanent link">#</a></h2>
+<p>You can set a default variant for an agent so it starts with that variant pre-selected:</p>
+<div class="highlight"><span class="filename">~/.config/eca/config.json</span><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="s2">&quot;agent&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="s2">&quot;code&quot;</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">      </span><span class="s2">&quot;variant&quot;</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;medium&quot;</span>
+<span class="w">    </span><span class="p">}</span>
+<span class="w">  </span><span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div>
+<p>If the configured variant doesn't exist for the current model, it will be ignored.</p>
 
 
 
@@ -1182,22 +1388,22 @@ Rules are text files (typically <code>.md</code>, but any format works):</p>
   
   <nav class="md-footer__inner md-grid" aria-label="Footer" >
     
-    <a href="../skills/" class="md-footer__link md-footer__link--prev">
+    <a href="../tools/" class="md-footer__link md-footer__link--prev">
       <div class="md-footer__button md-icon">
         
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </div>
       <div class="md-footer__title">
         <span class="md-footer__direction">Previous</span>
-        <span class="md-ellipsis">Skills</span>
+        <span class="md-ellipsis">Tools / Approval</span>
       </div>
     </a>
     
     
-    <a href="../commands/" class="md-footer__link md-footer__link--next">
+    <a href="../skills/" class="md-footer__link md-footer__link--next">
       <div class="md-footer__title">
         <span class="md-footer__direction">Next</span>
-        <span class="md-ellipsis">Commands</span>
+        <span class="md-ellipsis">Skills</span>
       </div>
       <div class="md-footer__button md-icon">
         
