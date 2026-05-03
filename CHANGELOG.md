@@ -2,6 +2,9 @@
 
 ## Unreleased
 
+- Add built-in variants for `deepseek-v4-pro` (`none`, `high`, `max`).
+- `variantsByModel` entries now support an optional `:api` filter (string or vector) to restrict variant matching by provider API type.
+
 ## 0.131.1
 
 - MCP tools that return image content blocks (e.g. an MCP image-generation/edit server) now render those images in the chat UI as `ChatImageContent` and replay them back to the LLM as image inputs on follow-up turns when the model supports vision. Implemented for `openai-responses` (synthetic user-role `input_image` after the `function_call_output`) and `anthropic` (mixed text + image blocks inside `tool_result.content`). `openai-chat` and `ollama` continue to receive a text placeholder until a parallel pattern is implemented there.
