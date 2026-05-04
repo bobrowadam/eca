@@ -4,6 +4,7 @@
 
 - Custom commands and skills now expose `:arguments` metadata inferred from their content. Previously they always reported empty arguments.
 - Native `skill-create`, `plugin-install`, and `plugin-uninstall` commands now declare `:required true` on their arguments in the command listing.
+- - Fix documentation link in `--help` output
 
 ## 0.131.1
 
