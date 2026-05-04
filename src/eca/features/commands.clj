@@ -647,8 +647,17 @@
          :prompt custom-command-prompt}
         (if-let [skill (first (filter #(= command (:name %)) skills))]
           {:type :send-prompt
-           :prompt (if (seq args)
+           :prompt (cond
+                     ;; Built-in skills compute their body lazily via the
+                     ;; `eca__skill` tool; the slash form just nudges the LLM
+                     ;; to load it.
+                     (:handler-fn skill)
+                     (str "Load skill: " (:name skill))
+
+                     (seq args)
                      (substitute-args (:body skill) args)
+
+                     :else
                      (str "Load skill: " (:name skill)))}
           {:type :text
            :text (str "Unknown command: " command)})))))

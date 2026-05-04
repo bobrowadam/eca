@@ -12,15 +12,18 @@
                       #(= skill-name (:name %))
                       all-skills))]
     (if skill
-      {:error false
-       :contents [{:type :text
-                   :text (format (multi-str "**Skill**: %s"
-                                            "**Base directory**: %s"
-                                            ""
-                                            "%s")
-                                 (:name skill)
-                                 (:dir skill)
-                                 (:body skill))}]}
+      (let [body (if-let [handler (:handler-fn skill)]
+                   (handler {:db db :config config :skills all-skills})
+                   (:body skill))]
+        {:error false
+         :contents [{:type :text
+                     :text (format (multi-str "**Skill**: %s"
+                                              "**Base directory**: %s"
+                                              ""
+                                              "%s")
+                                   (:name skill)
+                                   (or (:dir skill) "(built-in)")
+                                   body)}]})
       {:error true
        :contents [{:type :text
                    :text (format "Skill '%s' not found, available skills: %s" skill-name (mapv :name all-skills))}]})))

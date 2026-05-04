@@ -1,6 +1,7 @@
 (ns eca.features.skills-test
   (:require
    [babashka.fs :as fs]
+   [clojure.string :as string]
    [clojure.test :refer [deftest is testing]]
    [eca.config :as config]
    [eca.features.skills :as f.skills]
@@ -69,7 +70,11 @@
         (spit (fs/file skill-dir "SKILL.md") "---\nname: configured\ndescription: Configured skill\n---\nConfigured body")
         (spit (fs/file skills-dir "ignored.md") "Ignored")
         (let [config {:pureConfig true :skills [{:path (str skills-dir)}]}
-              result (vec (f.skills/all config []))]
+              ;; Exclude built-in skills (identified by :handler-fn) so this
+              ;; test stays focused on configured on-disk skills.
+              result (->> (f.skills/all config [])
+                          (remove :handler-fn)
+                          vec)]
           (is (= ["configured"] (mapv :name result)))
           (is (= ["Configured skill"] (mapv :description result))))
         (finally
@@ -176,4 +181,36 @@
         (is (match?
              (m/embeds [{:name "old"
                          :description "Legacy"}])
-             (f.skills/all config [])))))))
+             (f.skills/all config []))))))
+
+  (testing "eca-info built-in skill is always available"
+    (is (match?
+         (m/embeds [{:name "eca-info"
+                     :handler-fn fn?}])
+         (f.skills/all {:pureConfig true} [])))))
+
+(deftest eca-info-handler-test
+  (testing "eca-info handler returns a markdown report with expected sections"
+    (let [skill (->> (f.skills/all {:pureConfig true} [])
+                     (filter #(= "eca-info" (:name %)))
+                     first)
+          body ((:handler-fn skill)
+                {:db {:client-info {:name "test-client" :version "1.0"}
+                      :workspace-folders []
+                      :auth {}
+                      :models {}
+                      :mcp-clients {}}
+                 :config {}
+                 :skills [skill]})]
+      (is (string? body))
+      (is (string/includes? body "# ECA Self-Debug Report"))
+      (is (string/includes? body "## Versions"))
+      (is (string/includes? body "## Server process"))
+      (is (string/includes? body "## Workspaces"))
+      (is (string/includes? body "## Models"))
+      (is (string/includes? body "## Logged providers"))
+      (is (string/includes? body "## MCP servers"))
+      (is (string/includes? body "## Skills"))
+      (is (string/includes? body "## Subagents"))
+      (is (string/includes? body "## Credential files"))
+      (is (string/includes? body "test-client 1.0")))))

@@ -3,6 +3,7 @@
    [babashka.fs :as fs]
    [clojure.java.io :as io]
    [eca.config :as config]
+   [eca.features.skills.builtin :as skills.builtin]
    [eca.interpolation :as interpolation]
    [eca.logger :as logger]
    [eca.shared :as shared]))
@@ -94,4 +95,5 @@
           (when-not (:pureConfig config)
             (global-skills))
           (plugin-skills (:pluginSkillDirs config))
-          (local-skills roots)))
+          (local-skills roots)
+          (skills.builtin/all)))
