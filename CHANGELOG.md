@@ -2,6 +2,11 @@
 
 ## Unreleased
 
+- `variantsByModel` entries now support an optional `:api` filter (string or vector) to restrict variant matching by provider API type.
+- Custom commands and skills now expose `:arguments` metadata inferred from their content. Previously they always reported empty arguments.
+- Native `skill-create`, `plugin-install`, and `plugin-uninstall` commands now declare `:required true` on their arguments in the command listing.
+- Fix documentation link in `--help` output.
+- Add built-in variants for `deepseek-v4-pro` (`none`, `high`, `max`).
 - Improve skill tool description to resolve file paths and scripts mentioned in skill content against the skill's base directory.
 
 ## 0.131.1

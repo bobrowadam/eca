@@ -72,6 +72,11 @@
    "xhigh" {:output_config {:effort "xhigh"} :thinking {:type "adaptive" :display "summarized"}}
    "max" {:output_config {:effort "max"} :thinking {:type "adaptive" :display "summarized"}}})
 
+(def ^:private deepseek-variants
+  {"none" {:thinking {:type "disabled"}}
+   "high" {:reasoning_effort "high"}
+   "max" {:reasoning_effort "max"}})
+
 (def ^:private initial-config*
   {:providers {"openai" {:api "openai-responses"
                          :url "${env:OPENAI_API_URL:https://api.openai.com}"
@@ -188,7 +193,9 @@
    :variantsByModel {".*sonnet[-._]4[-._]6|opus[-._]4[-._][56]" {:variants anthropic-variants}
                      ".*opus[-._]4[-._]7" {:variants anthropic-v2-variants}
                      ".*gpt[-._]5(?:[-._](?:2|4|5)(?!\\d)|[-._]3[-._]codex)" {:variants openai-variants
-                                                                            :excludeProviders ["github-copilot"]}}
+                                                                              :excludeProviders ["github-copilot"]}
+                     ".*deepseek[-._]v4[-._]pro" {:variants deepseek-variants
+                                                  :api "openai-chat"}}
    :mcpTimeoutSeconds 60
    :lspTimeoutSeconds 30
    :streamIdleTimeoutSeconds 120
@@ -243,10 +250,16 @@
    A variant set to {} is removed from the result, allowing users to disable
    built-in variants."
   [config provider model-name user-variants]
-  (let [builtin (when model-name
-                  (some (fn [[pattern-str {:keys [variants excludeProviders]}]]
+  (let [provider-api (get-in config [:providers provider :api])
+        api-match? (fn [api config-val]
+                     (cond (sequential? config-val) (some #{api} config-val)
+                           config-val (= api config-val)
+                           :else true))
+        builtin (when model-name
+                  (some (fn [[pattern-str {:keys [variants excludeProviders api]}]]
                           (when (and (regex-matches? pattern-str model-name)
-                                     (not (some #{provider} excludeProviders)))
+                                     (not (some #{provider} excludeProviders))
+                                     (api-match? provider-api api))
                             variants))
                         (:variantsByModel config)))
         merged (cond
