@@ -40,6 +40,16 @@ If you configure [MCP (Model Context Protocol)](https://modelcontextprotocol.io)
 
 You choose which MCP servers to configure. ECA ships with no MCP servers enabled by default.
 
+### Slack data via the Slack MCP server
+
+When you connect ECA to [Slack's MCP server](https://docs.slack.dev/ai/slack-mcp-server/) (`https://mcp.slack.com/mcp`):
+
+- Authentication is OAuth 2.0 with PKCE. The OAuth code exchange happens directly between your machine and Slack — no ECA-operated server is involved.
+- Slack access and refresh tokens are stored locally on your machine in `~/.cache/eca/db.transit.json`. Tokens never leave your machine except when ECA calls Slack's APIs on your behalf.
+- ECA does **not** store, cache, or analyze Slack messages, channels, or files. Slack tool results are returned to your LLM provider as part of the conversation just like any other MCP tool — and only for tools the assistant actually invokes.
+- You control which Slack workspaces ECA can access by approving (or revoking) the Slack OAuth grant. To revoke access, remove the ECA app from your workspace at `https://<your-workspace>.slack.com/apps/manage`.
+- If you delete `~/.cache/eca/`, all locally stored Slack tokens and any tool-result history are erased.
+
 ## Telemetry
 
 ECA includes optional [OpenTelemetry](https://opentelemetry.io) (OTLP) support for exporting metrics.
