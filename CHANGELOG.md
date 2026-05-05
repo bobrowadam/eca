@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+## 0.132.0
+
 - `variantsByModel` entries now support an optional `:api` filter (string or vector) to restrict variant matching by provider API type.
 - Custom commands and skills now expose `:arguments` metadata inferred from their content. Previously they always reported empty arguments.
 - Native `skill-create`, `plugin-install`, and `plugin-uninstall` commands now declare `:required true` on their arguments in the command listing.
