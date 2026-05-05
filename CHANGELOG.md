@@ -2,7 +2,13 @@
 
 ## Unreleased
 
-- Add built-in `eca-info` skill that exposes the running ECA's versions, client info, server cmd, configured default model, logged providers/auth, MCP servers (status, tools/prompts/resources counts), available skills, subagents, relevant env vars (obfuscated) and credential files. Useful to debug ECA itself; the body is computed lazily on `eca__skill` invocation so it costs nothing on every turn beyond a single catalog line.
+- `variantsByModel` entries now support an optional `:api` filter (string or vector) to restrict variant matching by provider API type.
+- Custom commands and skills now expose `:arguments` metadata inferred from their content. Previously they always reported empty arguments.
+- Native `skill-create`, `plugin-install`, and `plugin-uninstall` commands now declare `:required true` on their arguments in the command listing.
+- Fix documentation link in `--help` output.
+- Add built-in variants for `deepseek-v4-pro` (`none`, `high`, `max`).
+- Improve skill tool description to resolve file paths and scripts mentioned in skill content against the skill's base directory.
+- Add built-in `eca-info` skill that exposes the running ECA's information for debugging ECA itself.
 
 ## 0.131.1
 

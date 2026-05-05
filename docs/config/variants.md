@@ -35,6 +35,16 @@ ECA ships with built-in variants for some known models via the `variantsByModel`
     | `high`     | `{"reasoning": {"effort": "high", "summary": "auto"}}` |
     | `xhigh`    | `{"reasoning": {"effort": "xhigh", "summary": "auto"}}` |
 
+=== "DeepSeek"
+
+    Applies to models matching `deepseek-v4-pro`. Only for providers using the `openai-chat` API.
+
+    | Variant    | Payload |
+    | ---------- | ------- |
+    | `none`     | `{"thinking": {"type": "disabled"}}` |
+    | `high`     | `{"reasoning_effort": "high"}` |
+    | `max`      | `{"reasoning_effort": "max"}}` |
+
 ## Custom Variants
 
 You can define your own variants per model under `providers.<provider>.models.<model>.variants`. Custom variants are merged with built-in ones — if names clash, your definition wins.
