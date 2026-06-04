@@ -1,0 +1,1276 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://eca.dev/config.json",
+  "title": "ECA Configuration",
+  "description": "Configuration schema for ECA (Editor Code Assistant). See https://eca.dev/config/introduction for full documentation.",
+  "markdownDescription": "Configuration schema for ECA (Editor Code Assistant). See https://eca.dev/config/introduction for full documentation.",
+  "type": "object",
+  "additionalProperties": false,
+  "allowComments": true,
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference for editor validation support.",
+      "markdownDescription": "JSON Schema reference for editor validation support."
+    },
+    "extraConfigs": {
+      "type": "array",
+      "description": "Additional config file paths (relative to workspace root or absolute, ~ supported) deep merged last, overriding all other config sources. Missing paths are logged and skipped.",
+      "markdownDescription": "Additional config file paths (relative to workspace root or absolute, `~` supported) deep merged last, overriding all other config sources. Missing paths are logged and skipped.\n\nUseful for machine-specific or uncommitted overrides, e.g. `~/.config/eca/config.local.json` or `.eca/config.local.json`.",
+      "items": {
+        "type": "string"
+      },
+      "examples": [
+        [
+          "~/.config/eca/config.local.json"
+        ],
+        [
+          ".eca/config.local.json"
+        ]
+      ]
+    },
+    "providers": {
+      "type": "object",
+      "description": "LLM provider configurations. Each key is the provider name.",
+      "markdownDescription": "LLM provider configurations. Each key is the provider name.",
+      "additionalProperties": {
+        "$ref": "#/definitions/provider"
+      }
+    },
+    "defaultModel": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Default model in format 'provider/model'. When null, ECA decides the default model.",
+      "markdownDescription": "Default model in format 'provider/model'. When null, ECA decides the default model.",
+      "examples": [
+        "anthropic/claude-sonnet-4-6",
+        "openai/gpt-5.2"
+      ]
+    },
+    "defaultAgent": {
+      "type": "string",
+      "description": "The default agent to use for new chats.",
+      "markdownDescription": "The default agent to use for new chats.",
+      "default": "code",
+      "examples": ["code", "plan"]
+    },
+    "chatRetentionDays": {
+      "type": "integer",
+      "description": "Number of days to keep old chats and tool call output cache before cleanup. Set to 0 to disable cleanup entirely.",
+      "markdownDescription": "Number of days to keep old chats and tool call output cache before cleanup. Set to `0` to disable cleanup entirely.",
+      "default": 14
+    },
+    "agent": {
+      "type": "object",
+      "description": "Named agent configurations for different workflows.",
+      "markdownDescription": "Named agent configurations for different workflows.",
+      "additionalProperties": {
+        "$ref": "#/definitions/agent"
+      }
+    },
+    "defaultBehavior": {
+      "type": "string",
+      "description": "Deprecated: use 'defaultAgent' instead. Backward compatible alias.",
+      "markdownDescription": "Deprecated: use 'defaultAgent' instead. Backward compatible alias.",
+      "examples": ["code", "plan"]
+    },
+    "behavior": {
+      "type": "object",
+      "description": "Deprecated: use 'agent' instead. Backward compatible alias.",
+      "markdownDescription": "Deprecated: use 'agent' instead. Backward compatible alias.",
+      "additionalProperties": {
+        "$ref": "#/definitions/agent"
+      }
+    },
+    "hooks": {
+      "type": "object",
+      "description": "Shell actions that run before or after specific events.",
+      "markdownDescription": "Shell actions that run before or after specific events.",
+      "additionalProperties": {
+        "$ref": "#/definitions/hook"
+      }
+    },
+    "rules": {
+      "type": "array",
+      "description": "Rules are contexts passed to the LLM during a prompt, useful to tune prompts or LLM responses.",
+      "markdownDescription": "Rules are contexts passed to the LLM during a prompt, useful to tune prompts or LLM responses.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path to a rule file or directory (relative to workspace root or absolute). Directories are loaded recursively.",
+            "markdownDescription": "Path to a rule file or directory (relative to workspace root or absolute). Directories are loaded recursively."
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "disabledTools": {
+      "type": "array",
+      "description": "List of tool names to disable globally.",
+      "markdownDescription": "List of tool names to disable globally.",
+      "items": {
+        "type": "string"
+      }
+    },
+    "commands": {
+      "type": "array",
+      "description": "Custom command prompt files.",
+      "markdownDescription": "Custom command prompt files.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path to a command prompt markdown file or directory. Directories load markdown files recursively.",
+            "markdownDescription": "Path to a command prompt markdown file or directory. Directories load markdown files recursively."
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "skills": {
+      "type": "array",
+      "description": "Skill files or directories to load.",
+      "markdownDescription": "Skill files or directories to load.",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": {
+            "type": "string",
+            "description": "Path to a skill file or directory. Directories load SKILL.md files recursively.",
+            "markdownDescription": "Path to a skill file or directory. Directories load SKILL.md files recursively."
+          }
+        },
+        "required": [
+          "path"
+        ],
+        "additionalProperties": false
+      }
+    },
+    "customTools": {
+      "type": "object",
+      "description": "User-defined command-line tools the LLM can use.",
+      "markdownDescription": "User-defined command-line tools the LLM can use.",
+      "additionalProperties": {
+        "$ref": "#/definitions/customTool"
+      }
+    },
+    "toolCall": {
+      "$ref": "#/definitions/toolCallConfig"
+    },
+    "mcpTimeoutSeconds": {
+      "type": "integer",
+      "description": "Timeout in seconds for MCP server operations.",
+      "markdownDescription": "Timeout in seconds for MCP server operations.",
+      "default": 60
+    },
+    "lspTimeoutSeconds": {
+      "type": "integer",
+      "description": "Timeout in seconds for LSP operations.",
+      "markdownDescription": "Timeout in seconds for LSP operations.",
+      "default": 30
+    },
+    "streamIdleTimeoutSeconds": {
+      "type": "integer",
+      "description": "Timeout in seconds to wait without receiving data before considering a LLM stream stalled.",
+      "markdownDescription": "Timeout in seconds to wait without receiving data before considering a LLM stream stalled.",
+      "default": 120
+    },
+    "mcpServers": {
+      "type": "object",
+      "description": "MCP (Model Context Protocol) server configurations.",
+      "markdownDescription": "MCP (Model Context Protocol) server configurations.",
+      "additionalProperties": {
+        "$ref": "#/definitions/mcpServer"
+      }
+    },
+    "prompts": {
+      "$ref": "#/definitions/prompts"
+    },
+    "welcomeMessage": {
+      "type": "string",
+      "description": "Custom welcome message shown when ECA starts.",
+      "markdownDescription": "Custom welcome message shown when ECA starts."
+    },
+    "autoCompactPercentage": {
+      "type": "integer",
+      "description": "Context window usage percentage at which auto-compact triggers.",
+      "markdownDescription": "Context window usage percentage at which auto-compact triggers.",
+      "minimum": 0,
+      "maximum": 100,
+      "default": 75
+    },
+    "includeParentAgentsFiles": {
+      "type": "boolean",
+      "description": "When true, also include AGENTS.md files from each workspace folder's parent directories, ordered outermost parent first, then the workspace's own AGENTS.md.",
+      "markdownDescription": "When `true`, also include `AGENTS.md` files from each workspace folder's parent directories, ordered outermost parent first, then the workspace's own `AGENTS.md`.",
+      "default": false
+    },
+    "index": {
+      "type": "object",
+      "description": "Indexing configuration for workspace files.",
+      "markdownDescription": "Indexing configuration for workspace files.",
+      "additionalProperties": false,
+      "properties": {
+        "ignoreFiles": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "description": "Type of ignore file to use.",
+                "markdownDescription": "Type of ignore file to use.",
+                "examples": [
+                  "gitignore"
+                ]
+              }
+            }
+          }
+        },
+        "repoMap": {
+          "type": "object",
+          "description": "Repository map configuration for context building.",
+          "markdownDescription": "Repository map configuration for context building.",
+          "additionalProperties": false,
+          "properties": {
+            "maxTotalEntries": {
+              "type": "integer",
+              "description": "Maximum total entries in the repo map.",
+              "markdownDescription": "Maximum total entries in the repo map.",
+              "default": 800
+            },
+            "maxEntriesPerDir": {
+              "type": "integer",
+              "description": "Maximum entries per directory in the repo map.",
+              "markdownDescription": "Maximum entries per directory in the repo map.",
+              "default": 50
+            }
+          }
+        }
+      }
+    },
+    "completion": {
+      "type": "object",
+      "description": "Inline completion configuration.",
+      "markdownDescription": "Inline completion configuration.",
+      "additionalProperties": false,
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "Model to use for inline completions.",
+          "markdownDescription": "Model to use for inline completions.",
+          "default": "openai/gpt-4.1",
+          "examples": [
+            "openai/gpt-4.1",
+            "github-copilot/gpt-4.1"
+          ]
+        }
+      }
+    },
+    "rewrite": {
+      "type": "object",
+      "description": "Rewrite feature configuration.",
+      "markdownDescription": "Rewrite feature configuration.",
+      "additionalProperties": false,
+      "properties": {
+        "model": {
+          "type": "string",
+          "description": "Model to use for rewrites. Defaults to the same model selection as chat.",
+          "markdownDescription": "Model to use for rewrites. Defaults to the same model selection as chat.",
+          "examples": [
+            "openai/gpt-4.1",
+            "github-copilot/gpt-4.1"
+          ]
+        },
+        "fullFileMaxLines": {
+          "type": "integer",
+          "description": "Maximum number of lines of the target file to inline as context in the rewrite prompt. When the file exceeds this, a window of this many lines centered on the selection is used instead.",
+          "markdownDescription": "Maximum number of lines of the target file to inline as context in the rewrite prompt. When the file exceeds this, a window of this many lines centered on the selection is used instead.",
+          "default": 2000
+        }
+      }
+    },
+    "variantsByModel": {
+      "type": "object",
+      "description": "Built-in variant definitions keyed by model-name regex pattern.",
+      "markdownDescription": "Built-in variant definitions keyed by model-name regex pattern.",
+      "additionalProperties": {
+        "$ref": "#/definitions/variantsByModelEntry"
+      }
+    },
+    "otlp": {
+      "type": "object",
+      "description": "OpenTelemetry OTLP collector configuration. Keys follow otlp auto-configure settings.",
+      "markdownDescription": "OpenTelemetry OTLP collector configuration. Keys follow otlp auto-configure settings.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "netrcFile": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "Path to a custom netrc credential file. When null, searches ~/.netrc or ~/_netrc.",
+      "markdownDescription": "Path to a custom netrc credential file. When null, searches ~/.netrc or ~/_netrc.",
+      "default": null
+    },
+    "chat": {
+      "type": "object",
+      "description": "Chat feature settings.",
+      "markdownDescription": "Chat feature settings.",
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "boolean",
+          "description": "Whether to automatically generate a title for new chats.",
+          "markdownDescription": "Whether to automatically generate a title for new chats.",
+          "default": true
+        },
+        "defaultTrust": {
+          "type": "boolean",
+          "description": "Whether new chats start in trust mode, auto-accepting all tool calls (never overriding deny). Applies to all editors.",
+          "markdownDescription": "Whether new chats start in trust mode, auto-accepting all tool calls (never overriding `deny`). Applies to all editors.",
+          "default": false
+        }
+      }
+    },
+    "plugins": {
+      "type": "object",
+      "description": "Plugin system for loading external configuration from git repos or local paths. Each key (except 'install') is a named plugin source with a 'source' URL or path. 'install' lists plugin names to install from any registered source.",
+      "markdownDescription": "Plugin system for loading external configuration from git repos or local paths. Each key (except `install`) is a named plugin source with a `source` URL or path. `install` lists plugin names to install from any registered source.",
+      "examples": [
+        {
+          "my-org": {
+            "source": "https://github.com/org/ai-plugins.git"
+          },
+          "install": ["plugin-a", "plugin-b"]
+        }
+      ],
+      "properties": {
+        "install": {
+          "type": "array",
+          "description": "List of plugin names to install from registered sources.",
+          "markdownDescription": "List of plugin names to install from registered sources.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": {
+        "oneOf": [
+          {
+            "type": "object",
+            "description": "A named plugin source.",
+            "properties": {
+              "source": {
+                "type": "string",
+                "description": "Git URL or local path to a plugin repository containing .eca-plugin/marketplace.json.",
+                "markdownDescription": "Git URL or local path to a plugin repository containing `.eca-plugin/marketplace.json`.",
+                "examples": [
+                  "https://github.com/org/ai-plugins.git",
+                  "git@github.com:org/ai-plugins.git",
+                  "/home/user/local-plugins"
+                ]
+              }
+            },
+            "required": ["source"],
+            "additionalProperties": false
+          },
+          {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ]
+      }
+    },
+    "remote": {
+      "type": "object",
+      "description": "Remote web control server configuration. When enabled, starts an embedded HTTP server allowing a web frontend (web.eca.dev) to observe and control chat sessions in real-time.",
+      "markdownDescription": "Remote web control server configuration. When enabled, starts an embedded HTTP server allowing a web frontend (`web.eca.dev`) to observe and control chat sessions in real-time.",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enables the remote HTTP server.",
+          "markdownDescription": "Enables the remote HTTP server."
+        },
+        "host": {
+          "type": "string",
+          "description": "Host used in the logged URL for web.eca.dev to connect back to. Can be a LAN IP, public IP, domain, or tunnel URL. When unset, auto-detected via InetAddress/getLocalHost. This is display-only and does not affect which interface the server binds to (see bindHost).",
+          "markdownDescription": "Host used in the logged URL for `web.eca.dev` to connect back to. Can be a LAN IP, public IP, domain, or tunnel URL. When unset, auto-detected via `InetAddress/getLocalHost`. This is display-only and does not affect which interface the server binds to (see `bindHost`).",
+          "examples": [
+            "192.168.1.42",
+            "myserver.example.com"
+          ]
+        },
+        "bindHost": {
+          "type": "string",
+          "description": "Network interface the HTTP server binds to. When unset, ECA auto-detects. Set this to pin the server to a specific interface — e.g. a Tailscale/WireGuard IP, or '0.0.0.0' to bind all interfaces.",
+          "markdownDescription": "Network interface the HTTP server binds to. When unset, ECA auto-detects. Set this to pin the server to a specific interface — e.g. a Tailscale/WireGuard IP, or `0.0.0.0` to bind all interfaces.",
+          "examples": [
+            "100.101.146.110",
+            "0.0.0.0"
+          ]
+        },
+        "port": {
+          "type": "integer",
+          "description": "Port the HTTP server listens on. When unset, tries port 7777, then 7778, 7779, etc. up to 20 attempts.",
+          "markdownDescription": "Port the HTTP server listens on. When unset, tries port `7777`, then `7778`, `7779`, etc. up to 20 attempts.",
+          "examples": [
+            7777
+          ]
+        },
+        "password": {
+          "type": "string",
+          "description": "Auth token for Bearer authentication. When unset, a 32-byte hex token is auto-generated and logged to stderr.",
+          "markdownDescription": "Auth token for Bearer authentication. When unset, a 32-byte hex token is auto-generated and logged to stderr."
+        }
+      }
+    },
+    "network": {
+      "type": "object",
+      "description": "Network configuration for custom CA certificates and mTLS client certificates. Values support dynamic string interpolation (e.g. '${env:SSL_CERT_FILE}').",
+      "markdownDescription": "Network configuration for custom CA certificates and mTLS client certificates. Values support dynamic string interpolation (e.g. `${env:SSL_CERT_FILE}`).",
+      "additionalProperties": false,
+      "properties": {
+        "caCertFile": {
+          "type": "string",
+          "description": "Path to a PEM file containing custom CA certificates. These are added to the JVM default trust store, so public CAs remain trusted. Falls back to SSL_CERT_FILE or NODE_EXTRA_CA_CERTS environment variables.",
+          "markdownDescription": "Path to a PEM file containing custom CA certificates. These are added to the JVM default trust store, so public CAs remain trusted. Falls back to `SSL_CERT_FILE` or `NODE_EXTRA_CA_CERTS` environment variables.",
+          "examples": [
+            "/etc/ssl/certs/corporate-ca.pem",
+            "${env:SSL_CERT_FILE}"
+          ]
+        },
+        "clientCert": {
+          "type": "string",
+          "description": "Path to a PEM file containing the client certificate for mutual TLS (mTLS). Falls back to ECA_CLIENT_CERT environment variable.",
+          "markdownDescription": "Path to a PEM file containing the client certificate for mutual TLS (mTLS). Falls back to `ECA_CLIENT_CERT` environment variable.",
+          "examples": [
+            "/etc/ssl/certs/client.pem",
+            "${env:ECA_CLIENT_CERT}"
+          ]
+        },
+        "clientKey": {
+          "type": "string",
+          "description": "Path to a PEM file containing the client private key for mutual TLS (mTLS). Supports both unencrypted and encrypted PKCS8 keys. Falls back to ECA_CLIENT_KEY environment variable.",
+          "markdownDescription": "Path to a PEM file containing the client private key for mutual TLS (mTLS). Supports both unencrypted and encrypted PKCS8 keys. Falls back to `ECA_CLIENT_KEY` environment variable.",
+          "examples": [
+            "/etc/ssl/private/client-key.pem",
+            "${env:ECA_CLIENT_KEY}"
+          ]
+        },
+        "clientKeyPassphrase": {
+          "type": "string",
+          "description": "Passphrase for an encrypted client private key. Only needed when the key file is encrypted. Falls back to ECA_CLIENT_KEY_PASSPHRASE environment variable.",
+          "markdownDescription": "Passphrase for an encrypted client private key. Only needed when the key file is encrypted. Falls back to `ECA_CLIENT_KEY_PASSPHRASE` environment variable.",
+          "examples": [
+            "${env:ECA_CLIENT_KEY_PASSPHRASE}"
+          ]
+        }
+      }
+    }
+  },
+  "definitions": {
+    "variantPayload": {
+      "type": "object",
+      "description": "Additional request payload fields applied when a variant is selected. Empty object (`{}`) can be used to remove a built-in variant override.",
+      "markdownDescription": "Additional request payload fields applied when a variant is selected. Empty object (`{}`) can be used to remove a built-in variant override.",
+      "additionalProperties": true
+    },
+    "variantsByModelEntry": {
+      "type": "object",
+      "description": "Variant set applied when the model name matches this regex key.",
+      "markdownDescription": "Variant set applied when the model name matches this regex key.",
+      "properties": {
+        "variants": {
+          "type": "object",
+          "description": "Named variants provided for matching models.",
+          "markdownDescription": "Named variants provided for matching models.",
+          "additionalProperties": {
+            "$ref": "#/definitions/variantPayload"
+          }
+        },
+        "excludeProviders": {
+          "type": "array",
+          "description": "Provider names for which this regex-based variant set should not apply.",
+          "markdownDescription": "Provider names for which this regex-based variant set should not apply.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "api": {
+          "type": [
+            "string",
+            "array"
+          ],
+          "description": "Restrict variants to the given API type(s). String for exact match, array for any-of. Absent = match all.",
+          "markdownDescription": "Restrict variants to the given API type(s). String for exact match, array for any-of. Absent = match all.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "provider": {
+      "type": "object",
+      "description": "Configuration for an LLM provider.",
+      "markdownDescription": "Configuration for an LLM provider.",
+      "properties": {
+        "api": {
+          "type": "string",
+          "description": "The API protocol to use for this provider.",
+          "markdownDescription": "The API protocol to use for this provider.",
+          "enum": [
+            "openai-responses",
+            "openai-chat",
+            "anthropic",
+            "bedrock"
+          ]
+        },
+        "fetchModels": {
+          "type": "boolean",
+          "description": "Whether to fetch available models from the provider's API.",
+          "markdownDescription": "Whether to fetch available models from the provider's API."
+        },
+        "url": {
+          "type": "string",
+          "description": "Base URL for the provider's API. Supports dynamic strings like ${env:VAR} or ${cmd:command}.",
+          "markdownDescription": "Base URL for the provider's API. Supports dynamic strings like `${env:VAR}` or `${cmd:command}`.",
+          "format": "uri"
+        },
+        "key": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "API key for authentication. Supports dynamic strings like ${env:MY_API_KEY}, ${netrc:host} or ${cmd:pass show eca/api-key}. Takes precedence over login/OAuth auth (including when resolved from a <PROVIDER>_API_KEY env var), so it can incur paid API usage even when logged in.",
+          "markdownDescription": "API key for authentication. Supports dynamic strings like `${env:MY_API_KEY}`, `${netrc:host}` or `${cmd:pass show eca/api-key}`. Takes precedence over login/OAuth auth (including when resolved from a `<PROVIDER>_API_KEY` env var), so it can incur paid API usage even when logged in."
+        },
+        "keyRc": {
+          "type": "string",
+          "description": "Credential file lookup in format [login@]machine[:port] for netrc-based authentication.",
+          "markdownDescription": "Credential file lookup in format [login@]machine[:port] for netrc-based authentication."
+        },
+        "requiresAuth": {
+          "type": "boolean",
+          "description": "Whether this provider requires authentication.",
+          "markdownDescription": "Whether this provider requires authentication."
+        },
+        "auth": {
+          "type": "object",
+          "description": "Authentication endpoint overrides for providers that use OAuth device flow. Used when the provider's identity server differs from the default (e.g. enterprise or self-hosted instances).",
+          "markdownDescription": "Authentication endpoint overrides for providers that use OAuth device flow. Used when the provider's identity server differs from the default (e.g. enterprise or self-hosted instances).",
+          "additionalProperties": false,
+          "properties": {
+            "url": {
+              "type": "string",
+              "description": "Base URL of the identity provider. OAuth device-flow endpoints are derived from this URL.",
+              "markdownDescription": "Base URL of the identity provider. OAuth device-flow endpoints are derived from this URL.",
+              "format": "uri",
+              "examples": ["https://github.mycompany.com"]
+            },
+            "clientId": {
+              "type": "string",
+              "description": "OAuth client ID to use for the device-flow. Defaults to the provider's public client ID when omitted.",
+              "markdownDescription": "OAuth client ID to use for the device-flow. Defaults to the provider's public client ID when omitted."
+            }
+          }
+        },
+        "completionUrlRelativePath": {
+          "type": "string",
+          "description": "Custom relative URL path for completion requests.",
+          "markdownDescription": "Custom relative URL path for completion requests."
+        },
+        "thinkTagStart": {
+          "type": "string",
+          "description": "Custom start tag for thinking/reasoning blocks in model responses.",
+          "markdownDescription": "Custom start tag for thinking/reasoning blocks in model responses."
+        },
+        "thinkTagEnd": {
+          "type": "string",
+          "description": "Custom end tag for thinking/reasoning blocks in model responses.",
+          "markdownDescription": "Custom end tag for thinking/reasoning blocks in model responses."
+        },
+        "httpClient": {
+          "type": "string",
+          "description": "HTTP client implementation to use.",
+          "markdownDescription": "HTTP client implementation to use.",
+          "enum": [
+            "jdk",
+            "okhttp"
+          ]
+        },
+        "retryRules": {
+          "type": "array",
+          "description": "Custom retry rules. Each rule can match by HTTP status code and/or error text regex pattern. When matched, the request is retried with exponential backoff.",
+          "markdownDescription": "Custom retry rules. Each rule can match by HTTP status code and/or error text regex pattern. When matched, the request is retried with exponential backoff.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "status": {
+                "type": "integer",
+                "description": "HTTP status code to match.",
+                "markdownDescription": "HTTP status code to match."
+              },
+              "errorPattern": {
+                "type": "string",
+                "description": "Regex pattern to match against any error text — response body, error message, or exception message (case-insensitive). Useful for connection-level errors that have no HTTP status.",
+                "markdownDescription": "Regex pattern to match against any error text — response body, error message, or exception message (case-insensitive). Useful for connection-level errors that have no HTTP status."
+              },
+              "label": {
+                "type": "string",
+                "description": "Human-readable label shown in the retry progress message (e.g. 'Rate limited').",
+                "markdownDescription": "Human-readable label shown in the retry progress message (e.g. 'Rate limited')."
+              }
+            },
+            "anyOf": [
+              { "required": ["status"] },
+              { "required": ["errorPattern"] }
+            ],
+            "additionalProperties": false
+          }
+        },
+        "models": {
+          "type": "object",
+          "description": "Available models for this provider. Each key is the model alias.",
+          "markdownDescription": "Available models for this provider. Each key is the model alias.",
+          "additionalProperties": {
+            "$ref": "#/definitions/model"
+          }
+        },
+        "cacheRetention": {
+          "type": "string",
+          "description": "Prompt cache retention for Anthropic. 'short' uses 5-min TTL (default), 'long' uses 1-hour TTL at higher write cost. Only applies when hitting the direct Anthropic API.",
+          "markdownDescription": "Prompt cache retention for Anthropic. `short` uses 5-min TTL (default), `long` uses 1-hour TTL at higher write cost. Only applies when hitting the direct Anthropic API.",
+          "enum": ["short", "long"],
+          "default": "short"
+        }
+      },
+      "additionalProperties": false
+    },
+    "model": {
+      "type": "object",
+      "description": "Configuration for a specific model.",
+      "markdownDescription": "Configuration for a specific model.",
+      "properties": {
+        "modelName": {
+          "type": "string",
+          "description": "The actual model identifier sent to the API, if different from the alias key.",
+          "markdownDescription": "The actual model identifier sent to the API, if different from the alias key."
+        },
+        "extraPayload": {
+          "type": "object",
+          "description": "Additional fields to include in the API request payload.",
+          "markdownDescription": "Additional fields to include in the API request payload.",
+          "additionalProperties": true
+        },
+        "extraHeaders": {
+          "type": "object",
+          "description": "Additional HTTP headers to include in API requests.",
+          "markdownDescription": "Additional HTTP headers to include in API requests.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "reasoningHistory": {
+          "type": "string",
+          "description": "How to handle reasoning/thinking history in conversation context.",
+          "markdownDescription": "How to handle reasoning/thinking history in conversation context.",
+          "enum": [
+            "all",
+            "turn",
+            "off"
+          ],
+          "default": "all"
+        },
+        "limit": {
+          "type": "object",
+          "description": "Override the model's token limits (overrides models.dev). Useful for local models or to cap a known model's context window.",
+          "markdownDescription": "Override the model's token limits (overrides models.dev). Useful for local models or to cap a known model's context window.",
+          "properties": {
+            "context": {
+              "type": "integer",
+              "description": "Context window size in tokens (drives the usage display and auto-compaction).",
+              "markdownDescription": "Context window size in tokens (drives the usage display and auto-compaction)."
+            },
+            "output": {
+              "type": "integer",
+              "description": "Maximum output tokens.",
+              "markdownDescription": "Maximum output tokens."
+            }
+          },
+          "additionalProperties": false
+        },
+        "cost": {
+          "type": "object",
+          "description": "Override the model's pricing (overrides models.dev). Costs are per 1M tokens.",
+          "markdownDescription": "Override the model's pricing (overrides models.dev). Costs are per 1M tokens.",
+          "properties": {
+            "input": {
+              "type": "number",
+              "description": "Cost per 1M input tokens.",
+              "markdownDescription": "Cost per 1M input tokens."
+            },
+            "output": {
+              "type": "number",
+              "description": "Cost per 1M output tokens.",
+              "markdownDescription": "Cost per 1M output tokens."
+            },
+            "cacheRead": {
+              "type": "number",
+              "description": "Cost per 1M cached input tokens read.",
+              "markdownDescription": "Cost per 1M cached input tokens read."
+            },
+            "cacheWrite": {
+              "type": "number",
+              "description": "Cost per 1M cached input tokens written.",
+              "markdownDescription": "Cost per 1M cached input tokens written."
+            }
+          },
+          "additionalProperties": false
+        },
+        "variants": {
+          "type": "object",
+          "description": "Named payload presets for this model. Merged with built-in variants; same-name entries override built-ins. Setting a variant to {} removes that built-in variant.",
+          "markdownDescription": "Named payload presets for this model. Merged with built-in variants; same-name entries override built-ins. Setting a variant to `{}` removes that built-in variant.",
+          "additionalProperties": {
+            "$ref": "#/definitions/variantPayload"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "agent": {
+      "type": "object",
+      "description": "A named agent configuration.",
+      "markdownDescription": "A named agent configuration.",
+      "properties": {
+        "inherit": {
+          "type": "string",
+          "description": "Name of another agent to inherit configuration from. The current agent's settings are deep-merged on top of the inherited agent's settings.",
+          "markdownDescription": "Name of another agent to inherit configuration from. The current agent's settings are deep-merged on top of the inherited agent's settings.",
+          "examples": ["code", "plan", "explorer"]
+        },
+        "mode": {
+          "description": "Roles this agent can be used in. Accepts either a single string ('primary' or 'subagent') or a list (e.g. ['primary', 'subagent']). 'primary' means selectable as a chat agent; 'subagent' means spawnable by another agent. Defaults to both when absent.",
+          "markdownDescription": "Roles this agent can be used in. Accepts either a single string (`\"primary\"` or `\"subagent\"`) or a list (e.g. `[\"primary\", \"subagent\"]`). `primary` means selectable as a chat agent; `subagent` means spawnable by another agent. Defaults to both when absent.",
+          "oneOf": [
+            {
+              "type": "string",
+              "enum": ["primary", "subagent"]
+            },
+            {
+              "type": "array",
+              "items": {
+                "type": "string",
+                "enum": ["primary", "subagent"]
+              },
+              "uniqueItems": true
+            }
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of this agent's purpose. Required for subagents — shown to the LLM so it knows when to spawn this agent. Supports dynamic strings like ${file:path} and ${classpath:path}.",
+          "markdownDescription": "Description of this agent's purpose. Required for subagents — shown to the LLM so it knows when to spawn this agent. Supports dynamic strings like `${file:path}` and `${classpath:path}`."
+        },
+        "systemPrompt": {
+          "type": "string",
+          "description": "System prompt for this agent. Overrides the default system prompt. Supports dynamic strings like ${file:path} and ${classpath:path}.",
+          "markdownDescription": "System prompt for this agent. Overrides the default system prompt. Supports dynamic strings like `${file:path}` and `${classpath:path}`."
+        },
+        "maxSteps": {
+          "type": "integer",
+          "description": "Maximum number of tool-call steps before the agent is halted. Useful for limiting subagent execution.",
+          "markdownDescription": "Maximum number of tool-call steps before the agent is halted. Useful for limiting subagent execution.",
+          "minimum": 1
+        },
+        "defaultModel": {
+          "type": "string",
+          "description": "Default model for this agent, overriding the global default.",
+          "markdownDescription": "Default model for this agent, overriding the global default.",
+          "examples": ["anthropic/claude-sonnet-4-6"]
+        },
+        "variant": {
+          "type": "string",
+          "description": "Default variant for this agent. Used when available for the selected model.",
+          "markdownDescription": "Default variant for this agent. Used when available for the selected model.",
+          "examples": ["medium", "high"]
+        },
+        "disabledTools": {
+          "type": "array",
+          "description": "Tools to disable for this agent.",
+          "markdownDescription": "Tools to disable for this agent.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "autoCompactPercentage": {
+          "type": "integer",
+          "description": "Context window usage percentage at which auto-compact triggers for this agent.",
+          "markdownDescription": "Context window usage percentage at which auto-compact triggers for this agent.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "toolCall": {
+          "$ref": "#/definitions/toolCallConfig"
+        },
+        "prompts": {
+          "$ref": "#/definitions/prompts"
+        }
+      },
+      "additionalProperties": false
+    },
+    "hook": {
+      "type": "object",
+      "description": "A hook configuration for running shell actions on events.",
+      "markdownDescription": "A hook configuration for running shell actions on events.",
+      "required": [
+        "type",
+        "actions"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The event type that triggers this hook.",
+          "markdownDescription": "The event type that triggers this hook.",
+          "enum": [
+            "sessionStart",
+            "sessionEnd",
+            "chatStart",
+            "chatEnd",
+            "preRequest",
+            "postRequest",
+            "preToolCall",
+            "postToolCall"
+          ]
+        },
+        "matcher": {
+          "description": "Matches *ToolCall hooks; unmatched hooks are skipped. String: legacy regex against server__tool-name. Object: tool selector map with optional argsMatchers.",
+          "markdownDescription": "Matches `*ToolCall` hooks; unmatched hooks are skipped. **String**: legacy regex against `server__tool-name`. **Object**: tool selector map with optional `argsMatchers`.",
+          "oneOf": [
+            {
+              "type": "string",
+              "description": "Regex pattern for matching server__tool-name.",
+              "markdownDescription": "Regex pattern for matching `server__tool-name`."
+            },
+            {
+              "type": "object",
+              "description": "Tool selector map. Keys follow toolApproval selectors: full tool name (server__tool-name), native ECA tool name, or server name. Empty rule {} matches without argument filtering.",
+              "markdownDescription": "Tool selector map. Keys follow `toolApproval` selectors: full tool name (`server__tool-name`), native ECA tool name, or server name. Empty rule `{}` matches without argument filtering.",
+              "additionalProperties": {
+                "$ref": "#/definitions/hookMatcherEntry"
+              }
+            }
+          ]
+        },
+        "visible": {
+          "type": "boolean",
+          "description": "Whether to show hook execution in chat.",
+          "markdownDescription": "Whether to show hook execution in chat.",
+          "default": true
+        },
+        "runOnError": {
+          "type": "boolean",
+          "description": "For postToolCall hooks, whether to run even if the tool errored.",
+          "markdownDescription": "For postToolCall hooks, whether to run even if the tool errored.",
+          "default": false
+        },
+        "actions": {
+          "type": "array",
+          "description": "List of actions to execute when the hook triggers.",
+          "markdownDescription": "List of actions to execute when the hook triggers.",
+          "items": {
+            "$ref": "#/definitions/hookAction"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "hookAction": {
+      "type": "object",
+      "description": "A shell action executed by a hook.",
+      "markdownDescription": "A shell action executed by a hook.",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Action type.",
+          "markdownDescription": "Action type.",
+          "enum": [
+            "shell"
+          ]
+        },
+        "shell": {
+          "type": "string",
+          "description": "Inline shell script to execute.",
+          "markdownDescription": "Inline shell script to execute."
+        },
+        "file": {
+          "type": "string",
+          "description": "Path to a shell script file to execute.",
+          "markdownDescription": "Path to a shell script file to execute."
+        },
+        "timeout": {
+          "type": "integer",
+          "description": "Timeout in milliseconds for this action.",
+          "markdownDescription": "Timeout in milliseconds for this action.",
+          "default": 30000
+        }
+      },
+      "additionalProperties": false
+    },
+    "customTool": {
+      "type": "object",
+      "description": "A user-defined command-line tool.",
+      "markdownDescription": "A user-defined command-line tool.",
+      "required": [
+        "description",
+        "command",
+        "schema"
+      ],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of what the tool does. Used by the LLM to decide when to use it.",
+          "markdownDescription": "Description of what the tool does. Used by the LLM to decide when to use it."
+        },
+        "command": {
+          "type": "string",
+          "description": "Command template with {{argument_name}} placeholders.",
+          "markdownDescription": "Command template with {{argument_name}} placeholders."
+        },
+        "schema": {
+          "type": "object",
+          "description": "Schema defining the tool's parameters.",
+          "markdownDescription": "Schema defining the tool's parameters.",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "description": "Parameter definitions.",
+              "markdownDescription": "Parameter definitions.",
+              "additionalProperties": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "description": "Parameter type.",
+                    "markdownDescription": "Parameter type."
+                  },
+                  "description": {
+                    "type": "string",
+                    "description": "Parameter description for the LLM.",
+                    "markdownDescription": "Parameter description for the LLM."
+                  }
+                }
+              }
+            },
+            "required": {
+              "type": "array",
+              "description": "List of required parameter names.",
+              "markdownDescription": "List of required parameter names.",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "toolCallConfig": {
+      "type": "object",
+      "description": "Tool call configuration including approval rules and tool-specific settings.",
+      "markdownDescription": "Tool call configuration including approval rules and tool-specific settings.",
+      "properties": {
+        "approval": {
+          "$ref": "#/definitions/approval"
+        },
+        "readFile": {
+          "type": "object",
+          "description": "Configuration for the read_file tool.",
+          "markdownDescription": "Configuration for the read_file tool.",
+          "additionalProperties": false,
+          "properties": {
+            "maxLines": {
+              "type": "integer",
+              "description": "Maximum number of lines returned by read_file.",
+              "markdownDescription": "Maximum number of lines returned by read_file.",
+              "default": 2000
+            }
+          }
+        },
+        "shellCommand": {
+          "type": "object",
+          "description": "Configuration for the shell_command tool.",
+          "markdownDescription": "Configuration for the shell_command tool.",
+          "additionalProperties": false,
+          "properties": {
+            "path": {
+              "type": "string",
+              "description": "Custom shell executable path. Overrides the default platform shell (bash on Linux/macOS, powershell on Windows).",
+              "markdownDescription": "Custom shell executable path. Overrides the default platform shell (`bash` on Linux/macOS, `powershell` on Windows)."
+            },
+            "args": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Arguments passed to the shell before the script argument. E.g. [\"-l\", \"-c\"] for bash.",
+              "markdownDescription": "Arguments passed to the shell before the script argument. E.g. `[\"-l\", \"-c\"]` for bash."
+            },
+            "summaryMaxLength": {
+              "type": "integer",
+              "description": "Maximum length of shell command summary.",
+              "markdownDescription": "Maximum length of shell command summary.",
+              "default": 25
+            }
+          }
+        },
+        "outputTruncation": {
+          "type": "object",
+          "description": "Output truncation settings for tool results.",
+          "markdownDescription": "Output truncation settings for tool results.",
+          "additionalProperties": false,
+          "properties": {
+            "lines": {
+              "type": "integer",
+              "description": "Maximum number of lines in tool output.",
+              "markdownDescription": "Maximum number of lines in tool output.",
+              "default": 2000
+            },
+            "sizeKb": {
+              "type": "integer",
+              "description": "Maximum size in kilobytes for tool output.",
+              "markdownDescription": "Maximum size in kilobytes for tool output.",
+              "default": 50
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "approval": {
+      "type": "object",
+      "description": "Tool approval configuration.",
+      "markdownDescription": "Tool approval configuration.",
+      "properties": {
+        "byDefault": {
+          "type": "string",
+          "description": "Default approval mode for tools not explicitly configured.",
+          "markdownDescription": "Default approval mode for tools not explicitly configured.",
+          "enum": [
+            "ask",
+            "allow",
+            "deny"
+          ],
+          "default": "ask"
+        },
+        "allow": {
+          "type": "object",
+          "description": "Tools that are automatically allowed. Key is tool or server name.",
+          "markdownDescription": "Tools that are automatically allowed. Key is tool or server name.",
+          "additionalProperties": {
+            "$ref": "#/definitions/approvalMatcher"
+          }
+        },
+        "ask": {
+          "type": "object",
+          "description": "Tools that require user approval. Key is tool or server name.",
+          "markdownDescription": "Tools that require user approval. Key is tool or server name.",
+          "additionalProperties": {
+            "$ref": "#/definitions/approvalMatcher"
+          }
+        },
+        "deny": {
+          "type": "object",
+          "description": "Tools that are denied. Key is tool or server name.",
+          "markdownDescription": "Tools that are denied. Key is tool or server name.",
+          "additionalProperties": {
+            "$ref": "#/definitions/approvalMatcher"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "approvalMatcher": {
+      "type": "object",
+      "description": "Matcher configuration for a tool approval rule.",
+      "markdownDescription": "Matcher configuration for a tool approval rule.",
+      "properties": {
+        "argsMatchers": {
+          "type": "object",
+          "description": "Map of argument name to list of Java regex patterns to match against.",
+          "markdownDescription": "Map of argument name to list of Java regex patterns to match against.",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "hookMatcherEntry": {
+      "type": "object",
+      "description": "Hook matcher rule. Use argsMatchers to require argument values to match Java regex patterns.",
+      "markdownDescription": "Hook matcher rule. Use `argsMatchers` to require argument values to match Java regex patterns.",
+      "properties": {
+        "argsMatchers": {
+          "type": "object",
+          "description": "Tool argument name to Java regex alternatives. Every listed argument must exist and match at least one pattern.",
+          "markdownDescription": "Tool argument name to Java regex alternatives. Every listed argument must exist and match at least one pattern.",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "additionalProperties": false
+    },
+    "mcpServer": {
+      "type": "object",
+      "description": "MCP server configuration. Use 'url' for remote HTTP servers or 'command' for stdio servers.",
+      "markdownDescription": "MCP server configuration. Use 'url' for remote HTTP servers or 'command' for stdio servers.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "description": "URL for remote HTTP-streamable or SSE MCP servers.",
+          "markdownDescription": "URL for remote HTTP-streamable or SSE MCP servers.",
+          "format": "uri"
+        },
+        "command": {
+          "type": "string",
+          "description": "Command to launch a stdio MCP server.",
+          "markdownDescription": "Command to launch a stdio MCP server."
+        },
+        "args": {
+          "type": "array",
+          "description": "Arguments for the stdio MCP server command.",
+          "markdownDescription": "Arguments for the stdio MCP server command.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "env": {
+          "type": "object",
+          "description": "Environment variables to set for the MCP server process.",
+          "markdownDescription": "Environment variables to set for the MCP server process.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "disabled": {
+          "type": "boolean",
+          "description": "Whether this MCP server is disabled.",
+          "markdownDescription": "Whether this MCP server is disabled.",
+          "default": false
+        },
+        "headers": {
+          "type": "object",
+          "description": "Custom HTTP headers to include in requests to this MCP server. If an Authorization header is set, OAuth is skipped entirely.",
+          "markdownDescription": "Custom HTTP headers to include in requests to this MCP server. If an `Authorization` header is set, OAuth is skipped entirely.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "clientId": {
+          "type": "string",
+          "description": "OAuth client ID for servers that require a pre-registered OAuth application (e.g. Databricks, Slack). When set, dynamic client registration is skipped.",
+          "markdownDescription": "OAuth client ID for servers that require a pre-registered OAuth application (e.g. Databricks, Slack). When set, dynamic client registration is skipped."
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "OAuth client secret for servers that require confidential OAuth (e.g. Slack MCP). Used together with clientId for token exchange.",
+          "markdownDescription": "OAuth client secret for servers that require confidential OAuth (e.g. Slack MCP). Used together with `clientId` for token exchange."
+        },
+        "oauthPort": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 65535,
+          "description": "Fixed port for the OAuth callback server. Required by providers like Slack that mandate pre-registered redirect URIs. When set, the callback uses HTTPS with a bundled localhost certificate. Register https://localhost:<port>/auth/callback as the redirect URI in your OAuth app.",
+          "markdownDescription": "Fixed port for the OAuth callback server. Required by providers like Slack that mandate pre-registered redirect URIs. When set, the callback uses HTTPS with a bundled localhost certificate. Register `https://localhost:<port>/auth/callback` as the redirect URI in your OAuth app."
+        },
+        "clientName": {
+          "type": "string",
+          "description": "Override the client_name sent during OAuth Dynamic Client Registration. Required for servers that allowlist clients by name (e.g. Figma). Defaults to 'ECA (Editor Code Assistant)' when not set.",
+          "markdownDescription": "Override the `client_name` sent during OAuth Dynamic Client Registration. Required for servers that allowlist clients by name (e.g. Figma). Defaults to `ECA (Editor Code Assistant)` when not set."
+        }
+      },
+      "additionalProperties": false
+    },
+    "prompts": {
+      "type": "object",
+      "description": "Custom prompt configurations. Values support dynamic strings like ${file:path} and ${classpath:path}.",
+      "markdownDescription": "Custom prompt configurations. Values support dynamic strings like ${file:path} and ${classpath:path}.",
+      "properties": {
+        "chat": {
+          "type": "string",
+          "description": "System prompt for chat interactions.",
+          "markdownDescription": "System prompt for chat interactions."
+        },
+        "chatTitle": {
+          "type": "string",
+          "description": "Prompt for generating chat titles.",
+          "markdownDescription": "Prompt for generating chat titles."
+        },
+        "compact": {
+          "type": "string",
+          "description": "Prompt for compacting chat context.",
+          "markdownDescription": "Prompt for compacting chat context."
+        },
+        "init": {
+          "type": "string",
+          "description": "Prompt for the /init command.",
+          "markdownDescription": "Prompt for the /init command."
+        },
+        "skillCreate": {
+          "type": "string",
+          "description": "Prompt for skill creation.",
+          "markdownDescription": "Prompt for skill creation."
+        },
+        "completion": {
+          "type": "string",
+          "description": "System prompt for inline completions.",
+          "markdownDescription": "System prompt for inline completions."
+        },
+        "rewrite": {
+          "type": "string",
+          "description": "System prompt for rewrites.",
+          "markdownDescription": "System prompt for rewrites."
+        },
+        "tools": {
+          "type": "object",
+          "description": "Custom descriptions for specific tools. Key is the tool name.",
+          "markdownDescription": "Custom descriptions for specific tools. Key is the tool name.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}
