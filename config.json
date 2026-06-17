@@ -174,6 +174,12 @@
       "markdownDescription": "Timeout in seconds for MCP server operations.",
       "default": 60
     },
+    "mcpKeepAliveSeconds": {
+      "type": "integer",
+      "description": "Interval in seconds between keep-alive pings to remote MCP servers, preventing idle connections from being dropped by proxies. Set 0 to disable.",
+      "markdownDescription": "Interval in seconds between keep-alive pings to remote MCP servers, preventing idle connections from being dropped by proxies. Set 0 to disable.",
+      "default": 30
+    },
     "lspTimeoutSeconds": {
       "type": "integer",
       "description": "Timeout in seconds for LSP operations.",
@@ -699,6 +705,12 @@
           ],
           "default": "all"
         },
+        "imageInput": {
+          "type": "boolean",
+          "description": "Whether this model accepts image input (vision). Useful for custom/local models models.dev doesn't know about.",
+          "markdownDescription": "Whether this model accepts image input (vision). Useful for custom/local models models.dev doesn't know about.",
+          "default": false
+        },
         "limit": {
           "type": "object",
           "description": "Override the model's token limits (overrides models.dev). Useful for local models or to cap a known model's context window.",
@@ -803,9 +815,9 @@
         },
         "defaultModel": {
           "type": "string",
-          "description": "Default model for this agent, overriding the global default.",
-          "markdownDescription": "Default model for this agent, overriding the global default.",
-          "examples": ["anthropic/claude-sonnet-4-6"]
+          "description": "Default model for this agent, overriding the global default. May be a full provider/model id or a bare model name resolved against the currently selected provider's models (provider-relative alias).",
+          "markdownDescription": "Default model for this agent, overriding the global default. May be a full `provider/model` id or a bare model name resolved against the currently selected provider's models (provider-relative alias).",
+          "examples": ["anthropic/claude-sonnet-4-6", "explorer-small"]
         },
         "variant": {
           "type": "string",
@@ -855,20 +867,30 @@
             "sessionEnd",
             "chatStart",
             "chatEnd",
+            "chatStatusChanged",
+            "subagentStart",
+            "subagentPostRequest",
             "preRequest",
             "postRequest",
+            "preCompact",
+            "postCompact",
             "preToolCall",
             "postToolCall"
           ]
         },
+        "description": {
+          "type": "string",
+          "description": "Brief explanation of the hook's purpose, shown by /hooks.",
+          "markdownDescription": "Brief explanation of the hook's purpose, shown by `/hooks`."
+        },
         "matcher": {
-          "description": "Matches *ToolCall hooks; unmatched hooks are skipped. String: legacy regex against server__tool-name. Object: tool selector map with optional argsMatchers.",
-          "markdownDescription": "Matches `*ToolCall` hooks; unmatched hooks are skipped. **String**: legacy regex against `server__tool-name`. **Object**: tool selector map with optional `argsMatchers`.",
+          "description": "Matches *ToolCall hooks or compact hooks; unmatched hooks are skipped. For tool hooks, strings are legacy regex against server__tool-name and objects are tool selector maps with optional argsMatchers. For compact hooks, strings are exact matches against the triggered value (manual or auto); omitted matcher runs for both.",
+          "markdownDescription": "Matches `*ToolCall` hooks or compact hooks; unmatched hooks are skipped. For tool hooks, **String** is a legacy regex against `server__tool-name` and **Object** is a tool selector map with optional `argsMatchers`. For compact hooks, strings are matched as exact strings against the `triggered` value (`manual` or `auto`); omitted matcher runs for both.",
           "oneOf": [
             {
               "type": "string",
-              "description": "Regex pattern for matching server__tool-name.",
-              "markdownDescription": "Regex pattern for matching `server__tool-name`."
+              "description": "Tool hooks: regex pattern for matching server__tool-name. Compact hooks: exact triggered value (manual or auto).",
+              "markdownDescription": "Tool hooks: regex pattern for matching `server__tool-name`. Compact hooks: exact `triggered` value (`manual` or `auto`)."
             },
             {
               "type": "object",
@@ -1217,6 +1239,11 @@
           "type": "string",
           "description": "Override the client_name sent during OAuth Dynamic Client Registration. Required for servers that allowlist clients by name (e.g. Figma). Defaults to 'ECA (Editor Code Assistant)' when not set.",
           "markdownDescription": "Override the `client_name` sent during OAuth Dynamic Client Registration. Required for servers that allowlist clients by name (e.g. Figma). Defaults to `ECA (Editor Code Assistant)` when not set."
+        },
+        "authScope": {
+          "type": "string",
+          "description": "Controls how the OAuth token for this server is shared across projects. 'global' (default): one token shared everywhere. 'workspace': a separate token per workspace folder set, so authenticating different accounts in different projects does not clobber each other. Any other value defines a named bucket shared by every project that uses the same value. Like other config values, supports dynamic-string interpolation (${env:...}, ${file:...}, ${cmd:...}, etc.).",
+          "markdownDescription": "Controls how the OAuth token for this server is shared across projects. `global` (default): one token shared everywhere. `workspace`: a separate token per workspace folder set, so authenticating different accounts in different projects does not clobber each other. Any other value defines a named bucket shared by every project that uses the same value. Like other config values, supports dynamic-string interpolation (`${env:...}`, `${file:...}`, `${cmd:...}`, etc.)."
         }
       },
       "additionalProperties": false
